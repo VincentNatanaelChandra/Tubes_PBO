@@ -9,5 +9,7 @@ package Controller;
  * @author Vincent
  */
 public class Controller {
-    
+    public static void main(String[] args) {
+        System.out.println("Kontol kuda");
+    }
 }
