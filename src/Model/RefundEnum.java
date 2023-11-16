@@ -6,8 +6,8 @@ package Model;
 
 /**
  *
- * @author Vincent
+ * @author Devid L Manurung
  */
-public class Model {
-    
+public enum RefundEnum {
+    REFUNDSUCCESS, REFUNDDENIED;
 }
