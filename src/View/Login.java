@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,84 +22,22 @@ import javax.swing.JTextField;
  *
  * @author ASUS
  */
-public class Main {
+public class Login {
     
     private static JFrame frame;
     private static String loggedInUser;
     
-    private static void performLogin(String username, String password) {
+    private void performLogin(String username, String password) {
         // Implement your logic for user authentication here
         // For demonstration purposes, just print the credentials
         System.out.println("Logged in as: " + username);
     }
     
-//    private static void showMainMenu() {
-//       Color blueSky = new Color(135, 206, 235); // Warna biru langit
-//
-//        // Membuat tombol-tombol dengan latar belakang biru langit
-//        JButton buttonChooseAirline = new JButton("Choose Airline");
-//        buttonChooseAirline.setBackground(blueSky);
-//
-//        JButton buttonChooseSeatType = new JButton("Choose Seat Type");
-//        buttonChooseSeatType.setBackground(blueSky);
-//
-//        JButton buttonChooseMeal = new JButton("Choose Meal in Flight");
-//        buttonChooseMeal.setBackground(blueSky);
-//
-//        JButton buttonReschedule = new JButton("Reschedule Flight");
-//        buttonReschedule.setBackground(blueSky);
-//
-//        JButton buttonRefund = new JButton("Refund Ticket");
-//        buttonRefund.setBackground(blueSky);
-//
-//        JButton buttonExit = new JButton("Exit");
-//        buttonExit.setBackground(blueSky);
-//
-//
-//        // Add action listeners to the buttons
-//        buttonChooseAirline.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-////                chooseAirline();
-//            }
-//        });
-//
-//        buttonChooseSeatType.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-////                chooseSeatType();
-//            }
-//        });
-//
-//        buttonChooseMeal.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-////                chooseMeal();
-//            }
-//        });
-//
-//        buttonReschedule.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-////                rescheduleFlight();
-//            }
-//        });
-//
-//        buttonRefund.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-////                refundTicket();
-//            }
-//        });
-//           
-//    buttonExit.addActionListener(new ActionListener() {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.exit(0); // Menutup aplikasi saat tombol Exit ditekan
-//        }
-//    });
+    public Login() {
+        newLogin();
+    }
     
-    public static void main(String[] args) {
+    private void newLogin() {
         
         //=============BAGIAN CONTAINER================
         JFrame form = new JFrame("Flight Apps Harapan Bangsa");
@@ -112,9 +52,9 @@ public class Main {
         
         //==================COMPONENT===================
         //Judul Form
-        JLabel labelJudul = new JLabel("Welcome to, Flight Apps Harapan Bangsa!!!");
-        labelJudul.setBounds(80, 5, 250, 30);
-        form.add(labelJudul);
+        JLabel labelTitle = new JLabel("Welcome to, Flight Apps Harapan Bangsa!!!");
+        labelTitle.setBounds(80, 5, 250, 30);
+        form.add(labelTitle);
         
         //Login
         JLabel labelLogin = new JLabel("Login to your Account");
@@ -151,6 +91,13 @@ public class Main {
         linkLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Mengubah kursor saat mengarah ke hyperlink
         linkLabel.setBounds(260, 185, 250, 30);
         form.add(linkLabel);
+        
+        linkLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Register();
+            }
+        });
 
         buttonLogin.addActionListener(new ActionListener() {
         @Override
