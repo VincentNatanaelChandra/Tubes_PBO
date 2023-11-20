@@ -109,29 +109,43 @@ public class Register {
         panel.add(showPasswordButton);
         formRegister.add(panel);
         
+        
+        //ButtonBack
         JButton buttonBack = new JButton("← Back");
         buttonBack.setBounds(35, 190, 100, 20);
         formRegister.add(buttonBack);
+        buttonBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                formRegister.dispose();
+                new Login();
+            }
+        });
         
         //Register: Button
         JButton buttonRegister = new JButton("Register");
         buttonRegister.setBounds(170, 190, 100, 20);
         formRegister.add(buttonRegister);
         buttonRegister.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 String password = String.valueOf(passwordField.getPassword());
                 String pinPay = String.valueOf(pinPayField.getPassword());
                 boolean found = con.getUser(textUsername.getText(), textEmail.getText(), password, pinPay);
                 if (found) {
                     JOptionPane.showMessageDialog(formRegister, "User's Data Already Registered", "Error", JOptionPane.ERROR_MESSAGE);
-                    new Register();
                 } else {
                     //Controller Insert Data ---
                     JOptionPane.showMessageDialog(formRegister, "New User's Data Registered", "Inputting Data...", JOptionPane.INFORMATION_MESSAGE);
+                    new Login();
+                    formRegister.dispose();
                 }
             }
         });
         
         formRegister.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new Register();
     }
 }
