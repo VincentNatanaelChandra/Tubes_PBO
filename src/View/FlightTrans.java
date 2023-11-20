@@ -131,10 +131,10 @@ private Map<String, Integer> bookedSeatCounts;
                     ", \nMeal: " + meal +
                     ", \nBooked Seats: " + bookedSeats); // Menampilkan jumlah seat yang telah dibook
         } else {
-            System.out.println("No available seats for selected class on this flight.");
+            System.out.println("No available seats on this flight.");
         }
     } else {
-        System.out.println("No flights available for selected airline.");
+        System.out.println("No flights available on this airline.");
     }
 }
 
@@ -157,14 +157,14 @@ private Map<String, Integer> bookedSeatCounts;
     List<String> availableSeats = flight.getAvailableSeatsForClass(seatClass); // Mendapatkan daftar kursi yang tersedia langsung dari objek flight
 
     if (availableSeats != null) {
-        int totalSeats = seatClass.equals("Business") ? 10 : 20; // Ganti dengan jumlah kursi bisnis dan ekonomi
+        int totalSeats = seatClass.equals("Business") ? 10 : 20;
 
         if (availableSeats.size() < totalSeats) {
             Set<String> allSeats = new HashSet<>();
             for (int i = 1; i <= totalSeats; i++) {
                 allSeats.add(seatClass + i);
             }
-            allSeats.removeAll(availableSeats); // Menghilangkan kursi yang sudah dipesan
+            allSeats.removeAll(availableSeats); 
 
             // Mengambil kursi secara acak dari kursi yang tersedia
             if (!allSeats.isEmpty()) {
@@ -199,19 +199,19 @@ private String getOrDefault() {
     }
 
     private String getAirline() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private String getDepartureTime() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     private Object getBookedSeats() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private List<String> getAvailableSeatsForClass(String seatClass) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
    
 }
