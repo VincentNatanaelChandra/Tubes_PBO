@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import Controller.Controller;
 
 /**
  *
@@ -34,6 +35,8 @@ public class Login {
         // For demonstration purposes, just print the credentials
         System.out.println("Logged in as: " + username);
     }
+    
+    Controller con = new Controller();
     
     public Login() {
         newLogin();
