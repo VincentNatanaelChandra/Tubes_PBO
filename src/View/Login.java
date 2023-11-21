@@ -6,6 +6,7 @@ package View;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -54,7 +55,9 @@ public class Login {
         //==================COMPONENT===================
         //Judul Form
         JLabel labelTitle = new JLabel("Welcome to, Flight Apps Harapan Bangsa!!!");
-        labelTitle.setBounds(80, 5, 250, 30);
+        Font fontTitle = new Font("Mont", Font.BOLD, 17);
+        labelTitle.setFont(fontTitle);
+        labelTitle.setBounds(20, 5, 400, 30);
         formLogin.add(labelTitle);
         
         //Login

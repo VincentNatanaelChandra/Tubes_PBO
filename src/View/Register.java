@@ -5,6 +5,7 @@
 package View;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -39,7 +40,9 @@ public class Register {
         //================END CONTAINER=================
 
         JLabel labelTitle = new JLabel("Welcome New User!!!");
-        labelTitle.setBounds(90, 5, 250, 30);
+        Font fontTitle = new Font("Mont", Font.BOLD, 15);
+        labelTitle.setFont(fontTitle);
+        labelTitle.setBounds(80, 5, 250, 30);
         formRegister.add(labelTitle);
 
         //Register: Username
@@ -102,14 +105,13 @@ public class Register {
                 JOptionPane.showMessageDialog(formRegister, "Entered Password: " + String.valueOf(password));
             }
         });
-        
+
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Menggunakan FlowLayout
         panel.setBounds(85, 145, 350, 40);
         panel.add(pinPayField);
         panel.add(showPasswordButton);
         formRegister.add(panel);
-        
-        
+
         //ButtonBack
         JButton buttonBack = new JButton("← Back");
         buttonBack.setBounds(35, 190, 100, 20);
@@ -121,7 +123,7 @@ public class Register {
                 new Login();
             }
         });
-        
+
         //Register: Button
         JButton buttonRegister = new JButton("Register");
         buttonRegister.setBounds(170, 190, 100, 20);
@@ -142,10 +144,7 @@ public class Register {
                 }
             }
         });
-        
+
         formRegister.setVisible(true);
-    }
-    public static void main(String[] args) {
-        new Register();
     }
 }
