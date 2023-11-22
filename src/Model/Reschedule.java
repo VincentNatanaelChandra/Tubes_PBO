@@ -10,11 +10,13 @@ package Model;
  */
 public class Reschedule {
     private int reschedule_id;
-    private RescheduleEnum reshedule_status;    
+    private String reschedule_reason;
+    private RescheduleEnum reschedule_status;    
 
-    public Reschedule(int reschedule_id, RescheduleEnum reshedule_status) {
+    public Reschedule(int reschedule_id, String reschedule_reason, RescheduleEnum reschedule_status) {
         this.reschedule_id = reschedule_id;
-        this.reshedule_status = reshedule_status;
+        this.reschedule_reason = reschedule_reason;
+        this.reschedule_status = reschedule_status;
     }
 
     public int getReschedule_id() {
@@ -25,11 +27,22 @@ public class Reschedule {
         this.reschedule_id = reschedule_id;
     }
 
-    public RescheduleEnum getReshedule_status() {
-        return reshedule_status;
+    public String getReschedule_reason() {
+        return reschedule_reason;
     }
 
-    public void setReshedule_status(RescheduleEnum reshedule_status) {
-        this.reshedule_status = reshedule_status;
+    public void setReschedule_reason(String reschedule_reason) {
+        this.reschedule_reason = reschedule_reason;
     }
+
+    public RescheduleEnum getReschedule_status() {
+        return reschedule_status;
+    }
+
+    public void setReschedule_status(RescheduleEnum reschedule_status) {
+        this.reschedule_status = reschedule_status;
+    }
+    
+ 
+    
 }
