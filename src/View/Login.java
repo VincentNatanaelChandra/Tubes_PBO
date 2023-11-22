@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.Controller;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -19,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import Controller.Controller;
 
 /**
  *
@@ -27,22 +27,13 @@ import Controller.Controller;
  */
 public class Login {
     
-    private static JFrame frame;
-    private static String loggedInUser;
-    
-    private void performLogin(String username, String password) {
-        // Implement your logic for user authentication here
-        // For demonstration purposes, just print the credentials
-        System.out.println("Logged in as: " + username);
-    }
-    
-    Controller con = new Controller();
-    
     public Login() {
         newLogin();
     }
     
     private void newLogin() {
+        
+        Controller con = new Controller();
         
         //=============BAGIAN CONTAINER================
         JFrame formLogin = new JFrame("Flight Apps Harapan Bangsa");

@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.Controller;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -31,6 +32,9 @@ public class Register {
     }
 
     private void newRegister() {
+        
+        Controller con = new Controller();
+        
         //=============BAGIAN CONTAINER================
         JFrame formRegister = new JFrame("Register Menu");
         formRegister.setSize(320, 270);
@@ -133,7 +137,7 @@ public class Register {
             public void actionPerformed(ActionEvent e) {
                 String password = String.valueOf(passwordField.getPassword());
                 String pinPay = String.valueOf(pinPayField.getPassword());
-                boolean found = con.getUser(textUsername.getText(), textEmail.getText(), password, pinPay);
+                boolean found = con.RegisterCustomerData(textEmail.getText(), password);
                 if (found) {
                     JOptionPane.showMessageDialog(formRegister, "User's Data Already Registered", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
@@ -148,3 +152,4 @@ public class Register {
         formRegister.setVisible(true);
     }
 }
+
