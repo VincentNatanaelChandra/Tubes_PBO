@@ -4,10 +4,6 @@
  */
 package Controller;
 
-/**
- *
- * @author Vincent
- */
 public class Controller {
     
 }
