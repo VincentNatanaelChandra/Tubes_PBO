@@ -33,6 +33,9 @@ public class Register {
     Controller con = new Controller();
 
     private void newRegister() {
+        
+        Controller con = new Controller();
+        
         //=============BAGIAN CONTAINER================
         JFrame formRegister = new JFrame("Register Menu");
         formRegister.setSize(320, 270);
@@ -159,3 +162,4 @@ public class Register {
         formRegister.setVisible(true);
     }
 }
+
