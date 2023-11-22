@@ -3,17 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package View;
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import javax.swing.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SwingConstants;
 
 
 public class FlightRefund {
@@ -26,77 +32,99 @@ public class FlightRefund {
     private static JCheckBox checkBox4;
     private static JCheckBox checkBox5;
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Menu Refund Tiket Pesawat");
-        frame.setSize(450, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel = new JPanel();
-        frame.add(panel);
-        placeComponents(panel);
-
-        frame.setVisible(true);
-    }
+    
 
    
-       private static void placeComponents(JPanel panel) {
-        JLabel titleLabel = new JLabel("REFUND TIKET");
-     titleLabel.setHorizontalAlignment(SwingConstants.CENTER); 
-     titleLabel.setBounds(50, 10, 300, 30); 
+    private static void placeComponents(JPanel panel) {
+    JLabel titleLabel = new JLabel("REFUND TIKET");
+    titleLabel.setHorizontalAlignment(SwingConstants.CENTER); 
+    titleLabel.setBounds(120, 10, 200, 30); 
 
-     JLabel nomorTiketLabel = new JLabel("Nomor Tiket:");
-     JTextField nomorTiketField = new JTextField(20);
-     nomorTiketLabel.setBounds(50, 50, 150, 25); 
-     nomorTiketField.setBounds(200, 50, 150, 25); 
+    JLabel nomorTiketLabel = new JLabel("Nomor Tiket:");
+    JTextField nomorTiketField = new JTextField(20);
+    nomorTiketLabel.setBounds(50, 50, 150, 25); 
+    nomorTiketField.setBounds(200, 50, 150, 25); 
 
-     JLabel boardPassNameLabel = new JLabel("Boarding name:");
-     JTextField boardPassNameField = new JTextField(20);
-     boardPassNameLabel.setBounds(50, 90, 150, 25); 
-     boardPassNameField.setBounds(200, 90, 150, 25);
+    JLabel boardPassNameLabel = new JLabel("Boarding name:");
+    JTextField boardPassNameField = new JTextField(20);
+    boardPassNameLabel.setBounds(50, 90, 150, 25); 
+    boardPassNameField.setBounds(200, 90, 150, 25);
 
     JLabel tanggalRefundLabel = new JLabel("Tanggal Refund:");
-        tanggalRefundLabel.setBounds(50, 130, 150, 25);
-        panel.add(tanggalRefundLabel);
+    tanggalRefundLabel.setBounds(50, 130, 150, 25);
 
-        JSpinner dateSpinner = new JSpinner(new SpinnerDateModel());
-        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
-        dateSpinner.setEditor(dateEditor);
-        dateSpinner.setBounds(200, 130, 150, 25);
-        panel.add(dateSpinner);
-     
-     JCheckBox checkBox1 = new JCheckBox("Tanggal refund tidak kurang dari 1 hari ");
-     JCheckBox checkBox2 = new JCheckBox("Jumlah pengembalian biaya hanya 80%");
-     JCheckBox checkBox3 = new JCheckBox("Tiket yang sudah direfund tidak dapat dipakai kembali");
-     JCheckBox checkBox4 = new JCheckBox("Pengembalian biaya dilakukan selama jam kerja");
-     checkBox1.setBounds(50, 170, 250, 25); 
-     checkBox2.setBounds(50, 210, 250, 25); 
-     checkBox3.setBounds(50, 250, 345, 25); 
-     checkBox4.setBounds(50, 290, 290, 25); 
+    JSpinner dateSpinner = new JSpinner(new SpinnerDateModel());
+    JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
+    dateSpinner.setEditor(dateEditor);
+    dateSpinner.setBounds(200, 130, 150, 25);
 
-     JButton refundButton = new JButton("REFUND");
-     refundButton.setBounds(150, 320, 100, 30); 
+    JLabel syaratLabel = new JLabel("<html><u>Syarat Refund</u></html>");
+    syaratLabel.setForeground(Color.BLUE);
+    syaratLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    syaratLabel.setBounds(50, 170, 250, 30);
 
-     panel.setLayout(null); 
+    JCheckBox agreeCheckBox = new JCheckBox("Saya menyetujui segala prasyarat yang dibutuhkan");
+    agreeCheckBox.setBounds(50, 210, 300, 25);
 
-     panel.add(titleLabel);
-     panel.add(nomorTiketLabel);
-     panel.add(nomorTiketField);
-     panel.add(boardPassNameLabel);
-     panel.add(boardPassNameField);
-     panel.add(checkBox1);
-     panel.add(checkBox2);
-     panel.add(checkBox3);
-     panel.add(checkBox4);
-     panel.add(refundButton);
-
-
+    JButton refundButton = new JButton("REFUND");
+    refundButton.setBounds(150, 250, 100, 30);
     refundButton.addActionListener(e -> {
-        if (checkBox1.isSelected() && checkBox2.isSelected() && checkBox3.isSelected() && checkBox4.isSelected()) {
-            JOptionPane.showMessageDialog(panel, "Refund berhasil");
+        if (agreeCheckBox.isSelected()) {
+            // Lakukan refund
         } else {
-            JOptionPane.showMessageDialog(panel, "Mohon centang semua syarat untuk refund");
+            JOptionPane.showMessageDialog(null, "Harap setujui segala prasyarat yang dibutuhkan.");
         }
     });
+
+    panel.setLayout(null); 
+    panel.add(titleLabel);
+    panel.add(nomorTiketLabel);
+    panel.add(nomorTiketField);
+    panel.add(boardPassNameLabel);
+    panel.add(boardPassNameField);
+    panel.add(tanggalRefundLabel);
+    panel.add(dateSpinner);
+    panel.add(syaratLabel);
+    panel.add(agreeCheckBox);
+    panel.add(refundButton);
+
+
+
+    syaratLabel.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        JPanel syaratPanel = new JPanel();
+        syaratPanel.setLayout(new BoxLayout(syaratPanel, BoxLayout.Y_AXIS));
+
+        JLabel tanggalRefundLabel = new JLabel("&#8226;Tanggal refund tidak kurang dari 1 hari");
+        tanggalRefundLabel.setText("<html>&#8226; Tanggal refund tidak kurang dari 1 hari</html>");
+        panel.add(tanggalRefundLabel);
+        JLabel biayaLabel = new JLabel();
+        biayaLabel.setText("<html>&#8226; Jumlah pengembalian biaya hanya 80%</html>");
+        panel.add(biayaLabel);
+        JLabel tiketLabel = new JLabel();
+        tiketLabel.setText("<html>&#8226; Tiket yang sudah direfund tidak dapat dipakai kembali</html>");
+        panel.add(tiketLabel);
+        JLabel jamKerjaLabel = new JLabel();
+        jamKerjaLabel .setText("<html>&#8226; Pengembalian biaya dilakukan selama jam kerja</html>");
+        panel.add(jamKerjaLabel );
+
+        syaratPanel.add(tanggalRefundLabel);
+        syaratPanel.add(biayaLabel);
+        syaratPanel.add(tiketLabel);
+        syaratPanel.add(jamKerjaLabel);
+
+        int option = JOptionPane.showConfirmDialog(null, syaratPanel, "Syarat Refund",
+                JOptionPane.OK_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(null, "Anda setuju dengan syarat!");
+           }
+    }
+});
+    refundButton.addActionListener(e -> {
+    JOptionPane.showMessageDialog(null, "Refund akan diproses");
+});
 }
 
 private static JPanel createPanel(Component... components) {
@@ -108,21 +136,28 @@ private static JPanel createPanel(Component... components) {
     return panel;
 }
 
-private static boolean checkSyarat1() {
-    
+public static void main(String[] args) {
+        JFrame frame = new JFrame("Menu Refund Tiket Pesawat");
+        frame.setSize(450, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        placeComponents(panel);
+
+        frame.setVisible(true);
+    }
+private static boolean checkSyarat1() {   
     return true; 
 }
 
-private static boolean checkSyarat2() {
-   
+private static boolean checkSyarat2() {  
     return true; 
 }
-private static boolean checkSyarat3() {
-    
+private static boolean checkSyarat3() {   
     return true; 
 }
-private static boolean checkSyarat4() {
-    
+private static boolean checkSyarat4() {   
     return true; 
 }
 
@@ -147,28 +182,24 @@ private static boolean processRefund(String nomorTiket) {
 }
 
 // Metode untuk memeriksa nomor tiket di database
-private static boolean checkDatabase(String nomorTiket) {
-   
+private static boolean checkDatabase(String nomorTiket) {  
     return true; 
 }
 
 
-private static boolean showConfirmationDialog() {
-   
+private static boolean showConfirmationDialog() { 
     return true; 
 }
 
 
-private static boolean checkConditions() {
-   
+private static boolean checkConditions() {   
     return true; 
 }
 
 // Method untuk melaksanakan refund
-private static boolean performRefund() {
-   
+private static boolean performRefund() {   
     return true; 
-}
+    }
 
 }
 
