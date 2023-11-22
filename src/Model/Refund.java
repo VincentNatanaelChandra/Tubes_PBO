@@ -10,10 +10,12 @@ package Model;
  */
 public class Refund {
     private int refund_id;
+    private String refund_reason;
     private RefundEnum refund_status;
 
-    public Refund(int refund_id, RefundEnum refund_status) {
+    public Refund(int refund_id, String refund_reason, RefundEnum refund_status) {
         this.refund_id = refund_id;
+        this.refund_reason = refund_reason;
         this.refund_status = refund_status;
     }
 
@@ -25,6 +27,14 @@ public class Refund {
         this.refund_id = refund_id;
     }
 
+    public String getRefund_reason() {
+        return refund_reason;
+    }
+
+    public void setRefund_reason(String refund_reason) {
+        this.refund_reason = refund_reason;
+    }
+
     public RefundEnum getRefund_status() {
         return refund_status;
     }
@@ -32,4 +42,6 @@ public class Refund {
     public void setRefund_status(RefundEnum refund_status) {
         this.refund_status = refund_status;
     }
+
+    
 }
