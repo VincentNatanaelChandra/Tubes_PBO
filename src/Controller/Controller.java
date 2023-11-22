@@ -51,7 +51,7 @@ public class Controller {
     
     public boolean RegisterMemberData(String email, String pinPay, int id) {
         conn.connect();
-        String query = "INSERT INTO member (member_email, member_pinPay, cust_id) VALUES (?, ?)";
+        String query = "INSERT INTO member (member_email, member_pinPay, cust_id) VALUES (?, ?, ?)";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
@@ -82,9 +82,9 @@ public class Controller {
         return (id);
     }
     
-    public boolean getCustomer(String username, String password) {
+    public boolean getCustomer(String username) {
         conn.connect();
-        String query = "SELECT * FROM customer WHERE cust_name = '" + username +"' && cust_password = '" + password +"'";
+        String query = "SELECT * FROM customer WHERE cust_name = '" + username +"'";
         boolean exists = false;
         try {
             Statement stmt = conn.con.createStatement();

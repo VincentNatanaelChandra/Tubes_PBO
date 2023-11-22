@@ -30,6 +30,7 @@ public class Register {
     public Register() {
         newRegister();
     }
+    Controller con = new Controller();
 
     private void newRegister() {
         
@@ -137,14 +138,23 @@ public class Register {
             public void actionPerformed(ActionEvent e) {
                 String password = String.valueOf(passwordField.getPassword());
                 String pinPay = String.valueOf(pinPayField.getPassword());
-                boolean found = con.RegisterCustomerData(textEmail.getText(), password);
+                boolean found = con.getCustomer(textUsername.getText());
                 if (found) {
                     JOptionPane.showMessageDialog(formRegister, "User's Data Already Registered", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    //Controller Insert Data ---
-                    JOptionPane.showMessageDialog(formRegister, "New User's Data Registered", "Inputting Data...", JOptionPane.INFORMATION_MESSAGE);
+                    boolean insert = con.RegisterCustomerData(textUsername.getText(),password);
+                    int id = con.getIdUser(textUsername.getText());
+                    System.out.println("id = " + id);
+                    boolean insert2 = con.RegisterMemberData(textEmail.getText(), pinPay, id);
+                    if (insert2) {
+                        JOptionPane.showMessageDialog(formRegister, "New User's Data Registered", "Inputting Data...", JOptionPane.INFORMATION_MESSAGE);
+                        new Login();
+                        formRegister.dispose();
+                    } else {
+                    JOptionPane.showMessageDialog(formRegister, "User Input Failed", "Error", JOptionPane.WARNING_MESSAGE);
                     new Login();
                     formRegister.dispose();
+                    }
                 }
             }
         });

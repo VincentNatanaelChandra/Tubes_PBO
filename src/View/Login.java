@@ -107,7 +107,6 @@ public class Login {
                     formLogin.dispose();
                     new FlightTrans();
                 } else {
-                    //Controller Insert Data ---
                     JOptionPane.showMessageDialog(formLogin, "User Not Found", "WARNING", JOptionPane.WARNING_MESSAGE);
                 }
             }
