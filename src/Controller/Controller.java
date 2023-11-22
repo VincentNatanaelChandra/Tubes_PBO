@@ -82,9 +82,9 @@ public class Controller {
         return (id);
     }
     
-    public boolean getCustomer(String username, String password) {
+    public boolean getCustomer(String username) {
         conn.connect();
-        String query = "SELECT * FROM customer WHERE cust_name = '" + username +"' && cust_password = '" + password +"'";
+        String query = "SELECT * FROM customer WHERE cust_name = '" + username +"'";
         boolean exists = false;
         try {
             Statement stmt = conn.con.createStatement();

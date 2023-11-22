@@ -135,11 +135,11 @@ public class Register {
             public void actionPerformed(ActionEvent e) {
                 String password = String.valueOf(passwordField.getPassword());
                 String pinPay = String.valueOf(pinPayField.getPassword());
-                boolean found = con.getCustomer(textUsername.getText(),password);
-                boolean insert = con.RegisterCustomerData(textUsername.getText(),password);
+                boolean found = con.getCustomer(textUsername.getText());
                 if (found) {
                     JOptionPane.showMessageDialog(formRegister, "User's Data Already Registered", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (insert) {
+                } else {
+                    boolean insert = con.RegisterCustomerData(textUsername.getText(),password);
                     int id = con.getIdUser(textUsername.getText());
                     System.out.println("id = " + id);
                     boolean insert2 = con.RegisterMemberData(textEmail.getText(), pinPay, id);
