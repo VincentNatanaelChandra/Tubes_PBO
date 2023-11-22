@@ -192,7 +192,8 @@ private static boolean showConfirmationDialog() {
 }
 
 
-private static boolean checkConditions() {   
+private static boolean checkConditions() {  
+    
     return true; 
 }
 
