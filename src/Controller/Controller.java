@@ -98,4 +98,22 @@ public class Controller {
         }
         return exists;
     }
+    
+    public static boolean getUserAdmin(String username, String password) {
+        conn.connect();
+        String query = "SELECT * FROM customer c JOIN admin a on c.cust_id = a.cust_id WHERE"
+                + "cust_name = '" + username + "' AND cust_password = '" + password + "'";
+        boolean exists = false;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                exists = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return exists;
+    }
 }
