@@ -26,11 +26,8 @@ public class FlightRefund {
     private static JTextField tiketText;
     private static JLabel resultLabel;
     private static JButton refundButton;
-    private static JCheckBox checkBox1;
-    private static JCheckBox checkBox2;
-    private static JCheckBox checkBox3;
-    private static JCheckBox checkBox4;
-    private static JCheckBox checkBox5;
+    
+
 
     
 
