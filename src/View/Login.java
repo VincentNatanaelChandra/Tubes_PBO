@@ -103,9 +103,14 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 String password = String.valueOf(passwordField.getPassword());
                 boolean found = con.getUser(textUsername.getText(), password);
-                if (found) {
+                int id = con.getIdUser(textUsername.getText());
+                boolean found2 = con.getUserAdmin(textUsername.getText(), password);
+                if (found2) {
                     formLogin.dispose();
-                    new FlightTrans();
+                    new MainMenuAdmin(id, textUsername.getText());
+                } else if (found) {
+                     formLogin.dispose();
+                     new bookTicket(id);
                 } else {
                     JOptionPane.showMessageDialog(formLogin, "User Not Found", "WARNING", JOptionPane.WARNING_MESSAGE);
                 }
