@@ -10,8 +10,9 @@ import java.sql.Statement;
  * @author Vincent
  */
 public class Controller {
+
     static DatabaseHandler conn = new DatabaseHandler();
-    
+
     public static boolean getUser(String username, String password) {
         conn.connect();
         String query = "SELECT * FROM customer WHERE cust_name = '" + username + "' AND cust_password = '" + password + "'";
@@ -28,7 +29,7 @@ public class Controller {
         }
         return exists;
     }
-    
+
     public boolean RegisterCustomerData(String username, String password) {
         conn.connect();
         String query = "INSERT INTO customer (cust_name, cust_password) VALUES (?, ?)";
@@ -44,7 +45,7 @@ public class Controller {
             return false;
         }
     }
-    
+
     public boolean RegisterMemberData(String email, String pinPay, int id) {
         conn.connect();
         String query = "INSERT INTO member (member_email, member_pinPay, cust_id) VALUES (?, ?, ?)";
@@ -61,10 +62,10 @@ public class Controller {
             return false;
         }
     }
-    
+
     public int getIdUser(String username) {
         conn.connect();
-        String query = "SELECT cust_id FROM customer WHERE cust_name = '" + username +"'";
+        String query = "SELECT cust_id FROM customer WHERE cust_name = '" + username + "'";
         int id = 0;
         try {
             Statement stmt = conn.con.createStatement();
@@ -77,10 +78,10 @@ public class Controller {
         }
         return (id);
     }
-    
+
     public boolean getCustomer(String username) {
         conn.connect();
-        String query = "SELECT * FROM customer WHERE cust_name = '" + username +"'";
+        String query = "SELECT * FROM customer WHERE cust_name = '" + username + "'";
         boolean exists = false;
         try {
             Statement stmt = conn.con.createStatement();
@@ -94,7 +95,7 @@ public class Controller {
         }
         return exists;
     }
-    
+
     public static boolean getUserAdmin(String username, String password) {
         conn.connect();
         String query = "SELECT * FROM customer c JOIN admin a on c.cust_id = a.cust_id WHERE"
@@ -111,5 +112,38 @@ public class Controller {
 
         }
         return exists;
+    }
+
+    public boolean confirmationRefund(int refund_id) {
+        conn.connect();
+        String query = "SELECT * FROM refund WHERE refund_id = '" + refund_id + "'";
+
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean confirmationReschedule(int reschedule_id) {
+        conn.connect();
+        String query = "SELECT * FROM reschedule WHERE reschedule_id = '" + reschedule_id + "'";
+
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+
     }
 }
