@@ -51,7 +51,7 @@ public class Controller {
     
     public boolean RegisterMemberData(String email, String pinPay, int id) {
         conn.connect();
-        String query = "INSERT INTO member (member_email, member_pinPay, cust_id) VALUES (?, ?)";
+        String query = "INSERT INTO member (member_email, member_pinPay, cust_id) VALUES (?, ?, ?)";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
