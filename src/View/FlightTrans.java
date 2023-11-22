@@ -23,7 +23,8 @@ public class FlightTrans  extends JFrame {
     private String airline;
     private String departureTime;
     private Map<String, List<String>> bookedSeats;
-private Map<String, Integer> bookedSeatCounts;
+    private Map<String, Integer> bookedSeatCounts;
+    
 
     public FlightTrans(String airline, String departureTime) {
         this.airline = airline;
