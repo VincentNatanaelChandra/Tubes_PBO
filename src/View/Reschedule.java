@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.Controller;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,9 @@ public class Reschedule {
     }
     
     private void reschedule(){
+        
+        Controller con = new Controller();
+        
         //=============BAGIAN CONTAINER================
         JFrame formReschedule = new JFrame("Reschedule Menu");
         formReschedule.setSize(300, 300);
@@ -84,5 +88,8 @@ public class Reschedule {
         });
         
         formReschedule.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new Reschedule();
     }
 }
