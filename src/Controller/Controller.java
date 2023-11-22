@@ -114,9 +114,9 @@ public class Controller {
         return exists;
     }
 
-    public boolean confirmationRefund(int refund_id) {
+    public boolean getRefund() {
         conn.connect();
-        String query = "SELECT * FROM refund WHERE refund_id = '" + refund_id + "'";
+        String query = "SELECT * FROM refund";
 
         try {
             Statement stmt = conn.con.createStatement();
@@ -130,9 +130,9 @@ public class Controller {
         return false;
     }
 
-    public boolean confirmationReschedule(int reschedule_id) {
+    public boolean getReschedule() {
         conn.connect();
-        String query = "SELECT * FROM reschedule WHERE reschedule_id = '" + reschedule_id + "'";
+        String query = "SELECT * FROM reschedule";
 
         try {
             Statement stmt = conn.con.createStatement();
