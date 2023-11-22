@@ -8,6 +8,7 @@ import Controller.DateLabelFormatter;
 import java.awt.Font;
 import java.util.Properties;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,8 +28,8 @@ public class bookTicket {
     
     private void bookingTicket(int id){
         //=============BAGIAN CONTAINER================
-        JFrame form = new JFrame("Register Menu");
-        form.setSize(365, 370);
+        JFrame form = new JFrame("Booking Ticket Menu");
+        form.setSize(365, 360);
         form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         form.setLocationRelativeTo(null);
         form.setLayout(null);
@@ -124,6 +125,12 @@ public class bookTicket {
         captionFood.setFont(fontCaptionFood);
         captionFood.setBounds(20, 245, 250, 10);
         form.add(captionFood);
+        
+        JButton buttonPayment = new JButton("Go to Payment");
+        buttonPayment.setBounds(100, 265, 150, 30);
+        form.add(buttonPayment);
+        
+        //ActionListener
         
         form.setVisible(true);
     }
