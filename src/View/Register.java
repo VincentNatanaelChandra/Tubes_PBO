@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.Controller;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ public class Register {
     public Register() {
         newRegister();
     }
+    Controller con = new Controller();
 
     private void newRegister() {
         //=============BAGIAN CONTAINER================
@@ -133,14 +135,23 @@ public class Register {
             public void actionPerformed(ActionEvent e) {
                 String password = String.valueOf(passwordField.getPassword());
                 String pinPay = String.valueOf(pinPayField.getPassword());
-                boolean found = con.getUser(textUsername.getText(), textEmail.getText(), password, pinPay);
+                boolean found = con.getCustomer(textUsername.getText(),password);
+                boolean insert = con.RegisterCustomerData(textUsername.getText(),password);
                 if (found) {
                     JOptionPane.showMessageDialog(formRegister, "User's Data Already Registered", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    //Controller Insert Data ---
-                    JOptionPane.showMessageDialog(formRegister, "New User's Data Registered", "Inputting Data...", JOptionPane.INFORMATION_MESSAGE);
+                } else if (insert) {
+                    int id = con.getIdUser(textUsername.getText());
+                    System.out.println("id = " + id);
+                    boolean insert2 = con.RegisterMemberData(textEmail.getText(), pinPay, id);
+                    if (insert2) {
+                        JOptionPane.showMessageDialog(formRegister, "New User's Data Registered", "Inputting Data...", JOptionPane.INFORMATION_MESSAGE);
+                        new Login();
+                        formRegister.dispose();
+                    } else {
+                    JOptionPane.showMessageDialog(formRegister, "User Input Failed", "Error", JOptionPane.WARNING_MESSAGE);
                     new Login();
                     formRegister.dispose();
+                    }
                 }
             }
         });
