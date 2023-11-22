@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package View;
-
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -11,6 +10,11 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import javax.swing.event.*;
+
 
 public class FlightRefund {
     private static JTextField tiketText;
@@ -50,17 +54,27 @@ public class FlightRefund {
      boardPassNameLabel.setBounds(50, 90, 150, 25); 
      boardPassNameField.setBounds(200, 90, 150, 25);
 
+    JLabel tanggalRefundLabel = new JLabel("Tanggal Refund:");
+        tanggalRefundLabel.setBounds(50, 130, 150, 25);
+        panel.add(tanggalRefundLabel);
+
+        JSpinner dateSpinner = new JSpinner(new SpinnerDateModel());
+        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
+        dateSpinner.setEditor(dateEditor);
+        dateSpinner.setBounds(200, 130, 150, 25);
+        panel.add(dateSpinner);
+     
      JCheckBox checkBox1 = new JCheckBox("Tanggal refund tidak kurang dari 1 hari ");
      JCheckBox checkBox2 = new JCheckBox("Jumlah pengembalian biaya hanya 80%");
      JCheckBox checkBox3 = new JCheckBox("Tiket yang sudah direfund tidak dapat dipakai kembali");
      JCheckBox checkBox4 = new JCheckBox("Pengembalian biaya dilakukan selama jam kerja");
-     checkBox1.setBounds(50, 130, 250, 25); 
-     checkBox2.setBounds(50, 170, 250, 25); 
-     checkBox3.setBounds(50, 210, 345, 25); 
-     checkBox4.setBounds(50, 250, 290, 25); 
+     checkBox1.setBounds(50, 170, 250, 25); 
+     checkBox2.setBounds(50, 210, 250, 25); 
+     checkBox3.setBounds(50, 250, 345, 25); 
+     checkBox4.setBounds(50, 290, 290, 25); 
 
      JButton refundButton = new JButton("REFUND");
-     refundButton.setBounds(150, 290, 100, 30); 
+     refundButton.setBounds(150, 320, 100, 30); 
 
      panel.setLayout(null); 
 
@@ -155,7 +169,6 @@ private static boolean performRefund() {
    
     return true; 
 }
+
 }
-
-
 
