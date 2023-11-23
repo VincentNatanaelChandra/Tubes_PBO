@@ -344,4 +344,52 @@ public class Controller {
         }
         return (destinations);
     }
+    
+    public String getUsernameMember(int id) {
+        conn.connect();
+        String query = "SELECT cust_name FROM customer c WHERE cust_id = '" + id + "'";
+        String username = "";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                username = (rs.getString("cust_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (username);
+    }
+    
+    public ArrayList<String> getSeatClass() {
+        ArrayList<String> listClass = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT Class_name FROM classes";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listClass.add(rs.getString("Class_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listClass);
+    }
+    
+    public ArrayList<String> getSeatNumber() {
+        ArrayList<String> listSeat = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT seat_number FROM planeseat";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listSeat.add(rs.getString("seat_number"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listSeat);
+    }
 }
