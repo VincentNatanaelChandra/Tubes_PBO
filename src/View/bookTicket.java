@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.Controller;
 import Controller.DateLabelFormatter;
 import java.awt.Font;
 import java.util.Properties;
@@ -13,8 +14,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import java.sql.Date;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
 import org.jdatepicker.impl.UtilDateModel;
 
 /**
@@ -25,6 +28,8 @@ public class bookTicket {
     public bookTicket(int id){
         bookingTicket(id);
     }
+    
+    Controller con = new Controller();
     
     private void bookingTicket(int id){
         //=============BAGIAN CONTAINER================
@@ -46,17 +51,17 @@ public class bookTicket {
         labelCityDeparture.setBounds(20, 40, 150, 30);
         form.add(labelCityDeparture);
         //ComboBox City Departure
-        String depertureCity[] = {"Bandung", "Jakarta", "Semarang", "Surabaya"};
-        JComboBox cbDepartureCity =new JComboBox(depertureCity);
-        cbDepartureCity.setBounds(150, 40, 150, 30);
-        form.add(cbDepartureCity);
+        String depertureCity[] = con.getDeparture().toArray(new String [con.getDeparture().size()]);
+        JComboBox departureCity =new JComboBox(depertureCity);
+        departureCity.setBounds(150, 40, 150, 30);
+        form.add(departureCity);
         
         //City Arrival
         JLabel labelCityArrival = new JLabel("City Arrival :");
         labelCityArrival.setBounds(20, 75, 150, 30);
         form.add(labelCityArrival);
         //ComboBox City Arrival
-        String arrivalCity[] = {"Bandung", "Jakarta", "Semarang", "Surabaya"};
+        String arrivalCity[] = con.getArrival().toArray(new String [con.getArrival().size()]);
         JComboBox cbArrivalCity =new JComboBox(arrivalCity);
         cbArrivalCity.setBounds(150, 75, 150, 30);
         form.add(cbArrivalCity);
@@ -65,8 +70,9 @@ public class bookTicket {
         JLabel labelDateFly = new JLabel("Date Flight :");
         labelDateFly.setBounds(20, 110, 150, 30);
         form.add(labelDateFly);
+        
         //Isian Tanggal Berangkat
-        UtilDateModel model = new UtilDateModel();
+        SqlDateModel model = new SqlDateModel();
         Properties p = new Properties();
         p.put("text.today", "Today");
         p.put("text.month", "Month");
@@ -81,7 +87,8 @@ public class bookTicket {
         labelCompany.setBounds(20, 145, 150, 30);
         form.add(labelCompany);
         //ComboBox Airlines Company
-        String company[] = {"Dunia Air", "CountryLink", "Balikpapan Air"};
+        
+        String company[] = con.getAirline().toArray(new String [con.getAirline().size()]);
         JComboBox cbCompany =new JComboBox(company);
         cbCompany.setBounds(150, 145, 150, 30);
         form.add(cbCompany);

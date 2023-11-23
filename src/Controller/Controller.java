@@ -276,5 +276,52 @@ public class Controller {
             return false;
         }
     }
-
+    
+    public ArrayList<String> getDeparture() {
+        ArrayList<String> listDeparture = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT DISTINCT destination_departure FROM destination";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listDeparture.add(rs.getString("destination_departure"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listDeparture);
+    }
+    
+    public ArrayList<String> getArrival() {
+        ArrayList<String> listArrival = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT DISTINCT destination_arrival FROM destination";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listArrival.add(rs.getString("destination_arrival"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listArrival);
+    }
+    
+    public ArrayList<String> getAirline() {
+        ArrayList<String> listAirline = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT DISTINCT flight_company FROM flight";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listAirline.add(rs.getString("flight_company"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listAirline);
+    }
 }
