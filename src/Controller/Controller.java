@@ -394,6 +394,7 @@ public class Controller {
         }
         return (listSeat);
     }
+    
     public boolean requestRefund(int ticket_id, RefundEnum refund_status, int refund_total, String refund_reason) {
         conn.connect();
         String query = "INSERT INTO refund (ticket_id, refund_status, refund_total, refund_reason) VALUES (?, ?, ?, ?)";
@@ -428,5 +429,37 @@ public class Controller {
             return false;
         }
     }
+    
+    public double getPromoPercent(String code) {
+        conn.connect();
+        String query = "SELECT promo_percent FROM promo WHERE promo_code = '" + code + "'";
+        double promo = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                promo = (rs.getDouble("promo_percent"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
 
+        }
+        return promo;
+    }
+    
+    public int getSeatPrice(String classes) {
+        conn.connect();
+        String query = "SELECT Class_price FROM classes WHERE Class_name = '" + classes + "'";
+        int price = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                price = (rs.getInt("Class_price"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (price);
+    }
 }
