@@ -9,7 +9,7 @@ import java.awt.*;
 public class UpdatePenerbangan {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Update Penerbangan");
+            JFrame frame = new JFrame("Update Flight Menu");
             frame.setSize(300, 200);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -43,7 +43,7 @@ public class UpdatePenerbangan {
                 String input3 = field3.getText();
                 String input4 = field4.getText();
                 String input5 = field5.getText();
-                JOptionPane.showMessageDialog(frame, "Data sudah diupdate", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "Data has been updated", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             });
             panel.add(updateButton);
 
