@@ -104,7 +104,7 @@ public class Controller {
 
     public static boolean getUserAdmin(String username, String password) {
         conn.connect();
-        String query = "SELECT * FROM customer c JOIN admin a on c.cust_id = a.cust_id WHERE"
+        String query = "SELECT * FROM customer c JOIN admin a on c.cust_id = a.cust_id WHERE "
                 + "cust_name = '" + username + "' AND cust_password = '" + password + "'";
         boolean exists = false;
         try {
@@ -500,7 +500,7 @@ public class Controller {
     
     public boolean RegisterTransaction(int ticket, String method, int seatPrice, int promo, int total, int promoId, int memberId) {
         conn.connect();
-        String query = "INSERT INTO transaction (ticket_id, transaction_payMethod, transation_seatPrice, transaction_promoDiscount, transaction_totalPrice, promo_id, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO transaction (ticket_id, transaction_payMethod, transaction_seatPrice, transation_promoDiscount, transaction_totalPrice, promo_id, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
