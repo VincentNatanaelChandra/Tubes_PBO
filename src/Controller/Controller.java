@@ -324,4 +324,24 @@ public class Controller {
         }
         return (listAirline);
     }
+    
+    public ArrayList<Destination> getKTP() {
+        conn.connect();
+        String query = "SELECT * FROM destination";
+        ArrayList<Destination> destinations = new ArrayList<>();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Destination destination = new Destination();
+                destination.setDestination_departure(rs.getString("destination_departure"));
+                destination.setDestination_arrival(rs.getString("destination_arrival"));
+                destination.setDestination_departureDate(rs.getDate("destination_departureDate"));
+                destinations.add(destination);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (destinations);
+    }
 }
