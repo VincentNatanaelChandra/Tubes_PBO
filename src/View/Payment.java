@@ -24,14 +24,15 @@ import javax.swing.table.DefaultTableModel;
  * @author ASUS
  */
 public class Payment {
-    public Payment(int id, String name, String departureCity, String arrivalCity, Date dateFlight, String airlines, String classSeat, String seatNum, String preference, String fnb, int ticketPrice, int promo){
+
+    public Payment(int id, String name, String departureCity, String arrivalCity, Date dateFlight, String airlines, String classSeat, String seatNum, String preference, String fnb, int ticketPrice, int promo) {
         Payment(id, name, departureCity, arrivalCity, dateFlight, airlines, classSeat, seatNum, preference, fnb, ticketPrice, promo);
     }
-    
-    private void Payment(int id, String name, String departureCity, String arrivalCity, Date dateFlight, String airlines, String classSeat, String seatNum, String preference, String fnb, int ticketPrice, int promo){
-        
+
+    private void Payment(int id, String name, String departureCity, String arrivalCity, Date dateFlight, String airlines, String classSeat, String seatNum, String preference, String fnb, int ticketPrice, int promo) {
+
         Controller con = new Controller();
-        
+
         //=============BAGIAN CONTAINER================
         JFrame form = new JFrame("Payment Menu");
         form.setSize(650, 400);
@@ -45,23 +46,23 @@ public class Payment {
         labelTitle.setFont(fontTitle);
         labelTitle.setBounds(20, 5, 300, 30);
         form.add(labelTitle);
-        
+
         JLabel labelName = new JLabel("Customer : " + name);
         labelName.setBounds(20, 40, 200, 30);
         form.add(labelName);
-        
+
         Object[][] dataTicket = {
             {departureCity, arrivalCity, dateFlight, airlines, preference, fnb, classSeat, seatNum, ticketPrice}
         };
-        
+
         String[] columnNames = {"Departure", "Arrival", "Date", "Arilines", "Preference", "Food", "Class", "Seat", "Price"};
-        
+
         DefaultTableModel model = new DefaultTableModel(dataTicket, columnNames);
-        
+
         JTable tablePurchase = new JTable(model);
         JScrollPane scrollPanel = new JScrollPane(tablePurchase);
         scrollPanel.setBounds(20, 75, 600, 95);
-        form.getContentPane().add(scrollPanel);        
+        form.getContentPane().add(scrollPanel);
 
         //Payment Method
         JLabel labelpaymentMethod = new JLabel("Choose your Payment Method :");
@@ -69,49 +70,63 @@ public class Payment {
         form.add(labelpaymentMethod);
         //ComboBox payment Method
         String paymentMethod[] = {"Debit Mastercard", "Virtual Account"};
-        JComboBox dbPaymentMethod =new JComboBox(paymentMethod);
+        JComboBox dbPaymentMethod = new JComboBox(paymentMethod);
         dbPaymentMethod.setBounds(210, 175, 150, 30);
         form.add(dbPaymentMethod);
-        
+
         //Promo Code
         JLabel labelPromoCode = new JLabel("Promo Code :");
         labelPromoCode.setBounds(20, 210, 100, 30);
         form.add(labelPromoCode);
         JTextField textPromo = new JTextField();
-        textPromo.setBounds(115, 215, 150, 30);
+        textPromo.setBounds(115, 210, 150, 30);
         form.add(textPromo);
         //Button Promo Code
         JButton buttonPromo = new JButton("Redeem Code");
-        buttonPromo.setBounds(270, 210, 130, 20);
+        buttonPromo.setBounds(270, 215, 130, 20);
         form.add(buttonPromo);
-        
+
         buttonPromo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String promoCode = textPromo.getText();
-                String ticket = String.valueOf((int) (Math.random() * 10000));
-                int promo = getPromoTotal(promoCode, ticketPrice);
-                
+                boolean found = con.getPromo(promoCode);
+
+                if (found) {
+                    int potongan = getPromoPercent(String promoCode);
+                    form.dispose();
+                    new Payment(id, name, departureCity, arrivalCity, dateFlight, airlines, classSeat, seatNum, preference, fnb, ticketPrice, promo);
+                } else {
+                    JOptionPane.showMessageDialog(form, "Promo Not Found!", "WARNING", JOptionPane.WARNING_MESSAGE);
+                }
+
             }
         });
-        
-        
-//        Jlabel harga = new JLabel("Ticket Price : " + con.getPrice());
-        JLabel harga =new JLabel("Ticket Price : " + ticketPrice);
-        harga.setBounds(350, 245, 200, 20);
+
+        JLabel line = new JLabel("___________________________"
+                + "__________________________");
+        Font fontLine = new Font("Arial", Font.BOLD, 20);
+        line.setFont(fontLine);
+        line.setBounds(20, 220, 650, 30);
+        form.add(line);
+
+        JLabel harga = new JLabel("Ticket Price : " + ticketPrice);
+        harga.setBounds(450, 245, 200, 20);
         form.add(harga);
-//        Jlabel hargaPromo = new JLabel("Promo : " + con.getPricePromo(ticketPrice));
+
         JLabel hargaPromo = new JLabel("Promo : " + promo);
-        hargaPromo.setBounds(350, 266, 100, 20);
+        hargaPromo.setBounds(450, 265, 100, 20);
         form.add(hargaPromo);
-//        JLabel hargaAfter = new JLabel("Total Payment : " + con.getAfterPrice(con.getPrice() - con.getPricePromo(ticketPrice));        
+
         JLabel hargaAfter = new JLabel("Total Payment : " + (ticketPrice - promo));
-        hargaAfter.setBounds(350, 285, 200, 20);
+        hargaAfter.setBounds(450, 285, 200, 20);
         form.add(hargaAfter);
-        
+
         JButton buttonConfirmPayment = new JButton("Confirmation Payment");
-        buttonConfirmPayment.setBounds(90, 310, 400, 20);
+        buttonConfirmPayment.setBounds(110, 315, 400, 25);
         form.add(buttonConfirmPayment);
+        
+        //Controller Inser Data
         
         form.setVisible(true);
     }
