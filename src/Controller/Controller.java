@@ -552,22 +552,4 @@ public class Controller {
         }
         return (pinpay);
     }
-    public int getTicketIdInt(String ticket) {
-        conn.connect();
-        String query = "SELECT ticket_id FROM ticket WHERE ticket_id = '" + ticket + "'";
-        int id = 0;
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                id = (rs.getInt("ticket_id"));
-            }
-            ticket = String.valueOf((int) (Math.random() * 10000));
-            System.out.println(ticket);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            
-        }
-        return id;
-    }
 }
