@@ -380,7 +380,7 @@ public class Controller {
     public ArrayList<String> getSeatNumber() {
         ArrayList<String> listSeat = new ArrayList<>();
         conn.connect();
-        String query = "SELECT seat_number FROM planeseat";
+        String query = "SELECT seat_number FROM planeseat WHERE seat_state = 0";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
