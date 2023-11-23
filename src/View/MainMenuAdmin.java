@@ -20,7 +20,7 @@ public class MainMenuAdmin {
     
     private void MenuAdmin(int id, String nama){
         //=============BAGIAN CONTAINER================
-        JFrame formMenuAdmin = new JFrame("Menu Admin");
+        JFrame formMenuAdmin = new JFrame("Register Menu");
         formMenuAdmin.setSize(320, 300);
         formMenuAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         formMenuAdmin.setLocationRelativeTo(null);

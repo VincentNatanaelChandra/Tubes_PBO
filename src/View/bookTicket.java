@@ -28,14 +28,13 @@ import org.jdatepicker.impl.UtilDateModel;
  * @author ASUS
  */
 public class bookTicket {
-
-    public bookTicket(int id_user) {
+    public bookTicket(int id_user){
         bookingTicket(id_user);
     }
-
+    
     Controller con = new Controller();
-
-    private void bookingTicket(int id_user) {
+    
+    private void bookingTicket(int id_user){
         //=============BAGIAN CONTAINER================
         JFrame form = new JFrame("Booking Ticket Menu");
         form.setSize(365, 425);
@@ -49,32 +48,32 @@ public class bookTicket {
         labelTitle.setFont(fontTitle);
         labelTitle.setBounds(20, 5, 250, 30);
         form.add(labelTitle);
-
+        
         //City Departure
         JLabel labelCityDeparture = new JLabel("City Departure :");
         labelCityDeparture.setBounds(20, 40, 150, 30);
         form.add(labelCityDeparture);
         //ComboBox City Departure
-        String depertureCity[] = con.getDeparture().toArray(new String[con.getDeparture().size()]);
-        JComboBox cbDepartureCity = new JComboBox(depertureCity);
+        String depertureCity[] = con.getDeparture().toArray(new String [con.getDeparture().size()]);
+        JComboBox cbDepartureCity =new JComboBox(depertureCity);
         cbDepartureCity.setBounds(150, 40, 150, 30);
         form.add(cbDepartureCity);
-
+        
         //City Arrival
         JLabel labelCityArrival = new JLabel("City Arrival :");
         labelCityArrival.setBounds(20, 75, 150, 30);
         form.add(labelCityArrival);
         //ComboBox City Arrival
-        String arrivalCity[] = con.getArrival().toArray(new String[con.getArrival().size()]);
-        JComboBox cbArrivalCity = new JComboBox(arrivalCity);
+        String arrivalCity[] = con.getArrival().toArray(new String [con.getArrival().size()]);
+        JComboBox cbArrivalCity =new JComboBox(arrivalCity);
         cbArrivalCity.setBounds(150, 75, 150, 30);
         form.add(cbArrivalCity);
-
+        
         //Tanggal Berangkat
         JLabel labelDateFly = new JLabel("Date Flight :");
         labelDateFly.setBounds(20, 110, 150, 30);
         form.add(labelDateFly);
-
+        
         //Isian Tanggal Berangkat
         SqlDateModel model = new SqlDateModel();
         Properties p = new Properties();
@@ -85,37 +84,37 @@ public class bookTicket {
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
         datePicker.setBounds(150, 113, 150, 30);
         form.add(datePicker);
-
+        
         //Airlines Company
         JLabel labelCompany = new JLabel("Airlines LineUp :");
         labelCompany.setBounds(20, 145, 150, 30);
         form.add(labelCompany);
         //ComboBox Airlines Company
-        String company[] = con.getAirline().toArray(new String[con.getAirline().size()]);
-        JComboBox cbCompany = new JComboBox(company);
+        String company[] = con.getAirline().toArray(new String [con.getAirline().size()]);
+        JComboBox cbCompany =new JComboBox(company);
         cbCompany.setBounds(150, 145, 150, 30);
         form.add(cbCompany);
-
+        
         //Class
         JLabel labelClass = new JLabel("Class :");
         labelClass.setBounds(20, 180, 150, 30);
         form.add(labelClass);
         //ComboBox Class
-        String classPlane[] = con.getSeatClass().toArray(new String[con.getSeatClass().size()]);
+        String classPlane[] = con.getSeatClass().toArray(new String [con.getSeatClass().size()]);
         JComboBox cbClass = new JComboBox(classPlane);
         cbClass.setBounds(150, 180, 150, 30);
         form.add(cbClass);
-
+        
         //Seat Number
         JLabel labelSeatClass = new JLabel("Seat :");
         labelSeatClass.setBounds(20, 215, 150, 30);
         form.add(labelSeatClass);
         //ComboBox Class
-        String seatPlane[] = con.getSeatNumber().toArray(new String[con.getSeatClass().size()]);
+        String seatPlane[] = con.getSeatNumber().toArray(new String [con.getSeatClass().size()]);
         JComboBox cbSeat = new JComboBox(seatPlane);
         cbSeat.setBounds(150, 215, 150, 30);
         form.add(cbSeat);
-
+        
         //Flight Preference
         JLabel labelPref = new JLabel("Flight Preference : ");
         labelPref.setBounds(20, 250, 150, 30);
@@ -132,7 +131,7 @@ public class bookTicket {
         ButtonGroup buttonPref = new ButtonGroup();
         buttonPref.add(radioOverNight);
         buttonPref.add(radioLateNight);
-
+        
         //FnB Choose
         JLabel labelFnB = new JLabel("Food : ");
         labelFnB.setBounds(20, 285, 50, 30);
@@ -149,17 +148,17 @@ public class bookTicket {
         ButtonGroup buttonFnB = new ButtonGroup();
         buttonFnB.add(radioIndoFood);
         buttonFnB.add(radioWestFood);
-
+        
         JLabel captionFood = new JLabel("Free Indonesia Food, Western Food +Rp.20000,-");
         Font fontCaptionFood = new Font("Arial", Font.PLAIN, 9);
         captionFood.setFont(fontCaptionFood);
         captionFood.setBounds(20, 320, 250, 10);
         form.add(captionFood);
-
+        
         JButton buttonPayment = new JButton("Go to Payment");
         buttonPayment.setBounds(100, 340, 150, 30);
         form.add(buttonPayment);
-
+        
         buttonPayment.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -173,29 +172,24 @@ public class bookTicket {
                 String FnBValue = radioIndoFood.isSelected() ? "Indonesian Food" : "Western Food";
                 String name = con.getUsernameMember(id_user);
                 int ticketPrice = con.getSeatPrice(classValue);
-                if ("Western Food".equals(FnBValue)) {
-                    ticketPrice += 20000;
-                }
+                    if("Western Food".equals(FnBValue)){
+                        ticketPrice += 20000;
+                    }
                 int promo = 0;
-
-                boolean status = false;
-                if (cbDepartureCity.getSelectedItem() == null
-                        || cbArrivalCity.getSelectedItem() == null
-                        || datePicker.getModel().getValue() == null
-                        || cbCompany.getSelectedItem() == null
-                        || cbClass.getSelectedItem() == null
-                        || cbSeat.getSelectedItem() == null) {
-                    JOptionPane.showMessageDialog(form, "Please fill out all fields", "WARNING", JOptionPane.WARNING_MESSAGE);
-                } else {
+                
+                boolean found = true;
+                if (found) {
                     form.dispose();
                     new Payment(id_user, name, departureValue, arrivalValue, dateFlight, airlinesValue, classValue, seatValue, prefValue, FnBValue, ticketPrice, promo);
+                } else {
+                    JOptionPane.showMessageDialog(form, "User Not Found", "WARNING", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
-
+        
         form.setVisible(true);
     }
-
+    
     public static void main(String[] args) {
         new bookTicket(1);
     }
