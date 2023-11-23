@@ -599,4 +599,20 @@ public class Controller {
         }
         return id;
     }
+    public int getPromoId(String promo_kode) {
+        conn.connect();
+        String query = "SELECT promo_id FROM promo WHERE promo_code = '" + promo_kode + "'";
+        int id = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = rs.getInt("promo_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return id;
+    }
 }
