@@ -574,7 +574,6 @@ public class Controller {
         } catch (SQLException e) { 
             e.printStackTrace();
         } 
-        conn.disconnect();
         return (transactions);
     }
     
@@ -599,7 +598,6 @@ public class Controller {
         } catch (SQLException e) { 
             e.printStackTrace();
         } 
-        conn.disconnect();
         return (transactions);
     }
 }
