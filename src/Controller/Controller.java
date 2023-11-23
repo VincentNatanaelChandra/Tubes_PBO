@@ -536,4 +536,20 @@ public class Controller {
             return false;
         }
     }
+    
+    public String getPinpayMember(int id) {
+        conn.connect();
+        String query = "SELECT member_pinPay FROM member WHERE cust_id = '" + id + "'";
+        String pinpay = "";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                pinpay = (rs.getString("member_pinPay"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (pinpay);
+    }
 }
