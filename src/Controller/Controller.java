@@ -279,39 +279,3 @@ public class Controller {
         }
     }
     
-    public boolean requestRefund(int ticket_id, RefundEnum refund_status, int refund_total, String refund_reason) {
-        conn.connect();
-        String query = "INSERT INTO refund (ticket_id, refund_status, refund_total, refund_reason) VALUES (?, ?, ?, ?)";
-        PreparedStatement stmt;
-        try {
-            stmt = conn.con.prepareStatement(query);
-            stmt.setInt(1, ticket_id);
-//            stmt.set(2, refund_status);
-            stmt.setInt(3, refund_total);
-            stmt.setString(4, refund_reason);
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
-    public boolean requestReshcedule(int ticket_id, RescheduleEnum reschedule_status, String reschedule_reason) {
-        conn.connect();
-        String query = "INSERT INTO reschedule (ticket_id, reschedule_status, reschedule_reason) VALUES (?, ?, ?)";
-        PreparedStatement stmt;
-        try {
-            stmt = conn.con.prepareStatement(query);
-            stmt.setInt(1, ticket_id);
-//            stmt.set(2, reschedule_status);
-            stmt.setString(3, reschedule_reason);
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-}

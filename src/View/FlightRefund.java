@@ -37,17 +37,17 @@ public class FlightRefund {
     titleLabel.setHorizontalAlignment(SwingConstants.CENTER); 
     titleLabel.setBounds(120, 10, 200, 30); 
 
-    JLabel nomorTiketLabel = new JLabel("Nomor Tiket:");
+    JLabel nomorTiketLabel = new JLabel("Tiket Number:");
     JTextField nomorTiketField = new JTextField(20);
     nomorTiketLabel.setBounds(50, 50, 150, 25); 
     nomorTiketField.setBounds(200, 50, 150, 25); 
 
-    JLabel boardPassNameLabel = new JLabel("Boarding name:");
+    JLabel boardPassNameLabel = new JLabel("Boarding Name:");
     JTextField boardPassNameField = new JTextField(20);
     boardPassNameLabel.setBounds(50, 90, 150, 25); 
     boardPassNameField.setBounds(200, 90, 150, 25);
 
-    JLabel tanggalRefundLabel = new JLabel("Tanggal Refund:");
+    JLabel tanggalRefundLabel = new JLabel("Refund Date:");
     tanggalRefundLabel.setBounds(50, 130, 150, 25);
 
     JSpinner dateSpinner = new JSpinner(new SpinnerDateModel());
@@ -55,12 +55,12 @@ public class FlightRefund {
     dateSpinner.setEditor(dateEditor);
     dateSpinner.setBounds(200, 130, 150, 25);
 
-    JLabel syaratLabel = new JLabel("<html><u>Syarat Refund</u></html>");
+    JLabel syaratLabel = new JLabel("<html><u>Terms Refund </u></html>");
     syaratLabel.setForeground(Color.BLUE);
     syaratLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     syaratLabel.setBounds(50, 170, 250, 30);
 
-    JCheckBox agreeCheckBox = new JCheckBox("Saya menyetujui segala prasyarat yang dibutuhkan");
+    JCheckBox agreeCheckBox = new JCheckBox(" I agree about terms and conditions");
     agreeCheckBox.setBounds(50, 210, 300, 25);
 
     JButton refundButton = new JButton("REFUND");
@@ -69,7 +69,7 @@ public class FlightRefund {
         if (agreeCheckBox.isSelected()) {
             // Lakukan refund
         } else {
-            JOptionPane.showMessageDialog(null, "Harap setujui segala prasyarat yang dibutuhkan.");
+            JOptionPane.showMessageDialog(null, "Please agree to all the necessary prerequisites.\"");
         }
     });
 
@@ -93,35 +93,41 @@ public class FlightRefund {
         JPanel syaratPanel = new JPanel();
         syaratPanel.setLayout(new BoxLayout(syaratPanel, BoxLayout.Y_AXIS));
 
-        JLabel tanggalRefundLabel = new JLabel("&#8226;Tanggal refund tidak kurang dari 1 hari");
-        tanggalRefundLabel.setText("<html>&#8226; Tanggal refund tidak kurang dari 1 hari</html>");
+                JLabel tanggalRefundLabel = new JLabel("&#8226; Refund date must not be less than 1 day");
+        tanggalRefundLabel.setText("<html>&#8226; Refund date must not be less than 1 day</html>");
         panel.add(tanggalRefundLabel);
+
         JLabel biayaLabel = new JLabel();
-        biayaLabel.setText("<html>&#8226; Jumlah pengembalian biaya hanya 80%</html>");
+        biayaLabel.setText("<html>&#8226; Refund amount is only 80%</html>");
         panel.add(biayaLabel);
+
         JLabel tiketLabel = new JLabel();
-        tiketLabel.setText("<html>&#8226; Tiket yang sudah direfund tidak dapat dipakai kembali</html>");
+        tiketLabel.setText("<html>&#8226; Refunded tickets cannot be reused</html>");
         panel.add(tiketLabel);
+
         JLabel jamKerjaLabel = new JLabel();
-        jamKerjaLabel .setText("<html>&#8226; Pengembalian biaya dilakukan selama jam kerja</html>");
-        panel.add(jamKerjaLabel );
+        jamKerjaLabel.setText("<html>&#8226; Refund transactions are carried out during working hours</html>");
+        panel.add(jamKerjaLabel);
+
 
         syaratPanel.add(tanggalRefundLabel);
         syaratPanel.add(biayaLabel);
         syaratPanel.add(tiketLabel);
         syaratPanel.add(jamKerjaLabel);
 
-        int option = JOptionPane.showConfirmDialog(null, syaratPanel, "Syarat Refund",
-                JOptionPane.OK_OPTION);
+            int option = JOptionPane.showConfirmDialog(null, syaratPanel, "Refund Terms",
+            JOptionPane.OK_OPTION);
 
-        if (option == JOptionPane.OK_OPTION) {
-            JOptionPane.showMessageDialog(null, "Anda setuju dengan syarat!");
-           }
+    if (option == JOptionPane.OK_OPTION) {
+        JOptionPane.showMessageDialog(null, "You agree to the terms!");
+    }
+
     }
 });
-    refundButton.addActionListener(e -> {
-    JOptionPane.showMessageDialog(null, "Refund akan diproses");
-});
+        refundButton.addActionListener(e -> {
+        JOptionPane.showMessageDialog(null, "Refund will be processed");
+    });
+
 }
 
 private static JPanel createPanel(Component... components) {
@@ -134,7 +140,7 @@ private static JPanel createPanel(Component... components) {
 }
 
 public static void main(String[] args) {
-        JFrame frame = new JFrame("Menu Refund Tiket Pesawat");
+        JFrame frame = new JFrame("Airplane Ticket Refund Menu");
         frame.setSize(450, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
