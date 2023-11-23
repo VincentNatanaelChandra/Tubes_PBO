@@ -11,7 +11,7 @@ import java.util.Date;
 public class UpdateDestinasi {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Update Destinasi");
+            JFrame frame = new JFrame("Update Destination Menu");
             frame.setSize(400, 250);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -40,7 +40,7 @@ public class UpdateDestinasi {
                
                 Date destinaton_depatureDate = (Date) dateSpinner.getValue();
                 
-                JOptionPane.showMessageDialog(frame, "Data sudah diupdate", "Notification", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "Data has been updated", "Notification", JOptionPane.INFORMATION_MESSAGE);
             });
             panel.add(updateButton);
 
