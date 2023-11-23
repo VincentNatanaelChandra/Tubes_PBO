@@ -3,6 +3,7 @@ package Controller;
 import Model.Destination;
 import Model.RefundEnum;
 import Model.RescheduleEnum;
+import Model.Transaction;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -551,5 +552,54 @@ public class Controller {
             e.printStackTrace();
         }
         return (pinpay);
+    }
+    public ArrayList<Transaction> getHistoryMember(int member_id) {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        try {
+            conn.connect();
+            String query = "SELECT * FROM transaction WHERE member_id ='" + member_id + "'";
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Transaction trans = new Transaction();
+                trans.setTransaction_id(rs.getInt("transaction_id"));
+                trans.setTransaction_payMethod(rs.getString("transaction_payMethod"));
+                trans.setTransaction_seatPrice(rs.getDouble("transaction_seatPrice"));
+                trans.setTransaction_mealPrice(rs.getDouble("transaction_mealPrice"));
+                trans.setTransaction_promoDiscount(rs.getDouble("transaction_promoDiscount"));
+                trans.setTransaction_totalPrice(rs.getDouble("transaction_totalPrice"));
+                
+                transactions.add(trans);
+            }
+        } catch (SQLException e) { 
+            e.printStackTrace();
+        } 
+        conn.disconnect();
+        return (transactions);
+    }
+    
+    public ArrayList<Transaction> getHistoryAdmin() {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        try {
+            conn.connect();
+            String query = "SELECT * FROM transaction";
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Transaction trans = new Transaction();
+                trans.setTransaction_id(rs.getInt("transaction_id"));
+                trans.setTransaction_payMethod(rs.getString("transaction_payMethod"));
+                trans.setTransaction_seatPrice(rs.getDouble("transaction_seatPrice"));
+                trans.setTransaction_mealPrice(rs.getDouble("transaction_mealPrice"));
+                trans.setTransaction_promoDiscount(rs.getDouble("transaction_promoDiscount"));
+                trans.setTransaction_totalPrice(rs.getDouble("transaction_totalPrice"));
+                
+                transactions.add(trans);
+            }
+        } catch (SQLException e) { 
+            e.printStackTrace();
+        } 
+        conn.disconnect();
+        return (transactions);
     }
 }
