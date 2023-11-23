@@ -89,6 +89,7 @@ public class Payment {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String promoCode = textPromo.getText();
+                String ticket = String.valueOf((int) (Math.random() * 10000));
                 int promo = getPromoTotal(promoCode, ticketPrice);
                 
             }
