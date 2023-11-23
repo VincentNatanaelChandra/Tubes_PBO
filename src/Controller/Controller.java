@@ -361,6 +361,38 @@ public class Controller {
         return (username);
     }
     
+    public boolean getSeatPrice(String code) {
+        conn.connect();
+        String query = "SELECT Class_price FROM classes WHERE Class_name = '" + classes + "'";
+        int price = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                price = (rs.getInt("Class_price"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (price);
+    }
+    
+    public int getPromoPrice(String classes) {
+        conn.connect();
+        String query = "SELECT Class_price FROM classes WHERE Class_name = '" + classes + "'";
+        int price = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                price = (rs.getInt("Class_price"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (price);
+    }
+    
     public ArrayList<String> getSeatClass() {
         ArrayList<String> listClass = new ArrayList<>();
         conn.connect();
