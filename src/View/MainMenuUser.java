@@ -14,11 +14,11 @@ import javax.swing.JLabel;
 
 public class MainMenuUser {
     
-    public MainMenuUser(int id, String nama){
-        MenuUser(id, nama);
+    public MainMenuUser(int id, int idMember, String nama){
+        MenuUser(id, idMember, nama);
     }
     
-    private void MenuUser(int id, String nama){
+    private void MenuUser(int id, int idMember, String nama){
         JFrame formMenuAdmin = new JFrame("Menu User ");
         formMenuAdmin.setSize(320, 300);
         formMenuAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
