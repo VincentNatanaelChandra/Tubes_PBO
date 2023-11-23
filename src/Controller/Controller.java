@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -498,14 +498,37 @@ public class Controller {
         return exists;
     }
     
-    public boolean RegisterTicket(String flight, String ticket) {
+    public boolean RegisterTicket(int flight, String ticket, Date dateTicket, String preference) {
         conn.connect();
-        String query = "INSERT INTO customer (cust_name, cust_password) VALUES (?, ?)";
+        String query = "INSERT INTO ticket (flight_id, ticket_code, ticket_date, ticket_preference) VALUES (?, ?, ?, ?)";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
-            stmt.setString(1, username);
-            stmt.setString(2, password);
+            stmt.setInt(1, flight);
+            stmt.setString(2, ticket);
+            stmt.setDate(3, dateTicket);
+            stmt.setString(4, preference);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean RegisterTransaction(int ticket, String method, int seatPrice, int promo, int total, int promoId, int memberId) {
+        conn.connect();
+        String query = "INSERT INTO ticket (ticket_id, transaction_payMethod, transaction_seatPrice, transaction_promoDiscount, transaction_totalPrice, promo_id, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, ticket);
+            stmt.setString(2, method);
+            stmt.setInt(3, seatPrice);
+            stmt.setInt(4, promo);
+            stmt.setInt(5, total);
+            stmt.setInt(6, promoId);
+            stmt.setInt(7, memberId);
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
