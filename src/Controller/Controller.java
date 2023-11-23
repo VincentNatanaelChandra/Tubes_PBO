@@ -96,7 +96,7 @@ public class Controller {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-
+            
         }
         return exists;
     }
@@ -202,9 +202,9 @@ public class Controller {
         return exists;
     }
     
-    public boolean getPromo(int promo_id) {
+    public boolean getPromo(String promo_kode) {
         conn.connect();
-        String query = "SELECT * FROM promo WHERE promo_id = '" + promo_id + "'";
+        String query = "SELECT * FROM promo WHERE promo_code = '" + promo_kode + "'";
         boolean exists = false;
         try {
             Statement stmt = conn.con.createStatement();
@@ -477,5 +477,40 @@ public class Controller {
             e.printStackTrace();
         }
         return (id);
+    }
+    
+    public boolean getTicketId(String ticket) {
+        conn.connect();
+        String query = "SELECT ticket_id FROM ticket WHERE ticket_id = '" + ticket + "'";
+        boolean exists = false;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                exists = true;
+            }
+            ticket = String.valueOf((int) (Math.random() * 10000));
+            System.out.println(ticket);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return exists;
+    }
+    
+    public boolean RegisterTicket(String flight, String ticket) {
+        conn.connect();
+        String query = "INSERT INTO customer (cust_name, cust_password) VALUES (?, ?)";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
