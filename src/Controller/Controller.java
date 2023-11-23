@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Destination;
+import Model.RefundEnum;
+import Model.RescheduleEnum;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -94,7 +96,7 @@ public class Controller {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-
+            
         }
         return exists;
     }
@@ -200,9 +202,9 @@ public class Controller {
         return exists;
     }
     
-    public boolean getPromo(int promo_id) {
+    public boolean getPromo(String promo_kode) {
         conn.connect();
-        String query = "SELECT * FROM promo WHERE promo_id = '" + promo_id + "'";
+        String query = "SELECT * FROM promo WHERE promo_code = '" + promo_kode + "'";
         boolean exists = false;
         try {
             Statement stmt = conn.con.createStatement();
@@ -377,10 +379,10 @@ public class Controller {
         return (listClass);
     }
     
-    public ArrayList<String> getSeatNumber() {
+    public ArrayList<String> getSeatNumber(int id) {
         ArrayList<String> listSeat = new ArrayList<>();
         conn.connect();
-        String query = "SELECT seat_number FROM planeseat";
+        String query = "SELECT seat_number FROM planeseat WHERE seat_state = 0 && flight_id = "+id+"";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -391,6 +393,58 @@ public class Controller {
             e.printStackTrace();
         }
         return (listSeat);
+    }
+    
+    public boolean requestRefund(int ticket_id, RefundEnum refund_status, int refund_total, String refund_reason) {
+        conn.connect();
+        String query = "INSERT INTO refund (ticket_id, refund_status, refund_total, refund_reason) VALUES (?, ?, ?, ?)";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, ticket_id);
+//            stmt.set(2, refund_status);
+            stmt.setInt(3, refund_total);
+            stmt.setString(4, refund_reason);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean requestReshcedule(int ticket_id, RescheduleEnum reschedule_status, String reschedule_reason) {
+        conn.connect();
+        String query = "INSERT INTO reschedule (ticket_id, reschedule_status, reschedule_reason) VALUES (?, ?, ?)";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, ticket_id);
+//            stmt.set(2, reschedule_status);
+            stmt.setString(3, reschedule_reason);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public double getPromoPercent(String code) {
+        conn.connect();
+        String query = "SELECT promo_percent FROM promo WHERE promo_code = '" + code + "'";
+        double promo = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                promo = (rs.getDouble("promo_percent"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return promo;
     }
     
     public int getSeatPrice(String classes) {
@@ -406,6 +460,57 @@ public class Controller {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return(price);
+        return (price);
+    }
+    
+    public int getFlightId(String company, String departure, String arrival) {
+        conn.connect();
+        String query = "SELECT f.flight_id FROM flight f JOIN destination d ON f.destination_id = d.destination_id WHERE f.flight_company = '" + company + "' && d.destination_departure = '" + departure +"' && d.destination_arrival = '" + arrival + "'";
+        int id = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = (rs.getInt("flight_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (id);
+    }
+    
+    public boolean getTicketId(String ticket) {
+        conn.connect();
+        String query = "SELECT ticket_id FROM ticket WHERE ticket_id = '" + ticket + "'";
+        boolean exists = false;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                exists = true;
+            }
+            ticket = String.valueOf((int) (Math.random() * 10000));
+            System.out.println(ticket);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return exists;
+    }
+    
+    public boolean RegisterTicket(String flight, String ticket) {
+        conn.connect();
+        String query = "INSERT INTO customer (cust_name, cust_password) VALUES (?, ?)";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
