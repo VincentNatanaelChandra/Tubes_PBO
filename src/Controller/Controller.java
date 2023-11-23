@@ -500,7 +500,7 @@ public class Controller {
     
     public boolean RegisterTransaction(int ticket, String method, int seatPrice, int promo, int total, int promoId, int memberId) {
         conn.connect();
-        String query = "INSERT INTO ticket (ticket_id, transaction_payMethod, transaction_seatPrice, transaction_promoDiscount, transaction_totalPrice, promo_id, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO transaction (ticket_id, transaction_payMethod, transaction_seatPrice, transaction_promoDiscount, transaction_totalPrice, promo_id, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
