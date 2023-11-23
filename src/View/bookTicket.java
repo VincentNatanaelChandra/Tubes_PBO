@@ -184,7 +184,7 @@ public class bookTicket {
                 if ("Western Food".equals(FnBValue)) {
                     ticketPrice += 20000;
                 }
-                int promo = 0;
+                
 
                 boolean status = false;
                 if (cbDepartureCity.getSelectedItem() == null
@@ -195,16 +195,14 @@ public class bookTicket {
                         || cbSeat.getSelectedItem() == null) {
                     JOptionPane.showMessageDialog(form, "Please fill out all fields", "WARNING", JOptionPane.WARNING_MESSAGE);
                 } else {
+                    int promo_id = 0;
+                    int promoDisc = 0;
                     form.dispose();
-                    new Payment(id_user, name, departureValue, arrivalValue, dateFlight, airlinesValue, classValue, seatValue, prefValue, FnBValue, ticketPrice, promo);
+                    new Payment(id_user, name, departureValue, arrivalValue, dateFlight, airlinesValue, classValue, seatValue, prefValue, FnBValue, ticketPrice, promo_id, promoDisc, flightId);
                 }
              }
         });
         
         form.setVisible(true);
-    }
-    
-    public static void main(String[] args) {
-        new bookTicket(1);
     }
 }

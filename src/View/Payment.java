@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,21 +29,48 @@ import javax.swing.table.DefaultTableModel;
  * @author ASUS
  */
 public class Payment {
-    
-    public int id_global = 0;
-    public JFrame formPayment;
-    public JFrame frame;
+
+    private JFrame formPayment;
+    private JFrame formPinpay;
+    private JFrame ticket;
     private JPasswordField pinField;
-    
-    public Payment(int id, String name, String departureCity, String arrivalCity, Date dateFlight, String airlines, String classSeat, String seatNum, String preference, String fnb, int ticketPrice, int promo) {
-        Payment(id, name, departureCity, arrivalCity, dateFlight, airlines, classSeat, seatNum, preference, fnb, ticketPrice, promo);
-        id_global = id;
+    private int member_id;
+    private String name;
+    private String departureCity;
+    private String arrivalCity;
+    private Date dateFlight;
+    private String airlines;
+    private String classSeat;
+    private String seatNum;
+    private String preference;
+    private String fnb;
+    private int ticketPrice;
+    private int promoDisc;
+    private int flightId;
+    private String method;
+    private int finalPrice;
+    private int promo_id;
+
+    public Payment(int id, String name, String departureCity, String arrivalCity, Date dateFlight, String airlines, String classSeat, String seatNum, String preference, String fnb, int ticketPrice, int promo_id, int promoDisc, int flightId) {
+        this.member_id = id;
+        this.name = name;
+        this.departureCity = departureCity;
+        this.arrivalCity = arrivalCity;
+        this.dateFlight = dateFlight;
+        this.airlines = airlines;
+        this.classSeat = classSeat;
+        this.seatNum = seatNum;
+        this.preference = preference;
+        this.fnb = fnb;
+        this.ticketPrice = ticketPrice;
+        this.promo_id = promo_id;
+        this.promoDisc = promoDisc;
+        this.flightId = flightId;
+        Payment();
     }
 
-    private void Payment(int id, String name, String departureCity, String arrivalCity, Date dateFlight, String airlines, String classSeat, String seatNum, String preference, String fnb, int ticketPrice, int promo) {
-
+    private void Payment() {
         Controller con = new Controller();
-
         //=============BAGIAN CONTAINER================
         formPayment = new JFrame("Payment Menu");
         formPayment.setSize(650, 400);
@@ -80,9 +108,11 @@ public class Payment {
         formPayment.add(labelpaymentMethod);
         //ComboBox payment Method
         String paymentMethod[] = {"Debit Mastercard", "Virtual Account"};
-        JComboBox dbPaymentMethod = new JComboBox(paymentMethod);
-        dbPaymentMethod.setBounds(210, 175, 150, 30);
-        formPayment.add(dbPaymentMethod);
+        JComboBox cbPaymentMethod = new JComboBox(paymentMethod);
+        cbPaymentMethod.setBounds(210, 175, 150, 30);
+        formPayment.add(cbPaymentMethod);
+        
+        method = (String) cbPaymentMethod.getSelectedItem();
 
         //Promo Code
         JLabel labelPromoCode = new JLabel("Promo Code :");
@@ -101,13 +131,14 @@ public class Payment {
             public void actionPerformed(ActionEvent e) {
                 String promoCode = textPromo.getText();
                 boolean found = con.getPromo(promoCode);
-
+                
                 if (found) {
+                    int promo_id = con.getPromoId(promoCode);
                     double discount = con.getPromoPercent(promoCode);
                     double totalPromo = ticketPrice * discount;
                     int promo = (int) totalPromo;
                     formPayment.dispose();
-                    new Payment(id, name, departureCity, arrivalCity, dateFlight, airlines, classSeat, seatNum, preference, fnb, ticketPrice, promo);
+                    new Payment(member_id, name, departureCity, arrivalCity, dateFlight, airlines, classSeat, seatNum, preference, fnb, ticketPrice, promo_id, promo, flightId);
                 } else {
                     JOptionPane.showMessageDialog(formPayment, "Promo Not Found!", "WARNING", JOptionPane.WARNING_MESSAGE);
                 }
@@ -126,37 +157,33 @@ public class Payment {
         harga.setBounds(450, 245, 200, 20);
         formPayment.add(harga);
 
-        JLabel hargaPromo = new JLabel("Promo : " + promo);
+        JLabel hargaPromo = new JLabel("Promo : " + promoDisc);
         hargaPromo.setBounds(450, 265, 100, 20);
         formPayment.add(hargaPromo);
 
-        JLabel hargaAfter = new JLabel("Total Payment : " + (ticketPrice - promo));
+        finalPrice = ticketPrice - promoDisc;
+        JLabel hargaAfter = new JLabel("Total Payment : " + (ticketPrice - promoDisc));
         hargaAfter.setBounds(450, 285, 200, 20);
         formPayment.add(hargaAfter);
 
         JButton buttonConfirmPayment = new JButton("Confirmation Payment");
         buttonConfirmPayment.setBounds(110, 315, 400, 25);
         formPayment.add(buttonConfirmPayment);
-        
+
         buttonConfirmPayment.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    PinEntryGUI();
-                    frame.setVisible(true);
+                PinEntryGUI();
+                formPinpay.setVisible(true);
             }
         });
 
         //Controller Inser Data
-        
-        
-        
         formPayment.setVisible(true);
     }
-    
-    
+
     private void PinEntryGUI() {
-        frame = new JFrame("PIN Entry");
-        frame.setSize(300, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        formPinpay = new JFrame("PIN Entry");
+        formPinpay.setSize(300, 400);
 
         pinField = new JPasswordField();
         pinField.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -166,9 +193,9 @@ public class Payment {
         JPanel buttonPanel = createButtonPanel();
 
         // Set layout and add components
-        frame.setLayout(new BorderLayout());
-        frame.add(pinField, BorderLayout.NORTH);
-        frame.add(buttonPanel, BorderLayout.CENTER);
+        formPinpay.setLayout(new BorderLayout());
+        formPinpay.add(pinField, BorderLayout.NORTH);
+        formPinpay.add(buttonPanel, BorderLayout.CENTER);
 
     }
 
@@ -204,12 +231,37 @@ public class Payment {
     }
 
     private void checkPin() {
+        Controller con = new Controller();
         char[] enteredPin = pinField.getPassword();
         // Convert char array to String for further processing
         String pinString = new String(enteredPin);
+        String memberPin = con.getPinpayMember(member_id);
 
-        // Add your logic to validate the PIN or perform actions based on the PIN
-        JOptionPane.showMessageDialog(frame, "Entered PIN: " + pinString);
-        pinField.setText(""); // Clear the PIN field after submission
+        if (pinString == null ? memberPin == null : pinString.equals(memberPin)) {
+            formPinpay.dispose();
+            formPayment.dispose();
+            insertTicket();
+        } else {
+            JOptionPane.showMessageDialog(formPinpay, "Wrong Pinpay!", "WARNING", JOptionPane.WARNING_MESSAGE);
+            pinField.setText("");
+        }
+    }
+
+    private void insertTicket() {
+        Controller con = new Controller();
+        
+        //Generate Ticker Code
+        String ticketCode = String.valueOf((int) (Math.random() * 10000));
+        
+        LocalDate currentDate = LocalDate.now();
+        java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
+        
+        //Insert Data
+        con.RegisterTicket(flightId, ticketCode, sqlDate, preference);
+        int ticket_id = con.getTicketIdInt(ticketCode);
+        System.out.println(ticket_id);
+        con.RegisterTransaction(ticket_id, method, ticketPrice, promoDisc, finalPrice, promo_id, member_id);
+        
+        JOptionPane.showMessageDialog(formPayment, "Done", "Done ga bang?", JOptionPane.PLAIN_MESSAGE);
     }
 }
