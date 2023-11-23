@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Destination;
+import Model.RefundEnum;
+import Model.RescheduleEnum;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -277,119 +279,3 @@ public class Controller {
         }
     }
     
-    public ArrayList<String> getDeparture() {
-        ArrayList<String> listDeparture = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT DISTINCT destination_departure FROM destination";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                listDeparture.add(rs.getString("destination_departure"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (listDeparture);
-    }
-    
-    public ArrayList<String> getArrival() {
-        ArrayList<String> listArrival = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT DISTINCT destination_arrival FROM destination";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                listArrival.add(rs.getString("destination_arrival"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (listArrival);
-    }
-    
-    public ArrayList<String> getAirline() {
-        ArrayList<String> listAirline = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT DISTINCT flight_company FROM flight";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                listAirline.add(rs.getString("flight_company"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (listAirline);
-    }
-    
-    public ArrayList<Destination> getKTP() {
-        conn.connect();
-        String query = "SELECT * FROM destination";
-        ArrayList<Destination> destinations = new ArrayList<>();
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                Destination destination = new Destination();
-                destination.setDestination_departure(rs.getString("destination_departure"));
-                destination.setDestination_arrival(rs.getString("destination_arrival"));
-                destination.setDestination_departureDate(rs.getDate("destination_departureDate"));
-                destinations.add(destination);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (destinations);
-    }
-    
-    public String getUsernameMember(int id) {
-        conn.connect();
-        String query = "SELECT cust_name FROM customer c WHERE cust_id = '" + id + "'";
-        String username = "";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                username = (rs.getString("cust_name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (username);
-    }
-    
-    public ArrayList<String> getSeatClass() {
-        ArrayList<String> listClass = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT Class_name FROM classes";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                listClass.add(rs.getString("Class_name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (listClass);
-    }
-    
-    public ArrayList<String> getSeatNumber() {
-        ArrayList<String> listSeat = new ArrayList<>();
-        conn.connect();
-        String query = "SELECT seat_number FROM planeseat WHERE seat_state = 0";
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                listSeat.add(rs.getString("seat_number"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (listSeat);
-    }
-}
