@@ -616,4 +616,21 @@ public class Controller {
         return id;
     }
     
+    public int getTicketIdInt(String ticket) {
+        conn.connect();
+        String query = "SELECT ticket_id FROM ticket WHERE ticket_code = '" + ticket + "'";
+        int id = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = (rs.getInt("ticket_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return id;
+    }
+    
 }
