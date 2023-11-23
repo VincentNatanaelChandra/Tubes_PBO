@@ -480,25 +480,6 @@ public class Controller {
         return (id);
     }
     
-    public boolean getTicketId(String ticket) {
-        conn.connect();
-        String query = "SELECT ticket_id FROM ticket WHERE ticket_id = '" + ticket + "'";
-        boolean exists = false;
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                exists = true;
-            }
-            ticket = String.valueOf((int) (Math.random() * 10000));
-            System.out.println(ticket);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            
-        }
-        return exists;
-    }
-    
     public boolean RegisterTicket(int flight, String ticket, Date dateTicket, String preference) {
         conn.connect();
         String query = "INSERT INTO ticket (flight_id, ticket_code, ticket_date, ticket_preference) VALUES (?, ?, ?, ?)";
@@ -599,5 +580,23 @@ public class Controller {
             e.printStackTrace();
         } 
         return (transactions);
+    }
+    public int getTicketId(String ticket) {
+        conn.connect();
+        String query = "SELECT ticket_id FROM ticket WHERE ticket_id = '" + ticket + "'";
+        int id = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = rs.getInt("ticket_id");
+            }
+            ticket = String.valueOf((int) (Math.random() * 10000));
+            System.out.println(ticket);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return id;
     }
 }
