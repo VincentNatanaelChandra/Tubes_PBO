@@ -43,22 +43,25 @@ public class MainMenuUser {
         formMenuAdmin.add(nametext);
 
         
-        JButton buttonUpdateSchedule = new JButton("Transaction");
-        buttonUpdateSchedule.setBounds(30, 80, 250, 30);
-        formMenuAdmin.add(buttonUpdateSchedule);
+        JButton buttonTransaction = new JButton("Transaction");
+        buttonTransaction.setBounds(30, 80, 250, 30);
+        formMenuAdmin.add(buttonTransaction);
         
-        JButton buttonUpdatePromo = new JButton("Refund");
-        buttonUpdatePromo.setBounds(30, 115, 250, 30);
-        formMenuAdmin.add(buttonUpdatePromo);
+        JButton buttonRefund = new JButton("Refund");
+        buttonRefund.setBounds(30, 115, 250, 30);
+        formMenuAdmin.add(buttonRefund);
         
-        JButton buttonConfirmationReschedule = new JButton("Reschedule");
-        buttonConfirmationReschedule.setBounds(30,150, 250, 30);
-        formMenuAdmin.add(buttonConfirmationReschedule);
+        JButton buttonReschedule = new JButton("Reschedule");
+        buttonReschedule.setBounds(30,150, 250, 30);
+        formMenuAdmin.add(buttonReschedule);
         
-        JButton buttonConfirmationRefund = new JButton("View Status Refund or Reschedule");
-        buttonConfirmationRefund.setBounds(30, 185, 250, 30);
-        formMenuAdmin.add(buttonConfirmationRefund);
+        JButton buttonViewStatus = new JButton("View Status Refund or Reschedule");
+        buttonViewStatus.setBounds(30, 185, 250, 30);
+        formMenuAdmin.add(buttonViewStatus);
         
+        JButton buttonBooking= new JButton("Buy Ticket");
+        buttonBooking.setBounds(30, 220, 250, 30);
+        formMenuAdmin.add(buttonBooking);
         JButton buttonBacktoLogin = new JButton("⬅");
         buttonBacktoLogin.setBounds(30, 5, 50, 30); // Menempatkan tombol "Back" di pojok kiri atas
         formMenuAdmin.add(buttonBacktoLogin);
@@ -75,6 +78,8 @@ public class MainMenuUser {
         
         formMenuAdmin.setVisible(true);
     }
-    
-
+   
+    public static void main(String[] args) {
+       new MainMenuUser(1,"CIPELI PAM PAM");
+    }
 }

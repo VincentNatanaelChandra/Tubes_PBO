@@ -29,6 +29,10 @@ public class Transaction {
         this.listTiket = listTiket;
     }
 
+    public Transaction() {
+        
+    }
+
     public int getTransaction_id() {
         return transaction_id;
     }
