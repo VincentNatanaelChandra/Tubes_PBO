@@ -146,4 +146,21 @@ public class Controller {
         return false;
 
     }
+    
+    public int getIdMember(String username) {
+        conn.connect();
+        String query = "SELECT m.member_id FROM member m JOIN customer c ON m.cust_id = c.cust_id WHERE c.cust_name = '" + username + "'";
+        int id = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = (rs.getInt("member_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (id);
+    }
+
 }
