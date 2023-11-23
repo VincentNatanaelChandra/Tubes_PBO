@@ -500,7 +500,7 @@ public class Controller {
     
     public boolean RegisterTransaction(int ticket, String method, int seatPrice, int promo, int total, int promoId, int memberId) {
         conn.connect();
-        String query = "INSERT INTO transaction (ticket_id, transaction_payMethod, transaction_seatPrice, transaction_promoDiscount, transaction_totalPrice, promo_id, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO transaction (ticket_id, transaction_payMethod, transation_seatPrice, transaction_promoDiscount, transaction_totalPrice, promo_id, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
@@ -583,7 +583,7 @@ public class Controller {
     }
     public int getTicketId(String ticket) {
         conn.connect();
-        String query = "SELECT ticket_id FROM ticket WHERE ticket_id = '" + ticket + "'";
+        String query = "SELECT ticket_id FROM ticket WHERE ticket_code = '" + ticket + "'";
         int id = 0;
         try {
             Statement stmt = conn.con.createStatement();
@@ -615,4 +615,5 @@ public class Controller {
         }
         return id;
     }
+    
 }
