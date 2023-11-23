@@ -379,10 +379,10 @@ public class Controller {
         return (listClass);
     }
     
-    public ArrayList<String> getSeatNumber() {
+    public ArrayList<String> getSeatNumber(int id) {
         ArrayList<String> listSeat = new ArrayList<>();
         conn.connect();
-        String query = "SELECT seat_number FROM planeseat WHERE seat_state = 0";
+        String query = "SELECT seat_number FROM planeseat WHERE seat_state = 0 && flight_id = "+id+"";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -461,5 +461,21 @@ public class Controller {
             e.printStackTrace();
         }
         return (price);
+    }
+    
+    public int getFlightId(String company, String departure, String arrival) {
+        conn.connect();
+        String query = "SELECT f.flight_id FROM flight f JOIN destination d ON f.destination_id = d.destination_id WHERE f.flight_company = '" + company + "' && d.destination_departure = '" + departure +"' && d.destination_arrival = '" + arrival + "'";
+        int id = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = (rs.getInt("flight_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (id);
     }
 }
