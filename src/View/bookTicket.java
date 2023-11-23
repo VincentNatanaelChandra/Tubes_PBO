@@ -95,6 +95,15 @@ public class bookTicket {
         cbCompany.setBounds(150, 145, 150, 30);
         form.add(cbCompany);
         
+        String departureValue = (String) cbDepartureCity.getSelectedItem();
+        String arrivalValue = (String) cbArrivalCity.getSelectedItem();
+        String airlinesValue = (String) cbCompany.getSelectedItem();
+        
+        int flightId = con.getFlightId(airlinesValue, departureValue, arrivalValue);
+        System.out.println(departureValue);
+        System.out.println(arrivalValue);
+        System.out.println(airlinesValue);
+        System.out.println(flightId);
         //Class
         JLabel labelClass = new JLabel("Class :");
         labelClass.setBounds(20, 180, 150, 30);
@@ -110,7 +119,7 @@ public class bookTicket {
         labelSeatClass.setBounds(20, 215, 150, 30);
         form.add(labelSeatClass);
         //ComboBox Class
-        String seatPlane[] = con.getSeatNumber().toArray(new String [con.getSeatClass().size()]);
+        String seatPlane[] = con.getSeatNumber(flightId).toArray(new String [con.getSeatClass().size()]);
         JComboBox cbSeat = new JComboBox(seatPlane);
         cbSeat.setBounds(150, 215, 150, 30);
         form.add(cbSeat);
@@ -170,6 +179,7 @@ public class bookTicket {
                 String seatValue = (String) cbSeat.getSelectedItem();
                 String prefValue = radioOverNight.isSelected() ? "Over Night" : "Late Night";
                 String FnBValue = radioIndoFood.isSelected() ? "Indonesian Food" : "Western Food";
+                int flightId = con.getFlightId(airlinesValue, departureValue, arrivalValue);
                 String name = con.getUsernameMember(id_user);
                 int ticketPrice = con.getSeatPrice(classValue);
                     if("Western Food".equals(FnBValue)){
