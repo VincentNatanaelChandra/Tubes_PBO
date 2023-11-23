@@ -278,4 +278,155 @@ public class Controller {
             return false;
         }
     }
+    
+    public ArrayList<String> getDeparture() {
+        ArrayList<String> listDeparture = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT DISTINCT destination_departure FROM destination";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listDeparture.add(rs.getString("destination_departure"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listDeparture);
+    }
+    
+    public ArrayList<String> getArrival() {
+        ArrayList<String> listArrival = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT DISTINCT destination_arrival FROM destination";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listArrival.add(rs.getString("destination_arrival"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listArrival);
+    }
+    
+    public ArrayList<String> getAirline() {
+        ArrayList<String> listAirline = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT DISTINCT flight_company FROM flight";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listAirline.add(rs.getString("flight_company"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listAirline);
+    }
+    
+    public ArrayList<Destination> getKTP() {
+        conn.connect();
+        String query = "SELECT * FROM destination";
+        ArrayList<Destination> destinations = new ArrayList<>();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Destination destination = new Destination();
+                destination.setDestination_departure(rs.getString("destination_departure"));
+                destination.setDestination_arrival(rs.getString("destination_arrival"));
+                destination.setDestination_departureDate(rs.getDate("destination_departureDate"));
+                destinations.add(destination);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (destinations);
+    }
+    
+    public String getUsernameMember(int id) {
+        conn.connect();
+        String query = "SELECT cust_name FROM customer c WHERE cust_id = '" + id + "'";
+        String username = "";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                username = (rs.getString("cust_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (username);
+    }
+    
+    public ArrayList<String> getSeatClass() {
+        ArrayList<String> listClass = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT Class_name FROM classes";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listClass.add(rs.getString("Class_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listClass);
+    }
+    
+    public ArrayList<String> getSeatNumber() {
+        ArrayList<String> listSeat = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT seat_number FROM planeseat WHERE seat_state = 0";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                listSeat.add(rs.getString("seat_number"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listSeat);
+    }
+    public boolean requestRefund(int ticket_id, RefundEnum refund_status, int refund_total, String refund_reason) {
+        conn.connect();
+        String query = "INSERT INTO refund (ticket_id, refund_status, refund_total, refund_reason) VALUES (?, ?, ?, ?)";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, ticket_id);
+//            stmt.set(2, refund_status);
+            stmt.setInt(3, refund_total);
+            stmt.setString(4, refund_reason);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean requestReshcedule(int ticket_id, RescheduleEnum reschedule_status, String reschedule_reason) {
+        conn.connect();
+        String query = "INSERT INTO reschedule (ticket_id, reschedule_status, reschedule_reason) VALUES (?, ?, ?)";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, ticket_id);
+//            stmt.set(2, reschedule_status);
+            stmt.setString(3, reschedule_reason);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
