@@ -15,7 +15,11 @@ public class Destination {
     private String destination_departure;
     private String destination_arrival;
     private Date destination_departureDate;
-
+    
+    public Destination() {
+        
+    }
+    
     public Destination(int destination_id, String destination_departure, String destination_arrival, Date destination_departureDate) {
         this.destination_id = destination_id;
         this.destination_departure = destination_departure;
