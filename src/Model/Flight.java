@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Flight {
     private int flight_id;
     private String flight_planeCode;
+    private String flight_company;
     private String flight_type;
     private String flight_planeType;
     private int flight_totalSeat;
@@ -20,9 +21,10 @@ public class Flight {
     private ArrayList<FoodAndBeverages> listFoodAndBeverages;
     private ArrayList<Destination> listDestination;
 
-    public Flight(int flight_id, String flight_planeCode, String flight_type, String flight_planeType, int flight_totalSeat, ArrayList<Seat> listSeat, ArrayList<FoodAndBeverages> listFoodAndBeverages, ArrayList<Destination> listDestination) {
+    public Flight(int flight_id, String flight_planeCode, String flight_company, String flight_type, String flight_planeType, int flight_totalSeat, ArrayList<Seat> listSeat, ArrayList<FoodAndBeverages> listFoodAndBeverages, ArrayList<Destination> listDestination) {
         this.flight_id = flight_id;
         this.flight_planeCode = flight_planeCode;
+        this.flight_company = flight_company;
         this.flight_type = flight_type;
         this.flight_planeType = flight_planeType;
         this.flight_totalSeat = flight_totalSeat;
@@ -45,6 +47,14 @@ public class Flight {
 
     public void setFlight_planeCode(String flight_planeCode) {
         this.flight_planeCode = flight_planeCode;
+    }
+
+    public String getFlight_company() {
+        return flight_company;
+    }
+
+    public void setFlight_company(String flight_company) {
+        this.flight_company = flight_company;
     }
 
     public String getFlight_type() {
@@ -94,4 +104,6 @@ public class Flight {
     public void setListDestination(ArrayList<Destination> listDestination) {
         this.listDestination = listDestination;
     }
+
+   
 }
