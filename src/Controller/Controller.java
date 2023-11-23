@@ -519,6 +519,7 @@ public class Controller {
         }
     }
     
+    
     public String getPinpayMember(int id) {
         conn.connect();
         String query = "SELECT member_pinPay FROM member WHERE cust_id = '" + id + "'";
