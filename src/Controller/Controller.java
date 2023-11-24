@@ -705,7 +705,7 @@ public class Controller {
     public boolean updateSeat(String seat) {
         conn.connect();
         String query = "UPDATE planeseat"
-                + " SET seat_state= " + 0 + " "
+                + " SET seat_state= " + 1 + " "
                 + "WHERE seat_number = " + seat;
         PreparedStatement stmt;
         try {
