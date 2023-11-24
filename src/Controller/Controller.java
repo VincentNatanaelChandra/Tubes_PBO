@@ -748,4 +748,36 @@ public class Controller {
         } 
         return (reschedules);
     }
+    
+    public boolean updateRefund(int refund_id) {
+        conn.connect();
+        String query = "UPDATE refund"
+                + " SET refund_status= " + 1 + " "
+                + "WHERE refund_id = '" + refund_id + "'";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updateReschdule(int reschedule_id) {
+        conn.connect();
+        String query = "UPDATE reschedule"
+                + " SET reschedule_status= " + 1 + " "
+                + "WHERE reschedule_id = '" + reschedule_id + "'";
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
