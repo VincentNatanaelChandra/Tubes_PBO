@@ -863,9 +863,9 @@ public class Controller {
         return (histories);    
     }
     
-    public int getTotalPrice(String ticket) {
+    public int getTotalPrice(int ticket) {
         conn.connect();
-        String query = "SELECT transaction_totalPrice FROM transaction WHERE ticket_id = '" + ticket + "'";
+        String query = "SELECT transaction_totalPrice FROM transaction WHERE ticket_code = '" + ticket + "'";
         int price = 0;
         try {
             Statement stmt = conn.con.createStatement();
