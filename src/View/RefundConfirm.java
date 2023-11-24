@@ -10,23 +10,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RefundConfirm {
+
     // Map untuk melacak status yang sudah diubah oleh setiap user ID
     private static Map<String, Boolean> userStatusMap = new HashMap<>();
 
     private JFrame frame;
 
-    public RefundConfirm(ArrayList<Refund> listRefund) {
-        createRefundConfirmWindow(listRefund);
+    public RefundConfirm(int admin_id, String name, ArrayList<Refund> listRefund) {
+        createRefundConfirmWindow(admin_id, name, listRefund);
         showRefundConfirmWindow(false);
     }
 
-    private void createRefundConfirmWindow(ArrayList<Refund> listRefund) {
+    private void createRefundConfirmWindow(int admin_id, String name, ArrayList<Refund> listRefund) {
         frame = new JFrame("Request Refund List");
         frame.setSize(600, 400);
 
         // Data untuk tabel (Simulasi data)
         Object[][] data = new Object[listRefund.size()][4];
-        
+
         for (int i = 0; i < listRefund.size(); i++) {
             Refund refunds = listRefund.get(i);
             data[i][0] = refunds.getRefund_id();
@@ -37,7 +38,7 @@ public class RefundConfirm {
         }
 
         // Nama kolom untuk tabel
-        String[] columns = {"Refund ID", "Ticket ID"," Refund_status ", "Refund_total", "Refund_total"};
+        String[] columns = {"Refund ID", "Ticket ID", " Refund_status ", "Refund_total", "Refund_total"};
 
         // Model tabel
         DefaultTableModel model = new DefaultTableModel(data, columns);
@@ -90,12 +91,12 @@ public class RefundConfirm {
                 }
             }
         });
-        
+
         JButton backButton = new JButton("Back");
         backButton.setBounds(350, 330, 100, 30);
         backButton.addActionListener(e -> {
             frame.dispose(); // Menutup jendela RefundConfirm
-            MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono"); // Kembali ke Main Menu Admin
+            MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(admin_id, name); // Kembali ke Main Menu Admin
         });
         frame.add(backButton);
 
@@ -103,11 +104,8 @@ public class RefundConfirm {
         frame.setVisible(true);
     }
 
-
     public void showRefundConfirmWindow(boolean visible) {
         frame.setVisible(visible);
     }
 
-
-    }
-
+}

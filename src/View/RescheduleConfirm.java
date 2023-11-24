@@ -10,22 +10,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RescheduleConfirm {
+
     // Map untuk melacak status yang sudah diubah oleh setiap user ID
     private static Map<String, Boolean> userStatusMap = new HashMap<>();
 
     private JFrame frame;
 
-    public RescheduleConfirm(ArrayList<Reschedule> listReschedule) {
-        createRescheduleConfirmWindow(listReschedule);
+    public RescheduleConfirm(int admin_id, String name, ArrayList<Reschedule> listReschedule) {
+        createRescheduleConfirmWindow(admin_id, name, listReschedule);
         showRescheduleConfirmWindow(false);
     }
 
-    private void createRescheduleConfirmWindow(ArrayList<Reschedule> listReschedule) {
+    private void createRescheduleConfirmWindow(int admin_id, String name, ArrayList<Reschedule> listReschedule) {
         frame = new JFrame("Request Reschedule List");
         frame.setSize(600, 400);
 
         Object[][] data = new Object[listReschedule.size()][4];
-        
+
         for (int i = 0; i < listReschedule.size(); i++) {
             Reschedule refunds = listReschedule.get(i);
             data[i][0] = refunds.getReschedule_id();
@@ -88,18 +89,17 @@ public class RescheduleConfirm {
                 }
             }
         });
- JButton backButton = new JButton("Back");
+        JButton backButton = new JButton("Back");
         backButton.setBounds(350, 330, 100, 30);
         backButton.addActionListener(e -> {
             frame.dispose(); // Menutup jendela RefundConfirm
-            MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono"); // Kembali ke Main Menu Admin
+            MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(admin_id, name); // Kembali ke Main Menu Admin
         });
         frame.add(backButton);
 
         frame.setLayout(null);
         frame.setVisible(true);
     }
-
 
     public void showRescheduleConfirmWindow(boolean visible) {
         frame.setVisible(visible);
