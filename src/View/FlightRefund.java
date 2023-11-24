@@ -31,11 +31,18 @@ import org.jdatepicker.impl.SqlDateModel;
 
 public class FlightRefund {
 
-    private static JTextField tiketText;
-    private static JLabel resultLabel;
-    private static JButton refundButton;
+    private  JTextField tiketText;
+    private  JLabel resultLabel;
+    private  JButton refundButton;
 
     private static void placeComponents(JPanel panel) {
+        JFrame frame = new JFrame("Airplane Ticket Refund Menu");
+        frame.setSize(450, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
+        frame.add(panel);
+        placeComponents(panel);
+
+        frame.setVisible(true);
         JLabel titleLabel = new JLabel("REFUND TIKET");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setBounds(120, 10, 200, 30);
@@ -152,73 +159,6 @@ public class FlightRefund {
             panel.add(component);
         }
         return panel;
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Airplane Ticket Refund Menu");
-        frame.setSize(450, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel = new JPanel();
-        frame.add(panel);
-        placeComponents(panel);
-
-        frame.setVisible(true);
-    }
-
-    private static boolean checkSyarat1() {
-        return true;
-    }
-
-    private static boolean checkSyarat2() {
-        return true;
-    }
-
-    private static boolean checkSyarat3() {
-        return true;
-    }
-
-    private static boolean checkSyarat4() {
-        return true;
-    }
-
-// Method untuk melakukan proses refund
-    private static boolean processRefund(String nomorTiket) {
-        boolean isTiketValid = checkDatabase(nomorTiket);
-        if (isTiketValid) {
-            boolean userAgrees = showConfirmationDialog();
-            if (userAgrees) {
-                boolean meetsConditions = checkConditions();
-                if (meetsConditions) {
-                    return performRefund();
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
-// Metode untuk memeriksa nomor tiket di database
-    private static boolean checkDatabase(String nomorTiket) {
-        return true;
-    }
-
-    private static boolean showConfirmationDialog() {
-        return true;
-    }
-
-    private static boolean checkConditions() {
-
-        return true;
-    }
-
-// Method untuk melaksanakan refund
-    private static boolean performRefund() {
-        return true;
     }
 
 }
