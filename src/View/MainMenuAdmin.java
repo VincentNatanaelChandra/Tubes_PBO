@@ -27,7 +27,6 @@ import javax.swing.SwingUtilities;
  */
 public class MainMenuAdmin {
 
-    private JFrame frame;
 
     public MainMenuAdmin(int admin_id, String name) {
         MenuAdmin(admin_id, name);

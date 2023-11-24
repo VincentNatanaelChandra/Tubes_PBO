@@ -71,7 +71,7 @@ public class Reschedule {
         formReschedule.add(checkAcc);
 
         JButton buttonBack = new JButton("Back to Menu");
-        buttonBack.setBounds(20, 340, 150, 30);
+        buttonBack.setBounds(20, 215, 130, 30);
         formReschedule.add(buttonBack);
 
         buttonBack.addActionListener(new ActionListener() {
