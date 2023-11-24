@@ -31,11 +31,11 @@ import org.jdatepicker.impl.SqlDateModel;
  */
 public class nextReschedule {
 
-    public nextReschedule(String ticket, String reasonReschedule) {
-        nextReschedule(ticket, reasonReschedule);
+    public nextReschedule(int member_id, String name, String ticket, String reasonReschedule) {
+        nextReschedule(member_id, name, ticket, reasonReschedule);
     }
 
-    private void nextReschedule(String ticketKode, String reason) {
+    private void nextReschedule(int member_id, String name, String ticketKode, String reason) {
 
         Controller con = new Controller();
 
@@ -98,6 +98,9 @@ public class nextReschedule {
                 String newSeatNum = (String) cbSeat.getSelectedItem();
                 con.requestReshcedule(ticket_id, RescheduleEnum.RESCHEDULEDENIED, reason, sqlDate, newSeatNum);
                 JOptionPane.showMessageDialog(formReschedule, "Reschedule Request Successful, Waiting for Confirmation.", "Reschedule Menu", JOptionPane.PLAIN_MESSAGE);
+                
+                formReschedule.dispose();
+                new MainMenuUser(member_id, name);
             }
         });
 

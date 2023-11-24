@@ -113,7 +113,7 @@ public class Login {
                     new MainMenuAdmin(id, textUsername.getText());
                 } else if (found) {
                      formLogin.dispose();
-                     new MainMenuUser(id, memberId, textUsername.getText());
+                     new MainMenuUser(memberId, textUsername.getText());
                 } else {
                     JOptionPane.showMessageDialog(formLogin, "User Not Found", "WARNING", JOptionPane.WARNING_MESSAGE);
                 }
