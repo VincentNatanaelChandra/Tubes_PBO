@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -169,9 +170,18 @@ buttonUpdateDestination.addActionListener(new ActionListener() {
         });
         
         JButton buttonHistory = new JButton("View History");
-        buttonHistory.setBounds(30, 215, 250, 30);
-        formMenuAdmin.add(buttonHistory);
+buttonHistory.setBounds(30, 215, 250, 30);
+formMenuAdmin.add(buttonHistory);
         
+    ViewHistory viewhistory = new ViewHistory();
+   buttonHistory.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            viewhistory.showViewHistoryWindow(true);
+            formMenuAdmin.setVisible(false); // Menutup tampilan saat ini (MainMenuAdmin)
+        }
+    });
+
         JButton buttonBacktoLogin = new JButton("Back");
         buttonBacktoLogin.setBounds(30, 250, 250, 30);
         formMenuAdmin.add(buttonBacktoLogin);
