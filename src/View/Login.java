@@ -27,6 +27,9 @@ import javax.swing.JTextField;
  */
 public class Login {
     
+    
+    private JFrame formLogin;
+    
     public Login() {
         newLogin();
     }
@@ -35,7 +38,7 @@ public class Login {
         
         
         //=============BAGIAN CONTAINER================
-        JFrame formLogin = new JFrame("Flight Apps Harapan Bangsa");
+        formLogin = new JFrame("Flight Apps Harapan Bangsa");
         formLogin.setSize(420, 280);
         formLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         formLogin.setLocationRelativeTo(null);
@@ -120,5 +123,8 @@ public class Login {
         
         formLogin.add(backgroundLabel);
         formLogin.setVisible(true);
+    }
+     public JFrame getFormLogin() {
+        return formLogin;
     }
 }
