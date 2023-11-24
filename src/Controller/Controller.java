@@ -28,7 +28,8 @@ public class Controller {
     }
     
     static DatabaseHandler conn = new DatabaseHandler();
-
+    
+    //Menu login
     public static boolean getUser(String username, String password) {
         conn.connect();
         String query = "SELECT * FROM customer WHERE cust_name = '" + username + "' AND cust_password = '" + password + "'";
