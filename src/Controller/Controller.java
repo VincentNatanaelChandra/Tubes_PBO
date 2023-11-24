@@ -47,7 +47,7 @@ public class Controller {
         return exists;
     }
 
-    public boolean RegisterCustomerData(String username, String password) {
+    public boolean registerCustomerData(String username, String password) {
         conn.connect();
         String query = "INSERT INTO customer (cust_name, cust_password) VALUES (?, ?)";
         PreparedStatement stmt;
@@ -339,7 +339,7 @@ public class Controller {
         return (listAirline);
     }
     
-    public ArrayList<Destination> getKTP() {
+    public ArrayList<Destination> getInsertDestination() {
         conn.connect();
         String query = "SELECT * FROM destination";
         ArrayList<Destination> destinations = new ArrayList<>();
@@ -432,7 +432,7 @@ public class Controller {
         try {
             stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, ticket_id);
-//            stmt.set(2, reschedule_status);
+            stmt.setObject(2, reschedule_status);
             stmt.setString(3, reschedule_reason);
             stmt.executeUpdate();
             return true;
@@ -491,7 +491,7 @@ public class Controller {
         return (id);
     }
     
-    public boolean RegisterTicket(int flight, String ticket, Date dateTicket, String preference) {
+    public boolean registerTicket(int flight, String ticket, Date dateTicket, String preference) {
         conn.connect();
         String query = "INSERT INTO ticket (flight_id, ticket_code, ticket_date, ticket_preference) VALUES (?, ?, ?, ?)";
         PreparedStatement stmt;
@@ -509,7 +509,7 @@ public class Controller {
         }
     }
     
-    public boolean RegisterTransaction(int ticket, String method, int seatPrice, int promo, int total, int promoId, int memberId) {
+    public boolean registerTransaction(int ticket, String method, int seatPrice, int promo, int total, int promoId, int memberId) {
         conn.connect();
         String query = "INSERT INTO transaction (ticket_id, transaction_payMethod, transaction_seatPrice, transation_promoDiscount, transaction_totalPrice, promo_id, member_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt;
