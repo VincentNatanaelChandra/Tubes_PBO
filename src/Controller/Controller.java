@@ -366,7 +366,7 @@ public class Controller {
         return (listSeat);
     }
     
-    public boolean requestRefund(int ticket_id, RefundEnum refund_status, int refund_total, String refund_reason) {
+    public boolean requestRefund(int ticket_id, RefundEnum refund_status, double refund_total, String refund_reason) {
         conn.connect();
         String query = "INSERT INTO refund (ticket_id, refund_status, refund_total, refund_reason) VALUES (?, ?, ?, ?)";
         PreparedStatement stmt;
@@ -374,7 +374,7 @@ public class Controller {
             stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, ticket_id);
             stmt.setString(2, refund_status.toString());
-            stmt.setInt(3, refund_total);
+            stmt.setDouble(3, refund_total);
             stmt.setString(4, refund_reason);
             stmt.executeUpdate();
             return true;
