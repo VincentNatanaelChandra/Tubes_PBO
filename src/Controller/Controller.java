@@ -864,4 +864,71 @@ public class Controller {
         }
         return (price);
     }
+    
+     public ArrayList<String> getAllFlightCode() {
+        conn.connect();
+        String query = "SELECT flight_planeCode FROM flight";
+        ArrayList<String> codes = new ArrayList<>();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                codes.add(rs.getString("flight_planeCode"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (codes);
+    }
+     
+     public int getFlightIdFromPlane(String plane) {
+        conn.connect();
+        String query = "SELECT flight_id FROM flight WHERE flight_planeCode = '" + plane + "'";
+        int id = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = (rs.getInt("flight_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return id;
+    }
+     
+     public ArrayList<Integer> getDestinationId() {
+        conn.connect();
+        String query = "SELECT destination_id FROM destination ";
+        ArrayList<Integer> ids = new ArrayList<>();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                ids.add(rs.getInt("destination_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return ids;
+    }
+     
+     public ArrayList<Integer> getPromoId() {
+        conn.connect();
+        String query = "SELECT promo_id FROM promo ";
+        ArrayList<Integer> ids = new ArrayList<>();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                ids.add(rs.getInt("promo_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return ids;
+    }
 }

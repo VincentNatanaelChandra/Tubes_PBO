@@ -2,10 +2,11 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import Controller.Controller;
 
 public class UpdatePenerbangan {
     private JFrame frame;
-     private JComboBox<String> comboBoxFlightID;
+    private JComboBox<String> comboBoxFlightID;
     private String selectedFlightID;
    
     public UpdatePenerbangan(String selectedFlightID) {
@@ -39,7 +40,7 @@ public class UpdatePenerbangan {
         panel.add(field5);
 
         // Tambahkan label dan combo box untuk Flight ID
-        panel.add(new JLabel("Flight ID:"));
+        panel.add(new JLabel("Plane Code:"));
         JComboBox<String> comboBoxFlightID = new JComboBox<>();
         comboBoxFlightID.addItem(selectedFlightID);
         comboBoxFlightID.setEnabled(false);
@@ -48,11 +49,13 @@ public class UpdatePenerbangan {
         JButton updateButton = new JButton("Update");
         updateButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         updateButton.addActionListener(e -> {
-            String input1 = field1.getText();
-            String input2 = field2.getText();
-            String input3 = field3.getText();
-            String input4 = field4.getText();
-            String input5 = field5.getText();
+            String code = field1.getText();
+            String airline = field2.getText();
+            String type = field3.getText();
+            String planeType = field4.getText();
+            int input5 = Integer.parseInt(field5.getText());
+            int id =Controller.getInstance().getFlightIdFromPlane(selectedFlightID);
+            Controller.getInstance().updateFlight(id, code, airline, type, planeType, input5);
             JOptionPane.showMessageDialog(frame, "Data has been updated", "Information", JOptionPane.INFORMATION_MESSAGE);
         });
         panel.add(updateButton);

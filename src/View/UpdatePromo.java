@@ -1,15 +1,25 @@
 package View;
 
+import Controller.DateLabelFormatter;
 import javax.swing.*;
 import java.awt.*;
+import Controller.Controller;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.text.NumberFormat;
+import java.util.Properties;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
 
 public class UpdatePromo {
     private JFrame frame;
-
-    public UpdatePromo() {}
+    private JComboBox<String> comboBoxFlightID;
+    private int selectedPromoID;
+    
+    public UpdatePromo(int selectedPromoID) {
+        this.selectedPromoID = selectedPromoID;
+    }
 
     private void createUpdatePromoWindow() {
         frame = new JFrame("Update Promo Menu");
@@ -22,14 +32,20 @@ public class UpdatePromo {
 
         JTextField field1 = new JTextField(10);
         JTextField field2 = new JTextField(10);
-        JSpinner dateSpinner = createDescendingDateSpinner();
+        SqlDateModel model = new SqlDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
         panel.add(new JLabel("Promo Code :"));
         panel.add(field1);
         panel.add(new JLabel("Promo Type :"));
         panel.add(field2);
         panel.add(new JLabel("Expired Date:"));
-        panel.add(dateSpinner);
+        panel.add(datePicker);
 
         JTextField field5 = new JFormattedTextField(NumberFormat.getNumberInstance()); // Menggunakan JFormattedTextField
         panel.add(new JLabel("Persen Promo"));
@@ -42,8 +58,7 @@ public class UpdatePromo {
         updateButton.addActionListener(e -> {
             String promoCode = field1.getText();
             String promoType = field2.getText();
-            Date expiredDate = (Date) dateSpinner.getValue();
-
+            Date expiredDate = (Date) (java.sql.Date) datePicker.getModel().getValue();
             double percentPromo = 0.0; // Inisialisasi variabel untuk persen promo
             try {
                 percentPromo = Double.parseDouble(field5.getText()); // Mengambil nilai dari field "Persen Promo"
@@ -52,7 +67,7 @@ public class UpdatePromo {
                 JOptionPane.showMessageDialog(frame, "Invalid input for percent promo", "Error", JOptionPane.ERROR_MESSAGE);
                 return; // Keluar dari actionPerformed jika input tidak valid
             }
-
+            Controller.getInstance().updatePromo(selectedPromoID, promoCode, promoType, expiredDate, percentPromo);
             // Lakukan sesuatu dengan nilai percentPromo
 
             JOptionPane.showMessageDialog(frame, "Data has been updated", "Notification", JOptionPane.INFORMATION_MESSAGE);
@@ -67,21 +82,6 @@ public class UpdatePromo {
         panel.add(backButton);
 
         frame.add(panel);
-    }
-
-    private JSpinner createDescendingDateSpinner() {
-        SpinnerDateModel model = new SpinnerDateModel();
-        JSpinner spinner = new JSpinner(model);
-        spinner.setEditor(new JSpinner.DateEditor(spinner, "yyyy-MM-dd"));
-
-        Calendar calendar = Calendar.getInstance();
-        Date today = calendar.getTime();
-        calendar.add(Calendar.YEAR, -10);
-        Date tenYearsAgo = calendar.getTime();
-        model.setValue(today);
-
-        spinner.setModel(new SpinnerDateModel(today, tenYearsAgo, today, Calendar.DAY_OF_MONTH));
-        return spinner;
     }
 
     public void showUpdatePromoWindow(boolean visible) {
