@@ -645,4 +645,76 @@ public class Controller {
         return id;
     }
     
+    public boolean updateFlight(int flight, String plane, String airline, String type, String planetype, int totalSeat) {
+        conn.connect();
+        String query = "UPDATE flight"
+                + " SET flight_planeCode='" + plane + "',"
+                + "flight_company='" + airline + "',"
+                + "flight_type='" + type + "',"
+                + "flight_planeType='" + planetype + "',"
+                + "flight_totalSeat='" + totalSeat + "' "
+                + "WHERE flight_id = " + flight;
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updateDestination(int destination, String departure, String arrival, Date destinationDate) {
+        conn.connect();
+        String query = "UPDATE destination"
+                + " SET destination_departure='" + departure + "',"
+                + "destination_arrival='" + arrival + "',"
+                + "destination_departureDate='" + destinationDate + "' "
+                + "WHERE flight_id = " + destination;
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updatePromo(int promo, String code, String type, Date expired, double percent) {
+        conn.connect();
+        String query = "UPDATE promo"
+                + " SET promo_code='" + code + "',"
+                + "promo_type='" + type + "',"
+                + "promo_expiredDate='" + expired + "',"
+                + "promo_percent='" + percent + "' "
+                + "WHERE flight_id = " + promo;
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updateSeat(String seat) {
+        conn.connect();
+        String query = "UPDATE planeseat"
+                + " SET seat_state= " + 0 + " "
+                + "WHERE seat_number = " + seat;
+        PreparedStatement stmt;
+        try {
+            stmt = conn.con.prepareStatement(query);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
