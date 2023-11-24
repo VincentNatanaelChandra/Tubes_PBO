@@ -12,11 +12,11 @@ public class UpdatePenerbangan {
 
     private void createUpdatePenerbanganWindow() {
         frame = new JFrame("Update Flight Menu");
-        frame.setSize(300, 250);
+        frame.setSize(300, 290);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 1, 10, 10));
+        panel.setLayout(new GridLayout(7, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JTextField field1 = new JTextField(10);
@@ -51,11 +51,13 @@ public class UpdatePenerbangan {
     frame.add(panel);
     
     JButton backButton = new JButton("Back");
-    backButton.addActionListener(e -> {
-    });
-    panel.add(backButton);
-    frame.add(panel);
-}
+backButton.addActionListener(e -> {
+    frame.dispose(); // Menutup jendela UpdateDestinasi
+    MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono"); // Menampilkan kembali Main Menu Admin
+});
+panel.add(backButton);
+frame.add(panel);
+    }
 
     public void showUpdatePenerbanganWindow(boolean visible) {
         frame.setVisible(visible);

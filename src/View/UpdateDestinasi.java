@@ -43,10 +43,12 @@ public class UpdateDestinasi {
     frame.add(panel);
     
     JButton backButton = new JButton("Back");
-    backButton.addActionListener(e -> {
-    });
-    panel.add(backButton);
-    frame.add(panel);
+backButton.addActionListener(e -> {
+    frame.dispose(); // Menutup jendela UpdateDestinasi
+    MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono"); // Menampilkan kembali Main Menu Admin
+});
+panel.add(backButton);
+frame.add(panel);
 }
     private JSpinner createDescendingDateSpinner() {
         SpinnerDateModel model = new SpinnerDateModel();
