@@ -706,7 +706,7 @@ public class Controller {
         conn.connect();
         String query = "UPDATE planeseat"
                 + " SET seat_state= " + 1 + " "
-                + "WHERE seat_number = " + seat;
+                + "WHERE seat_number = '" + seat + "'";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
@@ -716,5 +716,22 @@ public class Controller {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public int getFlightId(String ticket) {
+        conn.connect();
+        String query = "SELECT flight_id FROM ticket WHERE ticket_code = '" + ticket + "'";
+        int id = 0;
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                id = (rs.getInt("flight_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        return id;
     }
 }
