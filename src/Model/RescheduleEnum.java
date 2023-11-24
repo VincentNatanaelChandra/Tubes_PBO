@@ -9,5 +9,16 @@ package Model;
  * @author Devid L Manurung
  */
 public enum RescheduleEnum {
-    RESCHEDULESUCCESS, RESCHEDULEDENIED;
+    RESCHEDULESUCCESS{
+        @Override
+        public String toString() {
+            return "RESCHEDULESUCCESS";
+        }
+    },
+    RESCHEDULEDENIED{
+        @Override
+        public String toString() {
+            return "RESCHEDULEDENIED";
+        }
+    }
 }

@@ -96,7 +96,7 @@ public class nextReschedule {
                 // Convert java.util.Date to java.sql.Date
                 java.sql.Date sqlDate = new java.sql.Date(newDateFlight.getTime());
                 String newSeatNum = (String) cbSeat.getSelectedItem();
-                con.requestReshcedule(ticket_id, RescheduleEnum.RESCHEDULEDENIED, reason, sqlDate, newSeatNum);
+                Controller.getInstance().requestReshcedule(ticket_id, RescheduleEnum.RESCHEDULEDENIED, reason, sqlDate, newSeatNum);
                 JOptionPane.showMessageDialog(formReschedule, "Reschedule Request Successful, Waiting for Confirmation.", "Reschedule Menu", JOptionPane.PLAIN_MESSAGE);
                 
                 formReschedule.dispose();
