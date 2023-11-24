@@ -22,16 +22,14 @@ public class RescheduleConfirm {
         frame = new JFrame("Request Reschedule List");
         frame.setSize(600, 400);
 
-        // Data untuk tabel (Simulasi data)
         String[][] data = {
-                {"John Doe", "12345", "Pending"},
-                {"Jane Smith", "54321", "Pending"},
+                {"John Doe", "12345","Ditinggal Nikah", "Pending"},
+                {"Jane Smith", "54321", "Telat Bangun","Pending"},
                 // Data lainnya...
         };
 
         // Nama kolom untuk tabel
-        String[] columns = {"User", "Ticket ID", "Status"};
-
+        String[] columns = {"User", "Ticket ID","Alasan ", "Status,"};
         // Model tabel
         DefaultTableModel model = new DefaultTableModel(data, columns);
         JTable table = new JTable(model);
@@ -56,7 +54,7 @@ public class RescheduleConfirm {
                 if (selectedRow != -1) {
                     String userID = (String) model.getValueAt(selectedRow, 1); // Ambil nilai ID user dari tabel
                     if (!userStatusMap.containsKey(userID) || !userStatusMap.get(userID)) {
-                        model.setValueAt("Approved", selectedRow, 2);
+                        model.setValueAt("Approved", selectedRow, 3);
                         userStatusMap.put(userID, true); // Menandai bahwa user ID ini sudah diubah statusnya
                     } else {
                         // Jika sudah diubah, tampilkan pesan bahwa user ID ini sudah memiliki status yang diubah
@@ -74,7 +72,7 @@ public class RescheduleConfirm {
                 if (selectedRow != -1) {
                     String userID = (String) model.getValueAt(selectedRow, 1); // Ambil nilai ID user dari tabel
                     if (!userStatusMap.containsKey(userID) || !userStatusMap.get(userID)) {
-                        model.setValueAt("Rejected", selectedRow, 2);
+                        model.setValueAt("Rejected", selectedRow, 3);
                         userStatusMap.put(userID, true); // Menandai bahwa user ID ini sudah diubah statusnya
                     } else {
                         // Jika sudah diubah, tampilkan pesan bahwa user ID ini sudah memiliki status yang diubah
