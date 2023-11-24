@@ -507,7 +507,7 @@ public class Controller {
         }
         return (pinpay);
     }
-    public ArrayList<Transaction> getHistoryMember(int member_id) {
+    public ArrayList<Transaction> getHistoryMember1(int member_id) {
         ArrayList<Transaction> transactions = new ArrayList<>();
         try {
             conn.connect();
@@ -754,7 +754,7 @@ public class Controller {
     public boolean updateRefund(int ticket_id) {
         conn.connect();
         String query = "UPDATE refund"
-                + " SET refund_status= " + 1 + " "
+                + " SET refund_status= 'REFUNDSUCCESS' "
                 + "WHERE ticket_id   = '" + ticket_id + "'";
         PreparedStatement stmt;
         try {
@@ -770,7 +770,7 @@ public class Controller {
     public boolean updateReschdule(int ticket_id) {
         conn.connect();
         String query = "UPDATE reschedule"
-                + " SET reschedule_status= " + 1 + " "
+                + " SET reschedule_status= 'RESCHEDULESUCCESS' "
                 + "WHERE ticket_id = '" + ticket_id + "'";
         PreparedStatement stmt;
         try {
@@ -781,5 +781,71 @@ public class Controller {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public ArrayList<Object> getHistory() {
+        ArrayList<Object> histories = new ArrayList<>();
+        try {
+            conn.connect();
+            String query = "SELECT c.cust_name, m.member_id, tck.ticket_id, tck.ticket_code, tck.ticket_date, tck.ticket_preference, t.transaction_id, t.transaction_payMethod, "
+                    + "t.transaction_seatPrice, t.transation_promoDiscount, t.transaction_totalPrice, p.promo_id, p.promo_code "
+                    + "FROM customer c JOIN member m ON c.cust_id = m.member_id "
+                    + "JOIN transaction t ON m.member_id = t.member_id "
+                    + "JOIN ticket tck ON t.ticket_id = tck.ticket_id "
+                    + "JOIN promo p ON t.promo_id = p.promo_id";
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                histories.add(rs.getString("cust_name"));
+                histories.add(rs.getInt("member_id"));
+                histories.add(rs.getInt("ticket_id"));
+                histories.add(rs.getString("ticket_code"));
+                histories.add(rs.getDate("ticket_date"));
+                histories.add(rs.getString("ticket_preference"));
+                histories.add(rs.getInt("transaction_id"));
+                histories.add(rs.getString("transaction_payMethod"));
+                histories.add(rs.getInt("transaction_seatPrice"));
+                histories.add(rs.getInt("transation_promoDiscount"));
+                histories.add(rs.getInt("transaction_totalPrice"));
+                histories.add(rs.getInt("promo_id"));
+                histories.add(rs.getInt("promo_code"));
+            }
+        } catch (SQLException e) { 
+            e.printStackTrace();
+        } 
+        return (histories);
+    }
+    
+    public ArrayList<Object> getHistoryMember(int member_id) {
+        ArrayList<Object> histories = new ArrayList<>();
+        try {
+            conn.connect();
+            String query = "SELECT c.cust_name, m.member_id, tck.ticket_id, tck.ticket_code, tck.ticket_date, tck.ticket_preference, t.transaction_id, t.transaction_payMethod, "
+                    + "t.transaction_seatPrice, t.transation_promoDiscount, t.transaction_totalPrice, p.promo_id, p.promo_code "
+                    + "FROM customer c JOIN member m ON c.cust_id = m.member_id "
+                    + "JOIN transaction t ON m.member_id = t.member_id "
+                    + "JOIN ticket tck ON t.ticket_id = tck.ticket_id "
+                    + "JOIN promo p ON t.promo_id = p.promo_id WHERE m.member_id = " + member_id +"";
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                histories.add(rs.getString("cust_name"));
+                histories.add(rs.getInt("member_id"));
+                histories.add(rs.getInt("ticket_id"));
+                histories.add(rs.getString("ticket_code"));
+                histories.add(rs.getDate("ticket_date"));
+                histories.add(rs.getString("ticket_preference"));
+                histories.add(rs.getInt("transaction_id"));
+                histories.add(rs.getString("transaction_payMethod"));
+                histories.add(rs.getInt("transaction_seatPrice"));
+                histories.add(rs.getInt("transation_promoDiscount"));
+                histories.add(rs.getInt("transaction_totalPrice"));
+                histories.add(rs.getInt("promo_id"));
+                histories.add(rs.getInt("promo_code"));
+            }
+        } catch (SQLException e) { 
+            e.printStackTrace();
+        } 
+        return (histories);
     }
 }
