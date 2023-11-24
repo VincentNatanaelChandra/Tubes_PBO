@@ -256,10 +256,10 @@ public class Payment {
         java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
         
         //Insert Data
-        con.RegisterTicket(flightId, ticketCode, sqlDate, preference);
+        con.registerTicket(flightId, ticketCode, sqlDate, preference);
         int ticket_id = con.getTicketIdInt(ticketCode);
         System.out.println(ticket_id);
-        con.RegisterTransaction(ticket_id, method, ticketPrice, promoDisc, finalPrice, promo_id, member_id);
+        con.registerTransaction(ticket_id, method, ticketPrice, promoDisc, finalPrice, promo_id, member_id);
         
         JOptionPane.showMessageDialog(formPayment, "Done", "Done ga bang?", JOptionPane.PLAIN_MESSAGE);
     }
