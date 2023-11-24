@@ -21,7 +21,7 @@ public class UpdatePromo {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 1, 10, 10));
+        panel.setLayout(new GridLayout(5, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JTextField field1 = new JTextField(10);
@@ -51,10 +51,12 @@ public class UpdatePromo {
     
     JButton backButton = new JButton("Back");
     backButton.addActionListener(e -> {
-    });
-    panel.add(backButton);
-    frame.add(panel);
-}
+    frame.dispose(); // Menutup jendela UpdateDestinasi
+    MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono"); // Menampilkan kembali Main Menu Admin
+});
+        panel.add(backButton);
+        frame.add(panel);
+    }
 
     private JSpinner createDescendingDateSpinner() {
         SpinnerDateModel model = new SpinnerDateModel();
