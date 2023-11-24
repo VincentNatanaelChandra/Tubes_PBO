@@ -182,7 +182,7 @@ public class bookTicket {
                 if ("Western Food".equals(FnBValue)) {
                     ticketPrice += 20000;
                 }
-                
+                Controller.getInstance().updateSeat(seatValue);
 
                 boolean status = false;
                 if (cbDepartureCity.getSelectedItem() == null
