@@ -45,38 +45,82 @@ public class MainMenuAdmin {
         formMenuAdmin.add(labelTitle);
         
         JButton buttonUpdateDestination = new JButton("Update Destination");
-        buttonUpdateDestination.setBounds(30, 40, 250, 30);
-        formMenuAdmin.add(buttonUpdateDestination);
-    
-         UpdateDestinasi updateDestinasi = new UpdateDestinasi();
+buttonUpdateDestination.setBounds(30, 40, 250, 30);
+formMenuAdmin.add(buttonUpdateDestination);
 
-          buttonUpdateDestination.addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                  // Menutup tampilan saat ini (MainMenuAdmin)
-                  formMenuAdmin.setVisible(false);
+buttonUpdateDestination.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Menutup tampilan saat ini (MainMenuAdmin)
+        formMenuAdmin.setVisible(false);
 
-                  // Menampilkan tampilan baru dari UpdateDestination
-                  updateDestinasi.showUpdateDestinasiWindow(true);
-              }
-          });   
-        
+        // Data dummy Flight ID
+        String[] flightIDs = { "FLIGHT_001", "FLIGHT_002", "FLIGHT_003" }; // Ganti dengan data Flight ID yang sesuai
+
+        if (flightIDs.length > 0) {
+            // Tampilkan JOptionPane untuk memilih Flight ID
+            String selectedFlightID = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Choose a Flight ID:",
+                    "Select Flight ID",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    flightIDs,
+                    flightIDs[0]); // Pilihan default (opsional)
+
+            if (selectedFlightID != null) { // Jika pengguna memilih Flight ID
+                UpdateDestinasi updateDestinasi = new UpdateDestinasi(selectedFlightID);
+                updateDestinasi.showUpdateDestinasiWindow(true);
+                formMenuAdmin.setVisible(false); // Menutup formMenuAdmin saat menampilkan UpdateDestinasi
+            } else {
+                formMenuAdmin.setVisible(true);
+            }
+        } else {
+            // Tampilkan pesan jika tidak ada Flight ID yang tersedia
+            JOptionPane.showMessageDialog(null, "No Flight IDs available", "No Data", JOptionPane.WARNING_MESSAGE);
+            formMenuAdmin.setVisible(true);
+        }
+    }
+});
+     
         JButton buttonUpdateFlight = new JButton("Update Flight");
         buttonUpdateFlight.setBounds(30, 75, 250, 30);
         formMenuAdmin.add(buttonUpdateFlight);
         
-        UpdatePenerbangan updateFlight = new UpdatePenerbangan();
+   buttonUpdateFlight.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Menutup tampilan saat ini (MainMenuAdmin)
+        formMenuAdmin.setVisible(false);
 
-          buttonUpdateFlight.addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                  // Menutup tampilan saat ini (MainMenuAdmin)
-                  formMenuAdmin.setVisible(false);
+        // Data dummy Flight ID
+        String[] flightIDs = { "FLIGHT_001", "FLIGHT_002", "FLIGHT_003" }; // Ganti dengan data Flight ID yang sesuai
 
-                  // Menampilkan tampilan baru dari UpdateFlight
-                  updateFlight.showUpdatePenerbanganWindow(true);
-              }
-          });
+        if (flightIDs.length > 0) {
+            // Tampilkan JOptionPane untuk memilih Flight ID
+            String selectedFlightID = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Choose a Flight ID:",
+                    "Select Flight ID",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    flightIDs,
+                    flightIDs[0]); // Pilihan default (opsional)
+
+            if (selectedFlightID != null) { // Jika pengguna memilih Flight ID
+                 UpdatePenerbangan updatePenerbangan = new UpdatePenerbangan(selectedFlightID);
+                updatePenerbangan.showUpdatePenerbanganWindow(true);
+                formMenuAdmin.setVisible(false); // Menutup formMenuAdmin saat menampilkan UpdatePenerbangan
+            } else {
+                formMenuAdmin.setVisible(true);
+            }
+        } else {
+            // Tampilkan pesan jika tidak ada Flight ID yang tersedia
+            JOptionPane.showMessageDialog(null, "No Flight IDs available", "No Data", JOptionPane.WARNING_MESSAGE);
+            formMenuAdmin.setVisible(true);
+        }
+    }
+});
           
         JButton buttonUpdatePromo = new JButton("Update Promo");
         buttonUpdatePromo.setBounds(30, 110, 250, 30);
@@ -140,6 +184,8 @@ public class MainMenuAdmin {
     });
 
         formMenuAdmin.setVisible(true);
+        
+        
     }
     
     
