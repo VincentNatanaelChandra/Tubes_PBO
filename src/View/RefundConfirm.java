@@ -83,10 +83,19 @@ public class RefundConfirm {
                 }
             }
         });
+        
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(350, 330, 100, 30);
+        backButton.addActionListener(e -> {
+            frame.dispose(); // Menutup jendela RefundConfirm
+            MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono"); // Kembali ke Main Menu Admin
+        });
+        frame.add(backButton);
 
         frame.setLayout(null);
         frame.setVisible(true);
     }
+
 
     public void showRefundConfirmWindow(boolean visible) {
         frame.setVisible(visible);
