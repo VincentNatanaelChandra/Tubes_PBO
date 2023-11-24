@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author Devid L Manurung
@@ -11,12 +13,16 @@ package Model;
 public class Reschedule {
     private int reschedule_id;
     private String reschedule_reason;
-    private RescheduleEnum reschedule_status;    
+    private RescheduleEnum reschedule_status;
+    private Date reschedule_date;
+    private String reschedule_seat;
 
-    public Reschedule(int reschedule_id, String reschedule_reason, RescheduleEnum reschedule_status) {
+    public Reschedule(int reschedule_id, String reschedule_reason, RescheduleEnum reschedule_status, Date reschedule_date, String reschedule_seat) {
         this.reschedule_id = reschedule_id;
         this.reschedule_reason = reschedule_reason;
         this.reschedule_status = reschedule_status;
+        this.reschedule_date = reschedule_date;
+        this.reschedule_seat = reschedule_seat;
     }
 
     public int getReschedule_id() {
@@ -42,7 +48,22 @@ public class Reschedule {
     public void setReschedule_status(RescheduleEnum reschedule_status) {
         this.reschedule_status = reschedule_status;
     }
-    
- 
-    
+
+    public Date getReschedule_date() {
+        return reschedule_date;
+    }
+
+    public void setReschedule_date(Date reschedule_date) {
+        this.reschedule_date = reschedule_date;
+    }
+
+    public String getReschedule_seat() {
+        return reschedule_seat;
+    }
+
+    public void setReschedule_seat(String reschedule_seat) {
+        this.reschedule_seat = reschedule_seat;
+    }
+
+   
 }
