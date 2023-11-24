@@ -28,11 +28,12 @@ import org.jdatepicker.impl.UtilDateModel;
  * @author ASUS
  */
 public class bookTicket {
-    public bookTicket(int id_user){
-        bookingTicket(id_user);
+
+    public bookTicket(int member_id, String name) {
+        bookingTicket(member_id, name);
     }
-    
-    private void bookingTicket(int id_user){
+
+    private void bookingTicket(int member_id, String name) {
         //=============BAGIAN CONTAINER================
         JFrame form = new JFrame("Booking Ticket Menu");
         form.setSize(365, 425);
@@ -46,32 +47,32 @@ public class bookTicket {
         labelTitle.setFont(fontTitle);
         labelTitle.setBounds(20, 5, 250, 30);
         form.add(labelTitle);
-        
+
         //City Departure
         JLabel labelCityDeparture = new JLabel("City Departure :");
         labelCityDeparture.setBounds(20, 40, 150, 30);
         form.add(labelCityDeparture);
         //ComboBox City Departure
-        String depertureCity[] = Controller.getInstance().getDeparture().toArray(new String [Controller.getInstance().getDeparture().size()]);
-        JComboBox cbDepartureCity =new JComboBox(depertureCity);
+        String depertureCity[] = Controller.getInstance().getDeparture().toArray(new String[Controller.getInstance().getDeparture().size()]);
+        JComboBox cbDepartureCity = new JComboBox(depertureCity);
         cbDepartureCity.setBounds(150, 40, 150, 30);
         form.add(cbDepartureCity);
-        
+
         //City Arrival
         JLabel labelCityArrival = new JLabel("City Arrival :");
         labelCityArrival.setBounds(20, 75, 150, 30);
         form.add(labelCityArrival);
         //ComboBox City Arrival
-        String arrivalCity[] = Controller.getInstance().getArrival().toArray(new String [Controller.getInstance().getArrival().size()]);
-        JComboBox cbArrivalCity =new JComboBox(arrivalCity);
+        String arrivalCity[] = Controller.getInstance().getArrival().toArray(new String[Controller.getInstance().getArrival().size()]);
+        JComboBox cbArrivalCity = new JComboBox(arrivalCity);
         cbArrivalCity.setBounds(150, 75, 150, 30);
         form.add(cbArrivalCity);
-        
+
         //Tanggal Berangkat
         JLabel labelDateFly = new JLabel("Date Flight :");
         labelDateFly.setBounds(20, 110, 150, 30);
         form.add(labelDateFly);
-        
+
         //Isian Tanggal Berangkat
         SqlDateModel model = new SqlDateModel();
         Properties p = new Properties();
@@ -82,21 +83,21 @@ public class bookTicket {
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
         datePicker.setBounds(150, 113, 150, 30);
         form.add(datePicker);
-        
+
         //Airlines Company
         JLabel labelCompany = new JLabel("Airlines LineUp :");
         labelCompany.setBounds(20, 145, 150, 30);
         form.add(labelCompany);
         //ComboBox Airlines Company
-        String company[] = Controller.getInstance().getAirline().toArray(new String [Controller.getInstance().getAirline().size()]);
-        JComboBox cbCompany =new JComboBox(company);
+        String company[] = Controller.getInstance().getAirline().toArray(new String[Controller.getInstance().getAirline().size()]);
+        JComboBox cbCompany = new JComboBox(company);
         cbCompany.setBounds(150, 145, 150, 30);
         form.add(cbCompany);
-        
+
         String departureValue = (String) cbDepartureCity.getSelectedItem();
         String arrivalValue = (String) cbArrivalCity.getSelectedItem();
         String airlinesValue = (String) cbCompany.getSelectedItem();
-        
+
         int flightId = Controller.getInstance().getFlightId(airlinesValue, departureValue, arrivalValue);
         System.out.println(departureValue);
         System.out.println(arrivalValue);
@@ -107,21 +108,21 @@ public class bookTicket {
         labelClass.setBounds(20, 180, 150, 30);
         form.add(labelClass);
         //ComboBox Class
-        String classPlane[] = Controller.getInstance().getSeatClass().toArray(new String [Controller.getInstance().getSeatClass().size()]);
+        String classPlane[] = Controller.getInstance().getSeatClass().toArray(new String[Controller.getInstance().getSeatClass().size()]);
         JComboBox cbClass = new JComboBox(classPlane);
         cbClass.setBounds(150, 180, 150, 30);
         form.add(cbClass);
-        
+
         //Seat Number
         JLabel labelSeatClass = new JLabel("Seat :");
         labelSeatClass.setBounds(20, 215, 150, 30);
         form.add(labelSeatClass);
         //ComboBox Class
-        String seatPlane[] = Controller.getInstance().getSeatNumber(flightId).toArray(new String [Controller.getInstance().getSeatClass().size()]);
+        String seatPlane[] = Controller.getInstance().getSeatNumber(flightId).toArray(new String[Controller.getInstance().getSeatClass().size()]);
         JComboBox cbSeat = new JComboBox(seatPlane);
         cbSeat.setBounds(150, 215, 150, 30);
         form.add(cbSeat);
-        
+
         //Flight Preference
         JLabel labelPref = new JLabel("Flight Preference : ");
         labelPref.setBounds(20, 250, 150, 30);
@@ -138,7 +139,7 @@ public class bookTicket {
         ButtonGroup buttonPref = new ButtonGroup();
         buttonPref.add(radioOverNight);
         buttonPref.add(radioLateNight);
-        
+
         //FnB Choose
         JLabel labelFnB = new JLabel("Food : ");
         labelFnB.setBounds(20, 285, 50, 30);
@@ -155,16 +156,20 @@ public class bookTicket {
         ButtonGroup buttonFnB = new ButtonGroup();
         buttonFnB.add(radioIndoFood);
         buttonFnB.add(radioWestFood);
-        
+
         JLabel captionFood = new JLabel("Free Indonesia Food, Western Food +Rp.20000,-");
         Font fontCaptionFood = new Font("Arial", Font.PLAIN, 9);
         captionFood.setFont(fontCaptionFood);
         captionFood.setBounds(20, 320, 250, 10);
         form.add(captionFood);
-        
+
         JButton buttonPayment = new JButton("Go to Payment");
-        buttonPayment.setBounds(100, 340, 150, 30);
+        buttonPayment.setBounds(180, 340, 150, 30);
         form.add(buttonPayment);
+
+        JButton buttonBack = new JButton("Back to Menu");
+        buttonBack.setBounds(20, 340, 150, 30);
+        form.add(buttonBack);
         
         buttonPayment.addActionListener(new ActionListener() {
             @Override
@@ -177,14 +182,12 @@ public class bookTicket {
                 String seatValue = (String) cbSeat.getSelectedItem();
                 String prefValue = radioOverNight.isSelected() ? "Over Night" : "Late Night";
                 String FnBValue = radioIndoFood.isSelected() ? "Indonesian Food" : "Western Food";
-                String name = Controller.getInstance().getUsernameMember(id_user);
                 int ticketPrice = Controller.getInstance().getSeatPrice(classValue);
                 if ("Western Food".equals(FnBValue)) {
                     ticketPrice += 20000;
                 }
                 Controller.getInstance().updateSeat(seatValue);
 
-                boolean status = false;
                 if (cbDepartureCity.getSelectedItem() == null
                         || cbArrivalCity.getSelectedItem() == null
                         || datePicker.getModel().getValue() == null
@@ -196,11 +199,19 @@ public class bookTicket {
                     int promo_id = 0;
                     int promoDisc = 0;
                     form.dispose();
-                    new Payment(id_user, name, departureValue, arrivalValue, dateFlight, airlinesValue, classValue, seatValue, prefValue, FnBValue, ticketPrice, promo_id, promoDisc, flightId);
+                    new Payment(member_id, name, departureValue, arrivalValue, dateFlight, airlinesValue, classValue, seatValue, prefValue, FnBValue, ticketPrice, promo_id, promoDisc, flightId);
                 }
-             }
+            }
         });
         
+        buttonBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                form.dispose();
+                new MainMenuUser(member_id, name);
+            }
+        });
+
         form.setVisible(true);
     }
 }

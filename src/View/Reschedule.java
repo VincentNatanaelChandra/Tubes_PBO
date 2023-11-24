@@ -21,14 +21,15 @@ import javax.swing.JTextField;
  * @author ASUS
  */
 public class Reschedule {
-    public Reschedule(int member_id, String name){
+
+    public Reschedule(int member_id, String name) {
         reschedule(member_id, name);
     }
-    
-    private void reschedule(int member_id, String name){
-        
+
+    private void reschedule(int member_id, String name) {
+
         Controller con = new Controller();
-        
+
         //=============BAGIAN CONTAINER================
         JFrame formReschedule = new JFrame("Reschedule Menu");
         formReschedule.setSize(300, 300);
@@ -36,14 +37,14 @@ public class Reschedule {
         formReschedule.setLocationRelativeTo(null);
         formReschedule.setLayout(null);
         //================END CONTAINER=================
-        
+
         //Judul Form
         JLabel labelTitle = new JLabel("Form Reschedule");
         Font fontTitle = new Font("Mont", Font.BOLD, 20);
         labelTitle.setFont(fontTitle);
         labelTitle.setBounds(20, 5, 250, 30);
         formReschedule.add(labelTitle);
-        
+
         //Kode Ticket
         JLabel labelTicketCode = new JLabel("Kode Ticket :");
         labelTicketCode.setBounds(20, 40, 100, 30);
@@ -51,7 +52,7 @@ public class Reschedule {
         JTextField textTicketCode = new JTextField();
         textTicketCode.setBounds(105, 40, 165, 30);
         formReschedule.add(textTicketCode);
-        
+
         //Alasan Reschedule
         JLabel labelReason = new JLabel("Alasan Reschedule :");
         labelReason.setBounds(20, 75, 200, 30);
@@ -59,7 +60,7 @@ public class Reschedule {
         JTextField textReason = new JTextField();
         textReason.setBounds(20, 110, 250, 70);
         formReschedule.add(textReason);
-        
+
         Font fontLabelCheck = new Font("Mont", Font.PLAIN, 10);
         JLabel labelCheck = new JLabel("Apakah anda yakin ingin melakukan Reschedule? ");
         labelCheck.setFont(fontLabelCheck);
@@ -68,7 +69,19 @@ public class Reschedule {
         checkAcc.setBounds(235, 185, 50, 20);
         formReschedule.add(labelCheck);
         formReschedule.add(checkAcc);
-        
+
+        JButton buttonBack = new JButton("Back to Menu");
+        buttonBack.setBounds(20, 340, 150, 30);
+        formReschedule.add(buttonBack);
+
+        buttonBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                formReschedule.dispose();
+                new MainMenuUser(member_id, name);
+            }
+        });
+
         JButton buttonSubmit = new JButton("Next Page");
         buttonSubmit.setBounds(160, 215, 100, 30);
         formReschedule.add(buttonSubmit);
@@ -77,16 +90,16 @@ public class Reschedule {
             public void actionPerformed(ActionEvent e) {
                 String ticket = textTicketCode.getText();
                 String reason = textReason.getText();
-                boolean found = Controller.getInstance().getTicket(ticket);
+                boolean found = con.getTicket(ticket);
                 if (found) {
                     formReschedule.dispose();
-                    new nextReschedule(member_id, name,ticket, reason);
+                    new nextReschedule(member_id, name, ticket, reason);
                 } else {
                     JOptionPane.showMessageDialog(formReschedule, "Ticket Not Found", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-        
+
         formReschedule.setVisible(true);
     }
 }

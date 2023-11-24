@@ -54,7 +54,7 @@ public class MainMenuUser {
             @Override
             public void actionPerformed(ActionEvent e) {
                formMenuUser.dispose();
-               new bookTicket(member_id);
+               new bookTicket(member_id, name);
             }
         });
         
@@ -97,6 +97,4 @@ public class MainMenuUser {
         
         formMenuUser.setVisible(true);
     }
-    
-    
 }
