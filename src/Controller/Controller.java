@@ -414,7 +414,7 @@ public class Controller {
         try {
             stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, ticket_id);
-//            stmt.set(2, refund_status);
+            stmt.setObject(2, refund_status);
             stmt.setInt(3, refund_total);
             stmt.setString(4, refund_reason);
             stmt.executeUpdate();
