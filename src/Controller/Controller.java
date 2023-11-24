@@ -720,7 +720,7 @@ public class Controller {
             while (rs.next()) {
                 refunds.add(rs.getInt("refund_id"));
                 refunds.add(rs.getInt("ticket_id"));
-                refunds.add(rs.getObject("refund_status"));
+                refunds.add(rs.getString("refund_status"));
                 refunds.add(rs.getInt("refund_total"));
                 refunds.add(rs.getString("refund_reason"));
             }
