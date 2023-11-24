@@ -384,15 +384,17 @@ public class Controller {
         }
     }
     
-    public boolean requestReshcedule(int ticket_id, RescheduleEnum reschedule_status, String reschedule_reason) {
+    public boolean requestReshcedule(int ticket_id, RescheduleEnum reschedule_status, String reschedule_reason, Date reschedule_date, String reschedule_seat) {
         conn.connect();
-        String query = "INSERT INTO reschedule (ticket_id, reschedule_status, reschedule_reason) VALUES (?, ?, ?)";
+        String query = "INSERT INTO reschedule (ticket_id, reschedule_status, reschedule_reason, reschedule_date, reschedule_seat) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, ticket_id);
             stmt.setObject(2, reschedule_status);
             stmt.setString(3, reschedule_reason);
+            stmt.setDate(4, reschedule_date);
+            stmt.setString(5, reschedule_seat);
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -720,7 +722,7 @@ public class Controller {
             while (rs.next()) {
                 refunds.add(rs.getInt("refund_id"));
                 refunds.add(rs.getInt("ticket_id"));
-                refunds.add(rs.getObject("refund_status"));
+                refunds.add(rs.getString("refund_status"));
                 refunds.add(rs.getInt("refund_total"));
                 refunds.add(rs.getString("refund_reason"));
             }
@@ -749,11 +751,11 @@ public class Controller {
         return (reschedules);
     }
     
-    public boolean updateRefund(int refund_id) {
+    public boolean updateRefund(int ticket_id) {
         conn.connect();
         String query = "UPDATE refund"
                 + " SET refund_status= " + 1 + " "
-                + "WHERE refund_id = '" + refund_id + "'";
+                + "WHERE ticket_id   = '" + ticket_id + "'";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
@@ -765,11 +767,11 @@ public class Controller {
         }
     }
     
-    public boolean updateReschdule(int reschedule_id) {
+    public boolean updateReschdule(int ticket_id) {
         conn.connect();
         String query = "UPDATE reschedule"
                 + " SET reschedule_status= " + 1 + " "
-                + "WHERE reschedule_id = '" + reschedule_id + "'";
+                + "WHERE ticket_id = '" + ticket_id + "'";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
