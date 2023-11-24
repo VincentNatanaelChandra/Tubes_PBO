@@ -3,6 +3,7 @@ package Controller;
 import Model.Destination;
 import Model.Refund;
 import Model.RefundEnum;
+import Model.Reschedule;
 import Model.RescheduleEnum;
 import Model.Transaction;
 import java.sql.PreparedStatement;
@@ -738,18 +739,25 @@ public class Controller {
         return (refund);
     }
     
-    public ArrayList<Object> getViewReschedule() {
-        ArrayList<Object> reschedules = new ArrayList<>();
+    public ArrayList<Reschedule> getViewReschedule() {
+        ArrayList<Reschedule> reschedules = new ArrayList<>();
         try {
             conn.connect();
             String query = "SELECT * FROM reschedule";
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
+            String rescheduleStatusString = rs.getString("reschedule_status");
+            RescheduleEnum rescheduleStatus = RescheduleEnum.valueOf(rescheduleStatusString);
             while (rs.next()) {
-                reschedules.add(rs.getInt("reschedule_id"));
-                reschedules.add(rs.getInt("ticket_id"));
-                reschedules.add(rs.getObject("reschedule_status"));
-                reschedules.add(rs.getString("reschedule_reason"));
+                Reschedule listReschedules = new Reschedule();
+                listReschedules.setReschedule_id(rs.getInt("reschedule_id"));
+                listReschedules.setTicket_id(rs.getInt("ticket_id"));
+                listReschedules.setReschedule_status(rescheduleStatus);
+                listReschedules.setReschedule_reason(rs.getString("reschedule_reason"));
+                listReschedules.setReschedule_date(rs.getDate("reschedule_date"));
+                listReschedules.setReschedule_seat(rs.getString("reschedule_Seat"));
+                
+                reschedules.add(listReschedules);
             }
         } catch (SQLException e) { 
             e.printStackTrace();

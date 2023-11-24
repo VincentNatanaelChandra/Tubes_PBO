@@ -1,9 +1,11 @@
 package View;
 
+import Model.Reschedule;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,23 +15,28 @@ public class RescheduleConfirm {
 
     private JFrame frame;
 
-    public RescheduleConfirm() {
-        createRescheduleConfirmWindow();
+    public RescheduleConfirm(ArrayList<Reschedule> listReschedule) {
+        createRescheduleConfirmWindow(listReschedule);
         showRescheduleConfirmWindow(false);
     }
 
-    private void createRescheduleConfirmWindow() {
+    private void createRescheduleConfirmWindow(ArrayList<Reschedule> listReschedule) {
         frame = new JFrame("Request Reschedule List");
         frame.setSize(600, 400);
 
-        String[][] data = {
-                {"John Doe", "12345","Ditinggal Nikah", "Pending"},
-                {"Jane Smith", "54321", "Telat Bangun","Pending"},
-                // Data lainnya...
-        };
-
+        Object[][] data = new Object[listReschedule.size()][4];
+        
+        for (int i = 0; i < listReschedule.size(); i++) {
+            Reschedule refunds = listReschedule.get(i);
+            data[i][0] = refunds.getReschedule_id();
+            data[i][1] = refunds.getTicket_id();
+            data[i][2] = refunds.getReschedule_status();
+            data[i][3] = refunds.getReschedule_reason();
+            data[i][4] = refunds.getReschedule_date();
+            data[i][5] = refunds.getReschedule_seat();
+        }
         // Nama kolom untuk tabel
-        String[] columns = {"User", "Ticket ID","Alasan ", "Status,"};
+        String[] columns = {"Reschedule_id", "Ticket_id", "Reschedule_status", "Reschedule_reason", "Reschedule_date", "Reschedule_seat"};
         // Model tabel
         DefaultTableModel model = new DefaultTableModel(data, columns);
         JTable table = new JTable(model);

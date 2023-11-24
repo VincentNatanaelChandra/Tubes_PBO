@@ -21,9 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -34,6 +32,19 @@ public class FlightRefund {
     private  JTextField tiketText;
     private  JLabel resultLabel;
     private  JButton refundButton;
+    
+    public FlightRefund(){
+        createPanel();
+    }
+    
+    private static JPanel createPanel(Component... components) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        for (Component component : components) {
+            panel.add(component);
+        }
+        return panel;
+    }
 
     private static void placeComponents(JPanel panel) {
         JFrame frame = new JFrame("Airplane Ticket Refund Menu");
@@ -150,15 +161,6 @@ public class FlightRefund {
             }
         });
 
-    }
-
-    private static JPanel createPanel(Component... components) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        for (Component component : components) {
-            panel.add(component);
-        }
-        return panel;
     }
 
 }
