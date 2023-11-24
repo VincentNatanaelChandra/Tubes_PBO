@@ -30,11 +30,9 @@ public class Register {
     public Register() {
         newRegister();
     }
-    Controller con = new Controller();
 
     private void newRegister() {
         
-        Controller con = new Controller();
         
         //=============BAGIAN CONTAINER================
         JFrame formRegister = new JFrame("Register Menu");
@@ -138,14 +136,14 @@ public class Register {
             public void actionPerformed(ActionEvent e) {
                 String password = String.valueOf(passwordField.getPassword());
                 String pinPay = String.valueOf(pinPayField.getPassword());
-                boolean found = con.getCustomer(textUsername.getText());
+                boolean found = Controller.getInstance().getCustomer(textUsername.getText());
                 if (found) {
                     JOptionPane.showMessageDialog(formRegister, "User's Data Already Registered", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    boolean insert = con.RegisterCustomerData(textUsername.getText(),password);
-                    int id = con.getIdUser(textUsername.getText());
+                    boolean insert = Controller.getInstance().RegisterCustomerData(textUsername.getText(),password);
+                    int id = Controller.getInstance().getIdUser(textUsername.getText());
                     System.out.println("id = " + id);
-                    boolean insert2 = con.RegisterMemberData(textEmail.getText(), pinPay, id);
+                    boolean insert2 = Controller.getInstance().RegisterMemberData(textEmail.getText(), pinPay, id);
                     if (insert2) {
                         JOptionPane.showMessageDialog(formRegister, "New User's Data Registered", "Inputting Data...", JOptionPane.INFORMATION_MESSAGE);
                         new Login();

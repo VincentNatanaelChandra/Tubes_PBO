@@ -70,7 +70,6 @@ public class Payment {
     }
 
     private void Payment() {
-        Controller con = new Controller();
         //=============BAGIAN CONTAINER================
         formPayment = new JFrame("Payment Menu");
         formPayment.setSize(650, 400);
@@ -130,11 +129,11 @@ public class Payment {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String promoCode = textPromo.getText();
-                boolean found = con.getPromo(promoCode);
+                boolean found = Controller.getInstance().getPromo(promoCode);
                 
                 if (found) {
-                    int promo_id = con.getPromoId(promoCode);
-                    double discount = con.getPromoPercent(promoCode);
+                    int promo_id = Controller.getInstance().getPromoId(promoCode);
+                    double discount = Controller.getInstance().getPromoPercent(promoCode);
                     double totalPromo = ticketPrice * discount;
                     int promo = (int) totalPromo;
                     formPayment.dispose();

@@ -32,8 +32,6 @@ public class bookTicket {
         bookingTicket(id_user);
     }
     
-    Controller con = new Controller();
-    
     private void bookingTicket(int id_user){
         //=============BAGIAN CONTAINER================
         JFrame form = new JFrame("Booking Ticket Menu");
@@ -54,7 +52,7 @@ public class bookTicket {
         labelCityDeparture.setBounds(20, 40, 150, 30);
         form.add(labelCityDeparture);
         //ComboBox City Departure
-        String depertureCity[] = con.getDeparture().toArray(new String [con.getDeparture().size()]);
+        String depertureCity[] = Controller.getInstance().getDeparture().toArray(new String [Controller.getInstance().getDeparture().size()]);
         JComboBox cbDepartureCity =new JComboBox(depertureCity);
         cbDepartureCity.setBounds(150, 40, 150, 30);
         form.add(cbDepartureCity);
@@ -64,7 +62,7 @@ public class bookTicket {
         labelCityArrival.setBounds(20, 75, 150, 30);
         form.add(labelCityArrival);
         //ComboBox City Arrival
-        String arrivalCity[] = con.getArrival().toArray(new String [con.getArrival().size()]);
+        String arrivalCity[] = Controller.getInstance().getArrival().toArray(new String [Controller.getInstance().getArrival().size()]);
         JComboBox cbArrivalCity =new JComboBox(arrivalCity);
         cbArrivalCity.setBounds(150, 75, 150, 30);
         form.add(cbArrivalCity);
@@ -90,7 +88,7 @@ public class bookTicket {
         labelCompany.setBounds(20, 145, 150, 30);
         form.add(labelCompany);
         //ComboBox Airlines Company
-        String company[] = con.getAirline().toArray(new String [con.getAirline().size()]);
+        String company[] = Controller.getInstance().getAirline().toArray(new String [Controller.getInstance().getAirline().size()]);
         JComboBox cbCompany =new JComboBox(company);
         cbCompany.setBounds(150, 145, 150, 30);
         form.add(cbCompany);
@@ -99,7 +97,7 @@ public class bookTicket {
         String arrivalValue = (String) cbArrivalCity.getSelectedItem();
         String airlinesValue = (String) cbCompany.getSelectedItem();
         
-        int flightId = con.getFlightId(airlinesValue, departureValue, arrivalValue);
+        int flightId = Controller.getInstance().getFlightId(airlinesValue, departureValue, arrivalValue);
         System.out.println(departureValue);
         System.out.println(arrivalValue);
         System.out.println(airlinesValue);
@@ -109,7 +107,7 @@ public class bookTicket {
         labelClass.setBounds(20, 180, 150, 30);
         form.add(labelClass);
         //ComboBox Class
-        String classPlane[] = con.getSeatClass().toArray(new String [con.getSeatClass().size()]);
+        String classPlane[] = Controller.getInstance().getSeatClass().toArray(new String [Controller.getInstance().getSeatClass().size()]);
         JComboBox cbClass = new JComboBox(classPlane);
         cbClass.setBounds(150, 180, 150, 30);
         form.add(cbClass);
@@ -119,7 +117,7 @@ public class bookTicket {
         labelSeatClass.setBounds(20, 215, 150, 30);
         form.add(labelSeatClass);
         //ComboBox Class
-        String seatPlane[] = con.getSeatNumber(flightId).toArray(new String [con.getSeatClass().size()]);
+        String seatPlane[] = Controller.getInstance().getSeatNumber(flightId).toArray(new String [Controller.getInstance().getSeatClass().size()]);
         JComboBox cbSeat = new JComboBox(seatPlane);
         cbSeat.setBounds(150, 215, 150, 30);
         form.add(cbSeat);
@@ -179,8 +177,8 @@ public class bookTicket {
                 String seatValue = (String) cbSeat.getSelectedItem();
                 String prefValue = radioOverNight.isSelected() ? "Over Night" : "Late Night";
                 String FnBValue = radioIndoFood.isSelected() ? "Indonesian Food" : "Western Food";
-                String name = con.getUsernameMember(id_user);
-                int ticketPrice = con.getSeatPrice(classValue);
+                String name = Controller.getInstance().getUsernameMember(id_user);
+                int ticketPrice = Controller.getInstance().getSeatPrice(classValue);
                 if ("Western Food".equals(FnBValue)) {
                     ticketPrice += 20000;
                 }
