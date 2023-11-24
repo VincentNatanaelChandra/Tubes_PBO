@@ -100,9 +100,29 @@ public class MainMenuAdmin {
         buttonConfirmationReschedule.setBounds(30, 145, 250, 30);
         formMenuAdmin.add(buttonConfirmationReschedule);
         
+            RescheduleConfirm rescheduleConfirm = new RescheduleConfirm(); // Menginisialisasi objek RescheduleConfirm
+
+    buttonConfirmationReschedule.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            rescheduleConfirm.showRescheduleConfirmWindow(true);
+            formMenuAdmin.setVisible(false); // Menutup tampilan saat ini (MainMenuAdmin)
+        }
+    });
+        
         JButton buttonConfirmationRefund = new JButton("Refund Confirmation");
         buttonConfirmationRefund.setBounds(30, 180, 250, 30);
         formMenuAdmin.add(buttonConfirmationRefund);
+      
+        RefundConfirm refundConfirm = new RefundConfirm(); // Menginisialisasi objek RefundConfirm
+
+        buttonConfirmationRefund.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refundConfirm.showRefundConfirmWindow(true);
+                formMenuAdmin.setVisible(false); // Menutup tampilan saat ini (MainMenuAdmin)
+            }
+        });
         
         JButton buttonHistory = new JButton("View History");
         buttonHistory.setBounds(30, 215, 250, 30);
