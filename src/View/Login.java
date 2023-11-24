@@ -43,7 +43,7 @@ public class Login {
         formLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         formLogin.setLocationRelativeTo(null);
         formLogin.setLayout(null);
-        ImageIcon backgroundImage = new ImageIcon("D:\\ITHB\\Semester 3\\Prak. PBO\\tubesPBO_view\\src\\View\\pswt.png"); // Ganti dengan path gambar Anda
+        ImageIcon backgroundImage = new ImageIcon("C:\\Users\\Vincent\\Documents\\NetBeansProjects\\Tubes_PBO\\src\\pswt.png"); // Ganti dengan path gambar Anda
         JLabel backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setBounds(0, 0, 420, 280);
         //================END CONTAINER=================
@@ -53,7 +53,7 @@ public class Login {
         JLabel labelTitle = new JLabel("Welcome to, Flight Apps Harapan Bangsa!!!");
         Font fontTitle = new Font("Mont", Font.BOLD, 17);
         labelTitle.setFont(fontTitle);
-        labelTitle.setBounds(20, 5, 400, 30);
+        labelTitle.setBounds(30, 5, 400, 30);
         formLogin.add(labelTitle);
         
         //Login
