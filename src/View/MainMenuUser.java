@@ -66,7 +66,7 @@ public class MainMenuUser {
             @Override
             public void actionPerformed(ActionEvent e) {
                 formMenuUser.dispose();
-                new FlightRefund();
+                new Refund(member_id, name);
             }
         });
         
