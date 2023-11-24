@@ -153,7 +153,7 @@ public class MainMenuAdmin {
                         updatePromo.showUpdatePromoWindow(true);
                         formMenuAdmin.setVisible(false); // Menutup formMenuAdmin saat menampilkan UpdateDestinasi
                     } else {
-                        formMenuAdmin.setVisible(true);
+                        new MainMenuAdmin(id, nama);
                     }
                 } else {
                     // Tampilkan pesan jika tidak ada Flight ID yang tersedia
