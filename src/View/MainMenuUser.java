@@ -89,11 +89,21 @@ public class MainMenuUser {
         JButton buttonBooking= new JButton("Buy Ticket");
         buttonBooking.setBounds(30, 220, 250, 30);
         formMenuUser.add(buttonBooking);
+        
+        
         JButton buttonBacktoLogin = new JButton("⬅");
         buttonBacktoLogin.setBounds(30, 5, 50, 30); // Menempatkan tombol "Back" di pojok kiri atas
         formMenuUser.add(buttonBacktoLogin);
         Font fontback = new Font("Mont", Font.BOLD, 16);
         buttonBacktoLogin.setFont(fontback);
+        
+        buttonBacktoLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                formMenuUser.dispose();
+                new Login();
+            }
+        });
         
         JButton buttonViewHistory = new JButton("🎟");
         int formWidth = formMenuUser.getWidth();   
