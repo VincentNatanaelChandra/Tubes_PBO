@@ -33,7 +33,6 @@ public class Login {
     
     private void newLogin() {
         
-        Controller con = new Controller();
         
         //=============BAGIAN CONTAINER================
         JFrame formLogin = new JFrame("Flight Apps Harapan Bangsa");
@@ -102,10 +101,10 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String password = String.valueOf(passwordField.getPassword());
-                boolean found = con.getUser(textUsername.getText(), password);
-                int id = con.getIdUser(textUsername.getText());
-                int memberId = con.getIdMember(textUsername.getText());
-                boolean found2 = con.getUserAdmin(textUsername.getText(), password);
+                boolean found = Controller.getInstance().getUser(textUsername.getText(), password);
+                int id = Controller.getInstance().getIdUser(textUsername.getText());
+                int memberId = Controller.getInstance().getIdMember(textUsername.getText());
+                boolean found2 = Controller.getInstance().getUserAdmin(textUsername.getText(), password);
                 if (found2) {
                     formLogin.dispose();
                     new MainMenuAdmin(id, textUsername.getText());

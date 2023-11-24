@@ -16,7 +16,17 @@ import java.sql.Date;
  * @author Vincent
  */
 public class Controller {
+    
+    private static Controller instance;
 
+    public static synchronized Controller getInstance() {
+        if (instance == null) // Lazy instantiation
+        {
+            instance = new Controller();
+        }
+        return instance;
+    }
+    
     static DatabaseHandler conn = new DatabaseHandler();
 
     public static boolean getUser(String username, String password) {
