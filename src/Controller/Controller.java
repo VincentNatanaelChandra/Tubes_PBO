@@ -145,7 +145,7 @@ public class Controller {
         }
         return false;
     }
-
+    // reschedule
     public boolean getReschedule() {
         conn.connect();
         String query = "SELECT * FROM reschedule";
