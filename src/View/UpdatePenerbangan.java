@@ -5,19 +5,21 @@ import java.awt.*;
 
 public class UpdatePenerbangan {
     private JFrame frame;
-
-    public UpdatePenerbangan() {
-        createUpdatePenerbanganWindow();
+     private JComboBox<String> comboBoxFlightID;
+    private String selectedFlightID;
+   
+    public UpdatePenerbangan(String selectedFlightID) {
+        this.selectedFlightID = selectedFlightID;
     }
-
+    
     private void createUpdatePenerbanganWindow() {
         frame = new JFrame("Update Flight Menu");
-        frame.setSize(300, 290);
+        frame.setSize(400, 290);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 1, 10, 10));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setLayout(new GridLayout(9, 1, 10, 10)); // Ubah jumlah baris
 
         JTextField field1 = new JTextField(10);
         JTextField field2 = new JTextField(10);
@@ -35,7 +37,13 @@ public class UpdatePenerbangan {
         panel.add(field4);
         panel.add(new JLabel("Total Seat:"));
         panel.add(field5);
-        panel.add(Box.createVerticalGlue());
+
+        // Tambahkan label dan combo box untuk Flight ID
+        panel.add(new JLabel("Flight ID:"));
+        JComboBox<String> comboBoxFlightID = new JComboBox<>();
+        comboBoxFlightID.addItem(selectedFlightID);
+        comboBoxFlightID.setEnabled(false);
+        panel.add(comboBoxFlightID);
 
         JButton updateButton = new JButton("Update");
         updateButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -47,20 +55,24 @@ public class UpdatePenerbangan {
             String input5 = field5.getText();
             JOptionPane.showMessageDialog(frame, "Data has been updated", "Information", JOptionPane.INFORMATION_MESSAGE);
         });
-    panel.add(updateButton);
-    frame.add(panel);
-    
-    JButton backButton = new JButton("Back");
-backButton.addActionListener(e -> {
-    frame.dispose(); // Menutup jendela UpdateDestinasi
-    MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono"); // Menampilkan kembali Main Menu Admin
-});
-panel.add(backButton);
-frame.add(panel);
+        panel.add(updateButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> {
+            frame.dispose();
+            MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono");
+        });
+        panel.add(backButton);
+
+        frame.add(panel);
     }
 
-    public void showUpdatePenerbanganWindow(boolean visible) {
-        frame.setVisible(visible);
+   public void showUpdatePenerbanganWindow(boolean visible) {
+        if (visible) {
+            createUpdatePenerbanganWindow();
+            frame.setVisible(true);
+        } else {
+            frame.setVisible(false);
+        }
     }
-
 }

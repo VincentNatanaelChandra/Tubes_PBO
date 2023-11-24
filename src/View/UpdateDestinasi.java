@@ -1,5 +1,4 @@
 package View;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Calendar;
@@ -7,9 +6,11 @@ import java.util.Date;
 
 public class UpdateDestinasi {
     private JFrame frame;
+    private JComboBox<String> comboBoxFlightID;
+    private String selectedFlightID;
 
-    public UpdateDestinasi() {
-        createUpdateDestinasiWindow();
+    public UpdateDestinasi(String selectedFlightID) {
+        this.selectedFlightID = selectedFlightID;
     }
 
     private void createUpdateDestinasiWindow() {
@@ -18,12 +19,11 @@ public class UpdateDestinasi {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 1, 10, 10));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setLayout(new GridLayout(6, 2, 10, 10)); // Ubah tata letak menjadi 6 baris, 2 kolom
 
         JTextField field1 = new JTextField(10);
         JTextField field2 = new JTextField(10);
-        JSpinner dateSpinner = createDescendingDateSpinner(); // Spinner untuk pemilihan tanggal secara descending
+        JSpinner dateSpinner = createDescendingDateSpinner();
 
         panel.add(new JLabel("Destination Departure:"));
         panel.add(field1);
@@ -32,24 +32,30 @@ public class UpdateDestinasi {
         panel.add(new JLabel("Destination Date:"));
         panel.add(dateSpinner);
 
-        panel.add(Box.createVerticalGlue()); // Untuk membuat jarak di tengah
+        // Tambahkan label dan combo box untuk Flight ID
+        panel.add(new JLabel("Flight ID:"));
+        comboBoxFlightID = new JComboBox<>();
+        comboBoxFlightID.addItem(selectedFlightID); // Set nilai awal Flight ID
+        comboBoxFlightID.setEnabled(false); // Agar tidak bisa diubah
+        panel.add(comboBoxFlightID);
 
         JButton updateButton = new JButton("Update");
-          updateButton.addActionListener(e -> {
-         JOptionPane.showMessageDialog(frame, "Data has been updated", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        updateButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame, "Data has been updated", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        });
+        panel.add(updateButton);
 
-    });
-    panel.add(updateButton);
-    frame.add(panel);
-    
-    JButton backButton = new JButton("Back");
-backButton.addActionListener(e -> {
-    frame.dispose(); // Menutup jendela UpdateDestinasi
-    MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono"); // Menampilkan kembali Main Menu Admin
-});
-panel.add(backButton);
-frame.add(panel);
-}
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> {
+            frame.dispose(); // Menutup jendela UpdateDestinasi
+            MainMenuAdmin mainMenuAdmin = new MainMenuAdmin(11, "tono");
+        });
+        panel.add(backButton);
+
+        frame.add(panel);
+    }
+
+    // Method untuk membuat Spinner tanggal
     private JSpinner createDescendingDateSpinner() {
         SpinnerDateModel model = new SpinnerDateModel();
         JSpinner spinner = new JSpinner(model);
@@ -57,16 +63,21 @@ frame.add(panel);
 
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
-        calendar.add(Calendar.YEAR, -10); 
+        calendar.add(Calendar.YEAR, -10);
         Date tenYearsAgo = calendar.getTime();
-        model.setValue(today); 
+        model.setValue(today);
 
         spinner.setModel(new SpinnerDateModel(today, tenYearsAgo, today, Calendar.DAY_OF_MONTH));
         return spinner;
     }
 
+    // Method untuk menampilkan atau menyembunyikan frame
     public void showUpdateDestinasiWindow(boolean visible) {
-        frame.setVisible(visible);
+        if (visible) {
+            createUpdateDestinasiWindow();
+            frame.setVisible(true);
+        } else {
+            frame.setVisible(false);
+        }
     }
-
 }
