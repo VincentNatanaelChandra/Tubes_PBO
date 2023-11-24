@@ -72,7 +72,7 @@ public class Refund {
         
         JCheckBox agreeCheckBox = new JCheckBox("Check");
         agreeCheckBox.setFont(fontTerms);
-        agreeCheckBox.setBounds(20, 170, 53, 25);
+        agreeCheckBox.setBounds(20, 170, 55, 25);
 
         JLabel labelTerms1 = new JLabel("<html><u>Terms Refund </u></html>");
         labelTerms1.setFont(fontTerms);
@@ -82,7 +82,7 @@ public class Refund {
 
         JLabel labelTerms2 = new JLabel("before you Request Refund");
         labelTerms2.setFont(fontTerms);
-        labelTerms2.setBounds(138, 167, 120, 30);
+        labelTerms2.setBounds(140, 167, 130, 30);
 
         JButton buttonBack = new JButton("Go Back");
         buttonBack.setBounds(60, 200, 100, 30);
