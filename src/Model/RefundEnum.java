@@ -9,5 +9,16 @@ package Model;
  * @author Devid L Manurung
  */
 public enum RefundEnum {
-    REFUNDSUCCESS, REFUNDDENIED;
+    REFUNDSUCCESS{
+        @Override
+        public String toString() {
+            return "REFUNDSUCCESS";
+        }
+    },
+    REFUNDDENIED{
+        @Override
+        public String toString() {
+            return "REFUNDDENIED";
+        }
+    }
 }

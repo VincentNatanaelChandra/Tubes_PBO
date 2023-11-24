@@ -373,7 +373,7 @@ public class Controller {
         try {
             stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, ticket_id);
-            stmt.setObject(2, refund_status);
+            stmt.setString(2, refund_status.toString());
             stmt.setInt(3, refund_total);
             stmt.setString(4, refund_reason);
             stmt.executeUpdate();
@@ -391,7 +391,7 @@ public class Controller {
         try {
             stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, ticket_id);
-            stmt.setObject(2, reschedule_status);
+            stmt.setString(2, reschedule_status.toString());
             stmt.setString(3, reschedule_reason);
             stmt.setDate(4, reschedule_date);
             stmt.setString(5, reschedule_seat);
