@@ -77,7 +77,7 @@ public class nextReschedule {
         labelSeatClass.setBounds(10, 75, 150, 30);
         formReschedule.add(labelSeatClass);
         //ComboBox Class
-        String seatPlane[] = con.getSeatNumber(flightId).toArray(new String[con.getSeatClass().size()]);
+        String seatPlane[] = Controller.getInstance().getSeatNumber(flightId).toArray(new String[con.getSeatClass().size()]);
         JComboBox cbSeat = new JComboBox(seatPlane);
         cbSeat.setBounds(150, 75, 150, 30);
         formReschedule.add(cbSeat);
