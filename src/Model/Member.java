@@ -7,14 +7,14 @@ package Model;
 import java.util.ArrayList;
 
 public class Member extends User{
-    private String member_id;
-    private String member_email;
+    private Refund member_id;
+    private Refund member_email;
     private int member_pinPay;
     private ArrayList<Transaction> listTransaction;
     private ArrayList<Refund> listRefund;
     private ArrayList<Reschedule> listReschedule;
 
-    public Member(String member_id, String member_email, int member_pinPay, ArrayList<Transaction> listTransaction, ArrayList<Refund> listRefund, ArrayList<Reschedule> listReschedule, int user_id, String user_name, String user_password) {
+    public Member(Refund member_id, Refund member_email, int member_pinPay, ArrayList<Transaction> listTransaction, ArrayList<Refund> listRefund, ArrayList<Reschedule> listReschedule, int user_id, String user_name, String user_password) {
         super(user_id, user_name, user_password);
         this.member_id = member_id;
         this.member_email = member_email;
@@ -24,19 +24,21 @@ public class Member extends User{
         this.listReschedule = listReschedule;
     }
 
-    public String getMember_id() {
+    
+
+    public Refund getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(Refund member_id) {
         this.member_id = member_id;
     }
 
-    public String getMember_email() {
+    public Refund getMember_email() {
         return member_email;
     }
 
-    public void setMember_email(String member_email) {
+    public void setMember_email(Refund member_email) {
         this.member_email = member_email;
     }
 
