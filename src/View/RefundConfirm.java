@@ -1,9 +1,11 @@
 package View;
 
+import Model.Refund;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,24 +15,29 @@ public class RefundConfirm {
 
     private JFrame frame;
 
-    public RefundConfirm() {
-        createRefundConfirmWindow();
+    public RefundConfirm(ArrayList<Refund> listRefund) {
+        createRefundConfirmWindow(listRefund);
         showRefundConfirmWindow(false);
     }
 
-    private void createRefundConfirmWindow() {
+    private void createRefundConfirmWindow(ArrayList<Refund> listRefund) {
         frame = new JFrame("Request Refund List");
         frame.setSize(600, 400);
 
         // Data untuk tabel (Simulasi data)
-        String[][] data = {
-                {"John Doe", "12345","Ditinggal Nikah", "Pending"},
-                {"Jane Smith", "54321", "Telat Bangun","Pending"},
-                // Data lainnya...
-        };
+        Object[][] data = new Object[listRefund.size()][4];
+        
+        for (int i = 0; i < listRefund.size(); i++) {
+            Refund refunds = listRefund.get(i);
+            data[i][0] = refunds.getRefund_id();
+            data[i][1] = refunds.getTicket_id();
+            data[i][2] = refunds.getRefund_status();
+            data[i][3] = refunds.getRefund_total();
+            data[i][4] = refunds.getRefund_reason();
+        }
 
         // Nama kolom untuk tabel
-        String[] columns = {"User", "Ticket ID","Alasan ", "Status,"};
+        String[] columns = {"Refund ID", "Ticket ID"," Refund_status ", "Refund_total", "Refund_total"};
 
         // Model tabel
         DefaultTableModel model = new DefaultTableModel(data, columns);

@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Destination;
+import Model.Refund;
 import Model.RefundEnum;
 import Model.RescheduleEnum;
 import Model.Transaction;
@@ -712,24 +713,29 @@ public class Controller {
         }
         return exists;
     }
-    public ArrayList<Object> getViewRefund() {
-        ArrayList<Object> refunds = new ArrayList<>();
+    public ArrayList<Refund> getViewRefund() {
+        ArrayList<Refund> refund = new ArrayList<>();
         try {
             conn.connect();
             String query = "SELECT * FROM refund";
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
+            String refundStatusString = rs.getString("refund_status");
+            RefundEnum refundStatus = RefundEnum.valueOf(refundStatusString);
             while (rs.next()) {
-                refunds.add(rs.getInt("refund_id"));
-                refunds.add(rs.getInt("ticket_id"));
-                refunds.add(rs.getString("refund_status"));
-                refunds.add(rs.getInt("refund_total"));
-                refunds.add(rs.getString("refund_reason"));
+                Refund refunds = new Refund();
+                refunds.setRefund_id(rs.getInt("refund_id"));
+                refunds.setTicket_id(rs.getInt("ticket_id"));
+                refunds.setRefund_status(refundStatus);
+                refunds.setRefund_total(rs.getInt("refund_total"));
+                refunds.setRefund_reason(rs.getString("refund_reason"));
+                
+                refund.add(refunds);
             }
         } catch (SQLException e) { 
             e.printStackTrace();
         } 
-        return (refunds);
+        return (refund);
     }
     
     public ArrayList<Object> getViewReschedule() {
