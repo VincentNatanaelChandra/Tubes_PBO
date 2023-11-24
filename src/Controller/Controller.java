@@ -729,4 +729,23 @@ public class Controller {
         } 
         return (refunds);
     }
+    
+    public ArrayList<Object> getViewReschedule() {
+        ArrayList<Object> reschedules = new ArrayList<>();
+        try {
+            conn.connect();
+            String query = "SELECT * FROM reschedule";
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                reschedules.add(rs.getInt("reschedule_id"));
+                reschedules.add(rs.getInt("ticket_id"));
+                reschedules.add(rs.getObject("reschedule_status"));
+                reschedules.add(rs.getString("reschedule_reason"));
+            }
+        } catch (SQLException e) { 
+            e.printStackTrace();
+        } 
+        return (reschedules);
+    }
 }
