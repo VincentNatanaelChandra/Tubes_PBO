@@ -1,16 +1,22 @@
 package View;
+import Controller.Controller;
+import Controller.DateLabelFormatter;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Properties;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
 
 public class UpdateDestinasi {
     private JFrame frame;
     private JComboBox<String> comboBoxFlightID;
-    private String selectedFlightID;
+    private int selectedDestinationID;
 
-    public UpdateDestinasi(String selectedFlightID) {
-        this.selectedFlightID = selectedFlightID;
+    public UpdateDestinasi(int selectedDestinationID) {
+        this.selectedDestinationID = selectedDestinationID;
     }
 
     private void createUpdateDestinasiWindow() {
@@ -23,24 +29,35 @@ public class UpdateDestinasi {
 
         JTextField field1 = new JTextField(10);
         JTextField field2 = new JTextField(10);
-        JSpinner dateSpinner = createDescendingDateSpinner();
+        SqlDateModel model = new SqlDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
         panel.add(new JLabel("Destination Departure:"));
         panel.add(field1);
         panel.add(new JLabel("Destination Arrival:"));
         panel.add(field2);
         panel.add(new JLabel("Destination Date:"));
-        panel.add(dateSpinner);
+        panel.add(datePicker);
 
         // Tambahkan label dan combo box untuk Flight ID
-        panel.add(new JLabel("Flight ID:"));
+        panel.add(new JLabel("Destination ID:"));
+        String destinationId = String.valueOf(selectedDestinationID);
         comboBoxFlightID = new JComboBox<>();
-        comboBoxFlightID.addItem(selectedFlightID); // Set nilai awal Flight ID
+        comboBoxFlightID.addItem(destinationId); // Set nilai awal Flight ID
         comboBoxFlightID.setEnabled(false); // Agar tidak bisa diubah
         panel.add(comboBoxFlightID);
 
         JButton updateButton = new JButton("Update");
         updateButton.addActionListener(e -> {
+            String code = field1.getText();
+            String airline = field2.getText();
+            Date date = (java.sql.Date) datePicker.getModel().getValue();
+            Controller.getInstance().updateDestination(selectedDestinationID, code, airline, date);
             JOptionPane.showMessageDialog(frame, "Data has been updated", "Notification", JOptionPane.INFORMATION_MESSAGE);
         });
         panel.add(updateButton);
@@ -56,20 +73,6 @@ public class UpdateDestinasi {
     }
 
     // Method untuk membuat Spinner tanggal
-    private JSpinner createDescendingDateSpinner() {
-        SpinnerDateModel model = new SpinnerDateModel();
-        JSpinner spinner = new JSpinner(model);
-        spinner.setEditor(new JSpinner.DateEditor(spinner, "yyyy-MM-dd")); // Ubah format tanggal disini
-
-        Calendar calendar = Calendar.getInstance();
-        Date today = calendar.getTime();
-        calendar.add(Calendar.YEAR, -10);
-        Date tenYearsAgo = calendar.getTime();
-        model.setValue(today);
-
-        spinner.setModel(new SpinnerDateModel(today, tenYearsAgo, today, Calendar.DAY_OF_MONTH));
-        return spinner;
-    }
 
     // Method untuk menampilkan atau menyembunyikan frame
     public void showUpdateDestinasiWindow(boolean visible) {
