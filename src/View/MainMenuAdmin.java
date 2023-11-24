@@ -5,12 +5,14 @@
 package View;
 
 import Controller.Controller;
+import Model.Refund;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -177,8 +179,10 @@ public class MainMenuAdmin {
         JButton buttonConfirmationRefund = new JButton("Refund Confirmation");
         buttonConfirmationRefund.setBounds(30, 180, 250, 30);
         formMenuAdmin.add(buttonConfirmationRefund);
+        
+        ArrayList<Refund> refunds = Controller.getInstance().getViewRefund();
 
-        RefundConfirm refundConfirm = new RefundConfirm(); // Menginisialisasi objek RefundConfirm
+        RefundConfirm refundConfirm = new RefundConfirm(refunds); // Menginisialisasi objek RefundConfirm
 
         buttonConfirmationRefund.addActionListener(new ActionListener() {
             @Override
