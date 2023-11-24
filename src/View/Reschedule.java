@@ -21,11 +21,11 @@ import javax.swing.JTextField;
  * @author ASUS
  */
 public class Reschedule {
-    public Reschedule(int member_id, String name){
-        reschedule(member_id, name);
+    public Reschedule(){
+        reschedule();
     }
     
-    private void reschedule(int member_id, String name){
+    private void reschedule(){
         
         Controller con = new Controller();
         
@@ -80,7 +80,7 @@ public class Reschedule {
                 boolean found = con.getTicket(ticket);
                 if (found) {
                     formReschedule.dispose();
-                    new nextReschedule(member_id, name,ticket, reason);
+                    new nextReschedule(ticket, reason);
                 } else {
                     JOptionPane.showMessageDialog(formReschedule, "Ticket Not Found", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
@@ -88,5 +88,8 @@ public class Reschedule {
         });
         
         formReschedule.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new Reschedule();
     }
 }
