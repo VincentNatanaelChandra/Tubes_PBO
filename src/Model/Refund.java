@@ -11,7 +11,7 @@ package Model;
 public class Refund {
     private int refund_id;
     private RefundEnum refund_status;
-    private int refund_total;
+    private double refund_total;
     private String refund_reason;
     private int ticket_id;
 
@@ -19,7 +19,7 @@ public class Refund {
         
     }
 
-    public Refund(int refund_id, RefundEnum refund_status, int refund_total, String refund_reason, int ticket_id) {
+    public Refund(int refund_id, RefundEnum refund_status, double refund_total, String refund_reason, int ticket_id) {
         this.refund_id = refund_id;
         this.refund_status = refund_status;
         this.refund_total = refund_total;
@@ -43,11 +43,11 @@ public class Refund {
         this.refund_status = refund_status;
     }
 
-    public int getRefund_total() {
+    public double getRefund_total() {
         return refund_total;
     }
 
-    public void setRefund_total(int refund_total) {
+    public void setRefund_total(double refund_total) {
         this.refund_total = refund_total;
     }
 
