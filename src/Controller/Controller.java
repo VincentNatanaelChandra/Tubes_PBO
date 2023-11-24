@@ -710,27 +710,23 @@ public class Controller {
         }
         return exists;
     }
-    public ArrayList<String> getViewRefund() {
-        ArrayList<String> refunds = new ArrayList<>();
+    public ArrayList<Object> getViewRefund() {
+        ArrayList<Object> refunds = new ArrayList<>();
         try {
             conn.connect();
             String query = "SELECT * FROM refund";
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String refund = new String();
-                refund.setString(rs.getInt("refund_id"));
-                refund.setTicket_id(rs.getInt("ticket_id"));
-                refund.setRefund_status((RefundEnum) rs.getObject("refund_status"));
-                refund.setRefund_total(rs.getInt("refund_total"));
-                refund.s(rs.getString("refund_reason"));
-                
-                refunds.add(refund);
+                refunds.add(rs.getInt("refund_id"));
+                refunds.add(rs.getInt("ticket_id"));
+                refunds.add(rs.getObject("refund_status"));
+                refunds.add(rs.getInt("refund_total"));
+                refunds.add(rs.getString("refund_reason"));
             }
         } catch (SQLException e) { 
             e.printStackTrace();
         } 
         return (refunds);
     }
-  
 }
