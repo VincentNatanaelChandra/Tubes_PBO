@@ -634,7 +634,7 @@ public class Controller {
                 + " SET destination_departure='" + departure + "',"
                 + "destination_arrival='" + arrival + "',"
                 + "destination_departureDate='" + destinationDate + "' "
-                + "WHERE flight_id = " + destination;
+                + "WHERE destination_id = " + destination;
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
@@ -653,7 +653,7 @@ public class Controller {
                 + "promo_type='" + type + "',"
                 + "promo_expiredDate='" + expired + "',"
                 + "promo_percent='" + percent + "' "
-                + "WHERE flight_id = " + promo;
+                + "WHERE promo_id = " + promo;
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
