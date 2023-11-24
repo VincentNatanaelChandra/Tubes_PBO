@@ -143,7 +143,7 @@ public class FlightRefund {
             if (found) {
                 frame.dispose();
                 int id = Controller.getInstance().getTicketIdInt(ticket);
-                int price = Controller.getInstance().getTotalPrice(ticket);
+                double price = Controller.getInstance().getTotalPrice(ticket) * 0.8;
                 Controller.getInstance().requestRefund(id, RefundEnum.REFUNDDENIED, price, reason);
             } else {
                 JOptionPane.showMessageDialog(frame, "Ticket Not Found", "ERROR", JOptionPane.ERROR_MESSAGE);

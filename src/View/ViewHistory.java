@@ -1,6 +1,7 @@
 package View;
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.table.DefaultTableModel;
 
 public class ViewHistory {
     private JTable table;
@@ -35,6 +36,14 @@ public class ViewHistory {
                 {"John Doe", "12345", "T001", "T123", "2023-01-15", "Window", "TRX001", "Credit Card", "$100", "$20", "$10", "$110", "P001", "SUMMER10"},
                 {"Jane Smith", "67890", "T002", "T456", "2023-02-20", "Aisle", "TRX002", "Debit Card", "$120", "$25", "$15", "$130", "P002", "HOLIDAY20"}
         };
+        
+        Object[][] dataTicket = {
+            {departureCity, arrivalCity, dateFlight, airlines, preference, fnb, classSeat, seatNum, ticketPrice}
+        };
+
+        String[] columnNames = {"Departure", "Arrival", "Date", "Arilines", "Preference", "Food", "Class", "Seat", "Price"};
+
+        DefaultTableModel model = new DefaultTableModel(dataTicket, columnNames);
 
         // Membuat JTable
         table = new JTable(data, columns);
