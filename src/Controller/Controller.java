@@ -754,7 +754,7 @@ public class Controller {
     public boolean updateRefund(int ticket_id) {
         conn.connect();
         String query = "UPDATE refund"
-                + " SET refund_status= " + 1 + " "
+                + " SET refund_status= 'REFUNDSUCCESS' "
                 + "WHERE ticket_id   = '" + ticket_id + "'";
         PreparedStatement stmt;
         try {
@@ -770,7 +770,7 @@ public class Controller {
     public boolean updateReschdule(int ticket_id) {
         conn.connect();
         String query = "UPDATE reschedule"
-                + " SET reschedule_status= " + 1 + " "
+                + " SET reschedule_status= 'RESCHEDULESUCCESS' "
                 + "WHERE ticket_id = '" + ticket_id + "'";
         PreparedStatement stmt;
         try {
