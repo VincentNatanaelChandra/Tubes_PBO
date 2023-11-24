@@ -29,11 +29,11 @@ public class MainMenuAdmin {
 
     private JFrame frame;
 
-    public MainMenuAdmin(int id, String nama) {
-        MenuAdmin(id, nama);
+    public MainMenuAdmin(int admin_id, String name) {
+        MenuAdmin(admin_id, name);
     }
 
-    private void MenuAdmin(int id, String nama) {
+    private void MenuAdmin(int admin_id, String name) {
         //=============BAGIAN CONTAINER================
         JFrame formMenuAdmin = new JFrame("Menu Admin");
         formMenuAdmin.setSize(320, 330);
@@ -42,7 +42,7 @@ public class MainMenuAdmin {
         formMenuAdmin.setLayout(null);
         //================END CONTAINER=================
 
-        JLabel labelTitle = new JLabel("Welcome Back, Admin " + nama);
+        JLabel labelTitle = new JLabel("Welcome Back, Admin " + name);
         Font fontTitle = new Font("Mont", Font.BOLD, 15);
         labelTitle.setFont(fontTitle);
         labelTitle.setBounds(10, 5, 400, 30);
@@ -128,7 +128,6 @@ public class MainMenuAdmin {
         buttonUpdatePromo.setBounds(30, 110, 250, 30);
         formMenuAdmin.add(buttonUpdatePromo);
 
-
         buttonUpdatePromo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -153,7 +152,7 @@ public class MainMenuAdmin {
                         updatePromo.showUpdatePromoWindow(true);
                         formMenuAdmin.setVisible(false); // Menutup formMenuAdmin saat menampilkan UpdateDestinasi
                     } else {
-                        new MainMenuAdmin(id, nama);
+                        new MainMenuAdmin(admin_id, name);
                     }
                 } else {
                     // Tampilkan pesan jika tidak ada Flight ID yang tersedia
@@ -166,34 +165,34 @@ public class MainMenuAdmin {
         JButton buttonConfirmationReschedule = new JButton("Reschedule Confirmation");
         buttonConfirmationReschedule.setBounds(30, 145, 250, 30);
         formMenuAdmin.add(buttonConfirmationReschedule);
-        
-//        ArrayList<Reschedule> reschedule = Controller.getInstance().getViewReschedule();
-//
-//        RescheduleConfirm rescheduleConfirm = new RescheduleConfirm(reschedule); // Menginisialisasi objek RescheduleConfirm
-//
-//        buttonConfirmationReschedule.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                rescheduleConfirm.showRescheduleConfirmWindow(true);
-//                formMenuAdmin.setVisible(false); // Menutup tampilan saat ini (MainMenuAdmin)
-//            }
-//        });
+
+        ArrayList<Reschedule> reschedule = Controller.getInstance().getViewReschedule();
+
+        RescheduleConfirm rescheduleConfirm = new RescheduleConfirm(admin_id, name, reschedule); // Menginisialisasi objek RescheduleConfirm
+
+        buttonConfirmationReschedule.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                rescheduleConfirm.showRescheduleConfirmWindow(true);
+                formMenuAdmin.setVisible(false); // Menutup tampilan saat ini (MainMenuAdmin)
+            }
+        });
 
         JButton buttonConfirmationRefund = new JButton("Refund Confirmation");
         buttonConfirmationRefund.setBounds(30, 180, 250, 30);
         formMenuAdmin.add(buttonConfirmationRefund);
-        
-//        ArrayList<Refund> refunds = Controller.getInstance().getViewRefund();
-//
-//        RefundConfirm refundConfirm = new RefundConfirm(refunds); // Menginisialisasi objek RefundConfirm
-//
-//        buttonConfirmationRefund.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                refundConfirm.showRefundConfirmWindow(true);
-//                formMenuAdmin.setVisible(false); // Menutup tampilan saat ini (MainMenuAdmin)
-//            }
-//        });
+
+        ArrayList<Refund> refunds = Controller.getInstance().getViewRefund();
+
+        RefundConfirm refundConfirm = new RefundConfirm(admin_id, name, refunds); // Menginisialisasi objek RefundConfirm
+
+        buttonConfirmationRefund.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refundConfirm.showRefundConfirmWindow(true);
+                formMenuAdmin.setVisible(false); // Menutup tampilan saat ini (MainMenuAdmin)
+            }
+        });
 
         JButton buttonHistory = new JButton("View History");
         buttonHistory.setBounds(30, 215, 250, 30);
