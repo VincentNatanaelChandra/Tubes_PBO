@@ -13,12 +13,18 @@ public class Refund {
     private RefundEnum refund_status;
     private int refund_total;
     private String refund_reason;
+    private int ticket_id;
 
-    public Refund(int refund_id, RefundEnum refund_status, int refund_total, String refund_reason) {
+    public Refund(){
+        
+    }
+
+    public Refund(int refund_id, RefundEnum refund_status, int refund_total, String refund_reason, int ticket_id) {
         this.refund_id = refund_id;
         this.refund_status = refund_status;
         this.refund_total = refund_total;
         this.refund_reason = refund_reason;
+        this.ticket_id = ticket_id;
     }
 
     public int getRefund_id() {
@@ -52,7 +58,15 @@ public class Refund {
     public void setRefund_reason(String refund_reason) {
         this.refund_reason = refund_reason;
     }
-    
 
+    public int getTicket_id() {
+        return ticket_id;
+    }
+
+    public void setTicket_id(int ticket_id) {
+        this.ticket_id = ticket_id;
+    }
+    
+    
    
 }
