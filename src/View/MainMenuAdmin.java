@@ -213,8 +213,8 @@ public class MainMenuAdmin {
 
         buttonBacktoLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                formMenuAdmin.setVisible(false); // Sembunyikan formMenuAdmin
-                Login formLogin = new Login(); // Buat objek baru dari FormLogin
+                formMenuAdmin.dispose();
+                new Login(); 
             }
         });
 
