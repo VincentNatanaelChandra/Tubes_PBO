@@ -62,6 +62,14 @@ public class MainMenuUser {
         buttonRefund.setBounds(30, 115, 250, 30);
         formMenuUser.add(buttonRefund);
         
+        buttonRefund.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                formMenuUser.dispose();
+                new FlightRefund();
+            }
+        });
+        
         JButton buttonReschedule = new JButton("Reschedule");
         buttonReschedule.setBounds(30,150, 250, 30);
         formMenuUser.add(buttonReschedule);

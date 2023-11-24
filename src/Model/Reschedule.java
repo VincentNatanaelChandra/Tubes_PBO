@@ -16,9 +16,15 @@ public class Reschedule {
     private RescheduleEnum reschedule_status;
     private Date reschedule_date;
     private String reschedule_seat;
-
-    public Reschedule(int reschedule_id, String reschedule_reason, RescheduleEnum reschedule_status, Date reschedule_date, String reschedule_seat) {
+    private int ticket_id;
+    
+    public Reschedule(){
+        
+    }
+    
+    public Reschedule(int reschedule_id, int ticket_id, String reschedule_reason, RescheduleEnum reschedule_status, Date reschedule_date, String reschedule_seat) {
         this.reschedule_id = reschedule_id;
+        this.ticket_id = ticket_id;
         this.reschedule_reason = reschedule_reason;
         this.reschedule_status = reschedule_status;
         this.reschedule_date = reschedule_date;
@@ -33,6 +39,15 @@ public class Reschedule {
         this.reschedule_id = reschedule_id;
     }
 
+    public int getTicket_id() {
+        return ticket_id;
+    }
+
+    public void setTicket_id(int ticket_id) {
+        this.ticket_id = ticket_id;
+    }
+    
+    
     public String getReschedule_reason() {
         return reschedule_reason;
     }
