@@ -945,4 +945,20 @@ public class Controller {
         }
         return ids;
     }
+     
+     public String getPlaneCode(int id) {
+        conn.connect();
+        String query = "SELECT flight_planeCode FROM flight WHERE flight_id = '" + id + "'";
+        String code = "";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                code = (rs.getString("flight_planeCode"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (code);
+    }
 }
