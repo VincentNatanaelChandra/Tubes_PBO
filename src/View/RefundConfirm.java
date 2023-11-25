@@ -1,22 +1,22 @@
 package View;
 
+import Controller.Controller;
 import Model.Refund;
+import Model.RefundEnum;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RefundConfirm {
 
-    // Map untuk melacak status yang sudah diubah oleh setiap user ID
-    private static Map<String, Boolean> userStatusMap = new HashMap<>();
+    public JFrame frame;
+    Controller controller = new Controller();
 
-    private JFrame frame;
-
-    public RefundConfirm(int admin_id, String name, ArrayList<Refund> listRefund) {
+    public RefundConfirm(int admin_id, String name) {
+        this.controller = Controller.getInstance();
+        ArrayList<Refund> listRefund = controller.getViewRefund();
         createRefundConfirmWindow(admin_id, name, listRefund);
         showRefundConfirmWindow(false);
     }
@@ -32,7 +32,7 @@ public class RefundConfirm {
             Refund refunds = listRefund.get(i);
             data[i][0] = refunds.getRefund_id();
             data[i][1] = refunds.getTicket_id();
-            data[i][2] = refunds.getRefund_status();
+            data[i][2] = refunds.getRefund_status().toString();
             data[i][3] = refunds.getRefund_total();
             data[i][4] = refunds.getRefund_reason();
         }
@@ -48,6 +48,7 @@ public class RefundConfirm {
         scrollPane.setBounds(20, 20, 550, 300);
         frame.add(scrollPane);
 
+        // ... (kode lainnya)
         JButton acceptButton = new JButton("Terima");
         acceptButton.setBounds(50, 330, 100, 30);
         frame.add(acceptButton);
@@ -62,30 +63,34 @@ public class RefundConfirm {
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = table.getSelectedRow();
                 if (selectedRow != -1) {
-                    String userID = (String) model.getValueAt(selectedRow, 1); // Ambil nilai ID user dari tabel
-                    if (!userStatusMap.containsKey(userID) || !userStatusMap.get(userID)) {
-                        model.setValueAt("Approved", selectedRow, 3);
-                        userStatusMap.put(userID, true); // Menandai bahwa user ID ini sudah diubah statusnya
+                    Refund refund = listRefund.get(selectedRow);
+                    if (refund.getRefund_status() == RefundEnum.REFUNDDENIED) {
+                        model.setValueAt(RefundEnum.REFUNDSUCCESS.toString(), selectedRow, 2);
+                        refund.setRefund_status(RefundEnum.REFUNDSUCCESS);
+                        if (!Controller.getInstance().updateRefund(refund.getTicket_id(), "accept")) {
+                            JOptionPane.showMessageDialog(frame, "Gagal memperbarui status refund.");
+                        }
                     } else {
-                        // Jika sudah diubah, tampilkan pesan bahwa user ID ini sudah memiliki status yang diubah
                         JOptionPane.showMessageDialog(frame, "Status tidak dapat diubah lagi.");
                     }
                 }
             }
         });
 
-        // Event listener untuk tombol "Tolak"
+// Event listener untuk tombol "Tolak"
         rejectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = table.getSelectedRow();
                 if (selectedRow != -1) {
-                    String userID = (String) model.getValueAt(selectedRow, 1); // Ambil nilai ID user dari tabel
-                    if (!userStatusMap.containsKey(userID) || !userStatusMap.get(userID)) {
-                        model.setValueAt("Rejected", selectedRow, 3);
-                        userStatusMap.put(userID, true); // Menandai bahwa user ID ini sudah diubah statusnya
+                    Refund refund = listRefund.get(selectedRow);
+                    if (refund.getRefund_status() == RefundEnum.REFUNDSUCCESS) {
+                        model.setValueAt(RefundEnum.REFUNDDENIED.toString(), selectedRow, 2);
+                        refund.setRefund_status(RefundEnum.REFUNDDENIED);
+                        if (!Controller.getInstance().updateRefund(refund.getTicket_id(), "reject")) {
+                            JOptionPane.showMessageDialog(frame, "Gagal memperbarui status refund.");
+                        }
                     } else {
-                        // Jika sudah diubah, tampilkan pesan bahwa user ID ini sudah memiliki status yang diubah
                         JOptionPane.showMessageDialog(frame, "Status tidak dapat diubah lagi.");
                     }
                 }
