@@ -38,7 +38,7 @@ public class RefundConfirm {
         }
 
         // Nama kolom untuk tabel
-        String[] columns = {"Refund ID", "Ticket ID", " Refund_status ", "Refund_total", "Refund_total"};
+        String[] columns = {"Refund ID", "Ticket ID", "Refund Status", "Refund Total", "Refund Reason"};
 
         // Model tabel
         DefaultTableModel model = new DefaultTableModel(data, columns);
@@ -48,7 +48,7 @@ public class RefundConfirm {
         scrollPane.setBounds(20, 20, 550, 300);
         frame.add(scrollPane);
 
-        // ... (kode lainnya)
+       
         JButton acceptButton = new JButton("Terima");
         acceptButton.setBounds(50, 330, 100, 30);
         frame.add(acceptButton);
