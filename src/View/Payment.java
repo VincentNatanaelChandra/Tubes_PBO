@@ -230,11 +230,10 @@ public class Payment {
     }
 
     private void checkPin() {
-        Controller con = new Controller();
         char[] enteredPin = pinField.getPassword();
         // Convert char array to String for further processing
         String pinString = new String(enteredPin);
-        String memberPin = con.getPinpayMember(member_id);
+        String memberPin = Controller.getInstance().getPinpayMember(member_id);
 
         if (pinString == null ? memberPin == null : pinString.equals(memberPin)) {
             formPinpay.dispose();
@@ -247,7 +246,7 @@ public class Payment {
     }
 
     private void insertTicket() {
-        Controller con = new Controller();
+
         
         //Generate Ticker Code
         String ticketCode = String.valueOf((int) (Math.random() * 10000));
@@ -256,10 +255,10 @@ public class Payment {
         java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
         
         //Insert Data
-        con.registerTicket(flightId, ticketCode, sqlDate, preference);
-        int ticket_id = con.getTicketIdInt(ticketCode);
+        Controller.getInstance().registerTicket(flightId, ticketCode, sqlDate, preference);
+        int ticket_id = Controller.getInstance().getTicketIdInt(ticketCode);
         System.out.println(ticket_id);
-        con.registerTransaction(ticket_id, method, ticketPrice, promoDisc, finalPrice, promo_id, member_id);
+        Controller.getInstance().registerTransaction(ticket_id, method, ticketPrice, promoDisc, finalPrice, promo_id, member_id);
         
         JOptionPane.showMessageDialog(formPayment, "Done", "Done ga bang?", JOptionPane.PLAIN_MESSAGE);
     }
