@@ -27,7 +27,6 @@ import javax.swing.SwingUtilities;
  */
 public class MainMenuAdmin {
 
-    private JFrame frame;
 
     public MainMenuAdmin(int admin_id, String name) {
         MenuAdmin(admin_id, name);
@@ -168,7 +167,7 @@ public class MainMenuAdmin {
 
         ArrayList<Reschedule> reschedule = Controller.getInstance().getViewReschedule();
 
-        RescheduleConfirm rescheduleConfirm = new RescheduleConfirm(admin_id, name, reschedule); // Menginisialisasi objek RescheduleConfirm
+        RescheduleConfirm rescheduleConfirm = new RescheduleConfirm(admin_id, name); // Menginisialisasi objek RescheduleConfirm
 
         buttonConfirmationReschedule.addActionListener(new ActionListener() {
             @Override
@@ -184,7 +183,7 @@ public class MainMenuAdmin {
 
         ArrayList<Refund> refunds = Controller.getInstance().getViewRefund();
 
-        RefundConfirm refundConfirm = new RefundConfirm(admin_id, name, refunds); // Menginisialisasi objek RefundConfirm
+        RefundConfirm refundConfirm = new RefundConfirm(admin_id, name ); // Menginisialisasi objek RefundConfirm
 
         buttonConfirmationRefund.addActionListener(new ActionListener() {
             @Override

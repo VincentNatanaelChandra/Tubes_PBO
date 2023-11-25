@@ -28,7 +28,6 @@ public class Reschedule {
 
     private void reschedule(int member_id, String name) {
 
-        Controller con = new Controller();
 
         //=============BAGIAN CONTAINER================
         JFrame formReschedule = new JFrame("Reschedule Menu");
@@ -71,7 +70,7 @@ public class Reschedule {
         formReschedule.add(checkAcc);
 
         JButton buttonBack = new JButton("Back to Menu");
-        buttonBack.setBounds(20, 340, 150, 30);
+        buttonBack.setBounds(20, 215, 130, 30);
         formReschedule.add(buttonBack);
 
         buttonBack.addActionListener(new ActionListener() {
@@ -90,7 +89,7 @@ public class Reschedule {
             public void actionPerformed(ActionEvent e) {
                 String ticket = textTicketCode.getText();
                 String reason = textReason.getText();
-                boolean found = con.getTicket(ticket);
+                boolean found = Controller.getInstance().getTicket(ticket);
                 if (found) {
                     formReschedule.dispose();
                     new nextReschedule(member_id, name, ticket, reason);

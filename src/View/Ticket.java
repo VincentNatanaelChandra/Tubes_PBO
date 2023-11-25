@@ -25,7 +25,6 @@ public class Ticket {
 
     private void Ticket(int member_id, String name, int flight_id, String ticket_code, int ticket_id, String classSeat, String seatNum) {
 
-        Controller con = new Controller();
 
         //=============BAGIAN CONTAINER================
         JFrame ticket = new JFrame("TICKET");
@@ -62,7 +61,7 @@ public class Ticket {
         labelPlaneCode.setBounds(10, 70, 110, 30);
         ticket.add(labelPlaneCode);
 
-        String planeCode = con.getPlaneCode(flight_id);
+        String planeCode = Controller.getInstance().getPlaneCode(flight_id);
 
         JLabel planeCodeValue = new JLabel(planeCode);
         Font fontPlaneCode = new Font("Arial", Font.BOLD, 30);
