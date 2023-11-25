@@ -46,7 +46,7 @@ public class Payment {
     private String fnb;
     private int ticketPrice;
     private int promoDisc;
-    private int flightId;
+    private int flight_id;
     private String method;
     private int finalPrice;
     private int promo_id;
@@ -65,7 +65,7 @@ public class Payment {
         this.ticketPrice = ticketPrice;
         this.promo_id = promo_id;
         this.promoDisc = promoDisc;
-        this.flightId = flightId;
+        this.flight_id = flightId;
         Payment();
     }
 
@@ -137,7 +137,7 @@ public class Payment {
                     double totalPromo = ticketPrice * discount;
                     int promo = (int) totalPromo;
                     formPayment.dispose();
-                    new Payment(member_id, name, departureCity, arrivalCity, dateFlight, airlines, classSeat, seatNum, preference, fnb, ticketPrice, promo_id, promo, flightId);
+                    new Payment(member_id, name, departureCity, arrivalCity, dateFlight, airlines, classSeat, seatNum, preference, fnb, ticketPrice, promo_id, promo, flight_id);
                 } else {
                     JOptionPane.showMessageDialog(formPayment, "Promo Not Found!", "WARNING", JOptionPane.WARNING_MESSAGE);
                 }
@@ -250,17 +250,16 @@ public class Payment {
         Controller con = new Controller();
         
         //Generate Ticker Code
-        String ticketCode = String.valueOf((int) (Math.random() * 10000));
+        String ticket_code = String.valueOf((int) (Math.random() * 10000));
         
         LocalDate currentDate = LocalDate.now();
         java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
         
         //Insert Data
-        con.registerTicket(flightId, ticketCode, sqlDate, preference);
-        int ticket_id = con.getTicketIdInt(ticketCode);
-        System.out.println(ticket_id);
+        con.registerTicket(flight_id, ticket_code, sqlDate, preference);
+        int ticket_id = con.getTicketIdInt(ticket_code);
         con.registerTransaction(ticket_id, method, ticketPrice, promoDisc, finalPrice, promo_id, member_id);
         
-        JOptionPane.showMessageDialog(formPayment, "Done", "Done ga bang?", JOptionPane.PLAIN_MESSAGE);
+        new Ticket(member_id, name, flight_id, ticket_code, ticket_id, classSeat, seatNum);
     }
 }
