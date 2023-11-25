@@ -37,7 +37,6 @@ public class nextReschedule {
 
     private void nextReschedule(int member_id, String name, String ticketKode, String reason) {
 
-        Controller con = new Controller();
 
         //=============BAGIAN CONTAINER================
         JFrame formReschedule = new JFrame("Form Reschedule");
@@ -70,14 +69,14 @@ public class nextReschedule {
         datePicker.setBounds(150, 40, 150, 30);
         formReschedule.add(datePicker);
 
-        int flightId = con.getFlightId(ticketKode);
+        int flightId = Controller.getInstance().getFlightId(ticketKode);
 
         //Seat Number
         JLabel labelSeatClass = new JLabel("Seat :");
         labelSeatClass.setBounds(10, 75, 150, 30);
         formReschedule.add(labelSeatClass);
         //ComboBox Class
-        String seatPlane[] = Controller.getInstance().getSeatNumber(flightId).toArray(new String[con.getSeatClass().size()]);
+        String seatPlane[] = Controller.getInstance().getSeatNumber(flightId).toArray(new String[Controller.getInstance().getSeatClass().size()]);
         JComboBox cbSeat = new JComboBox(seatPlane);
         cbSeat.setBounds(150, 75, 150, 30);
         formReschedule.add(cbSeat);
@@ -86,7 +85,7 @@ public class nextReschedule {
         buttonReqReschedule.setBounds(70, 110, 180, 30);
         formReschedule.add(buttonReqReschedule);
 
-        int ticket_id = con.getTicketId(ticketKode);
+        int ticket_id = Controller.getInstance().getTicketId(ticketKode);
 
         buttonReqReschedule.addActionListener(new ActionListener() {
             @Override
