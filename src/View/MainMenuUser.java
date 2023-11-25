@@ -86,9 +86,6 @@ public class MainMenuUser {
         buttonViewStatus.setBounds(30, 185, 250, 30);
         formMenuUser.add(buttonViewStatus);
         
-        JButton buttonBooking= new JButton("Buy Ticket");
-        buttonBooking.setBounds(30, 220, 250, 30);
-        formMenuUser.add(buttonBooking);
         
         
         JButton buttonBacktoLogin = new JButton("⬅");
