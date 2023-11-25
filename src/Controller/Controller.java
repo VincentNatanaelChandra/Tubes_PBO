@@ -765,27 +765,32 @@ public class Controller {
         return (reschedules);
     }
     
-    public boolean updateRefund(int ticket_id) {
-        conn.connect();
-        String query = "UPDATE refund"
-                + " SET refund_status= 'REFUNDSUCCESS' "
-                + "WHERE ticket_id   = '" + ticket_id + "'";
-        PreparedStatement stmt;
-        try {
-            stmt = conn.con.prepareStatement(query);
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean updateRefund(int ticket_id, String action) {
+    conn.connect();
+    String statusToUpdate = (action.equals("accept")) ? "REFUNDSUCCESS" : "REFUNDDENIED";
+
+    String query = "UPDATE refund"
+            + " SET refund_status= ? "
+            + " WHERE ticket_id = ?";
+    PreparedStatement stmt;
+    try {
+        stmt = conn.con.prepareStatement(query);
+        stmt.setString(1, statusToUpdate);
+        stmt.setInt(2, ticket_id);
+        stmt.executeUpdate();
+        return true;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
     }
+}
     
-    public boolean updateReschdule(int ticket_id) {
+    public boolean updateReschedule(int ticket_id, String action) {
         conn.connect();
+        String statusToUpdate = (action.equals("accept")) ? "RESCHEDULESUCCESS" : "RESCHEDULEDENIED";
         String query = "UPDATE reschedule"
-                + " SET reschedule_status= 'RESCHEDULESUCCESS' "
-                + "WHERE ticket_id = '" + ticket_id + "'";
+                + " SET reschedule_status= ?' "
+                + "WHERE ticket_id = ? ";
         PreparedStatement stmt;
         try {
             stmt = conn.con.prepareStatement(query);
